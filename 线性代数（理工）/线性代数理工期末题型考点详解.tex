@@ -1,0 +1,2286 @@
+﻿\documentclass[11pt,a4paper,UTF8]{ctexart}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{geometry}
+\usepackage{booktabs,longtable,array,tabularx}
+\usepackage{enumitem}
+\usepackage{needspace}
+\usepackage[colorlinks=true,linkcolor=MidnightBlue,urlcolor=MidnightBlue]{hyperref}
+
+\geometry{left=2.1cm,right=2.1cm,top=2.2cm,bottom=2.2cm}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.35em}
+\linespread{1.08}
+\setlist{nosep,leftmargin=2em}
+\allowdisplaybreaks
+\raggedbottom
+
+\definecolor{bluebg}{RGB}{235,245,255}
+\definecolor{bluebd}{RGB}{41,128,185}
+\definecolor{greenbg}{RGB}{235,255,240}
+\definecolor{greenbd}{RGB}{39,174,96}
+\definecolor{orangebg}{RGB}{255,246,235}
+\definecolor{orangebd}{RGB}{230,126,34}
+\definecolor{redbg}{RGB}{255,240,240}
+\definecolor{redbd}{RGB}{192,57,43}
+
+\newtcolorbox{identifybox}[1][]{
+  enhanced,breakable,colback=bluebg,colframe=bluebd,
+  title=#1,fonttitle=\bfseries,arc=2mm,boxrule=0.8pt
+}
+\newtcolorbox{templatebox}[1][]{
+  enhanced,breakable,colback=orangebg,colframe=orangebd,
+  title=#1,fonttitle=\bfseries,arc=2mm,boxrule=0.9pt
+}
+\newtcolorbox{answerbox}[1][]{
+  enhanced,breakable,colback=greenbg,colframe=greenbd,
+  title=#1,fonttitle=\bfseries,arc=2mm,boxrule=0.8pt
+}
+\newtcolorbox{scorebox}[1][]{
+  enhanced,breakable,colback=redbg,colframe=redbd,
+  title=#1,fonttitle=\bfseries,arc=2mm,boxrule=0.8pt
+}
+
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\nul}{\operatorname{nul}}
+\newcommand{\R}{\mathbb R}
+
+\title{\Huge 四川大学线性代数（理工）期末真题融合讲义\\[0.25em]
+\Large 2020--2025 历年真题按题型考点分类详解}
+\author{按上传试卷与参考整理}
+\date{\today}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+\tableofcontents
+\newpage
+
+\begin{scorebox}[定位]
+版本：2020--2025 春季期末真题融合版\\
+用法：每个板块按“识别题型 -> 套模板 -> 写计算 -> 得结论”组织；历年题目不放附录，而是嵌入对应考点。\\
+\end{scorebox}
+
+\bigskip\hrule\bigskip
+
+\section{全题覆盖索引}
+
+本稿覆盖你上传的 2020--2021、2021--2022、2022--2023、2023--2024、2024--2025 春季试卷全部题型，并参考 2019--2020 秋卷作补充。
+
+{\scriptsize
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.25\textwidth}>{\raggedright\arraybackslash}p{0.43\textwidth}>{\raggedright\arraybackslash}p{0.13\textwidth}}
+\toprule
+年份 & 填空题 & 解答题 & 证明题 \\
+\midrule
+2020--2021 春 & 1--6：行列式、秩、余子式、矩阵幂、实对称特征、二次型秩 & 二：相似与矩阵表示；三：线性方程组；四：子空间与基；五：实对称矩阵；六：矩阵方程；七：二次型正定 & 八：基础解系变换；伴随矩阵与正交矩阵 \\
+2021--2022 春 & 1--6：行列式列变换、矩阵幂、秩最小、特征值与伴随、坐标、正定条件 & 一：矩阵方程；二：方程组同解；三：极大无关组；四：转移矩阵模型；五：二次型正交化 & 一：可逆性；二：幂等矩阵相似标准形 \\
+2022--2023 春 & 1--6：余子式、Sherman 型逆、矩阵幂、非齐次解维数、特征值、负定参数 & 二：向量组；三：矩阵方程；四：对角化；五：方程组；六：基与过渡矩阵；七：实对称二次型 & 一：伴随矩阵基础解系；二：二次多项式矩阵可对角化 \\
+2023--2024 春 & 1--6：行列式常数项、合同、无穷多解、正交方程、坐标内积、特征值 & 二：伴随矩阵方程；三：向量组；四：方程组；五：一般基变换；六：实对称矩阵；七：二次型合同/正交 & 一：非齐次解组线性无关；二：迹与转置证明 \\
+2024--2025 春 & 1--6：行列式、伴随、实对称惯性指数、过渡矩阵、解空间与秩、矩阵幂特征值 & 二：矩阵方程与矩阵幂；三：向量组；四：非齐次通解；五：基坐标；六：实对称矩阵；七：二次型 & 一：Vandermonde 型特征向量证明；二：秩一矩阵逆公式 \\
+\bottomrule
+\end{longtable}
+}
+
+\bigskip\hrule\bigskip
+
+\section{行列式、伴随矩阵、秩：填空题先拿分}
+
+\begin{identifybox}[高亮公式]
+$|kA|=k^n|A|,\quad |A^*|=|A|^{n-1},\quad AA^*=A^*A=|A|E$\\
+$r(AB)\le \min\{r(A),r(B)\}$；若 $P,Q$ 可逆，则 $r(PAQ)=r(A)$。\\
+伴随常用：若 $A$ 可逆，则 $A^*=|A|A^{-1}$。\\
+\end{identifybox}
+
+\begin{templatebox}[考场模板]
+
+\begin{enumerate}
+\item 看是否是“可逆矩阵左右乘”：秩不变。
+\item 看是否是“列向量线性组合”：把新列写成旧列乘一个系数矩阵，行列式相乘。
+\item 看是否出现 $A^*$：立刻写 $A^*=|A|A^{-1}$ 或 $|A^*|=|A|^{n-1}$。
+\item 行列式含参数或多项式：只求指定系数时，用列/行结构，不要硬展开整式。
+\end{enumerate}
+
+\end{templatebox}
+\subsection{真题融合}
+
+\begin{answerbox}[2020--2021 填空 1]
+题：$A$ 为四阶矩阵，$|A|=\frac14$，求 $|(2A^*)^{-1}|$。
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+四阶时 $|A^*|=|A|^3=\frac1{64}$，$\Rightarrow$ $|2A^*|=2^4\cdot\frac1{64}=\frac14$。
+\textbf{【答案】}
+
+\[|(2A^*)^{-1}|=4.\]
+\end{answerbox}
+\begin{answerbox}[2020--2021 填空 2]
+题：设 $A$ 是 $4\times3$ 阶矩阵，$A$ 的秩 $r(A)=2$，
+\[
+B=\begin{pmatrix}
+1&0&3\\
+0&2&0\\
+0&0&3
+\end{pmatrix},
+\]
+则 $AB$ 的秩 $r(AB)=\underline{\qquad}$。
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+先用 $r(AB)\le 2$，$B$ 的两个主元列经 $A$ 作用后仍线性无关，
+\textbf{【答案】}
+
+\[r(AB)=2.\]
+\end{answerbox}
+\begin{answerbox}[2020--2021 填空 3]
+题：三阶矩阵 $A$ 第一行为 $(1,2,3)$，$|A|$ 第二行元素余子式分别为 $a+2,a+1,a-2$，求 $a$。
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+按“某一行元素乘另一行余子式之和为 $0$”：
+\textbf{【答案】}
+
+\[1(a+2)+2(a+1)+3(a-2)=0,\]
+得 $a=3$。
+\end{answerbox}
+\begin{answerbox}[2021--2022 填空 1]
+题：设 $\alpha_1,\alpha_2,\alpha_3$ 均为 $3$ 维列向量，记矩阵
+\[
+A=(\alpha_1,\alpha_2,\alpha_3),
+\]
+矩阵
+\[
+B=(\alpha_1+\alpha_2+\alpha_3,\ \alpha_1+2\alpha_2+4\alpha_3,\ \alpha_1+3\alpha_2+9\alpha_3).
+\]
+如果 $|A|=1$，那么 $|B|=\underline{\qquad}$。
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+写成 $B=AC$，只算系数矩阵 $C$ 的行列式；
+\textbf{【答案】}
+
+\[|B|=2.\]
+\end{answerbox}
+\begin{answerbox}[2021--2022 填空 3]
+题：设矩阵
+\[
+A=\begin{pmatrix}
+1&\lambda&-1&2\\
+2&-1&\lambda&5\\
+1&10&-6&1
+\end{pmatrix},
+\]
+当参数 $\lambda=\underline{\qquad}$ 时，矩阵 $A$ 的秩最小。
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+先令所有最高阶非零子式同时为 $0$，检查低阶子式不全为 $0$。
+\textbf{【答案】}
+
+\[\lambda=3.\]
+\end{answerbox}
+\begin{answerbox}[2021--2022 填空 4]
+题：三阶矩阵 $A$ 的特征值为 $1,1,2$，求
+\[
+\left|\left(\frac13A^2\right)^{-1}+\frac12A^*-E\right|.
+\]
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+用 $A^*=|A|A^{-1}$，把问题转成特征值代入。
+\textbf{【答案】}
+
+\[\frac94.\]
+\end{answerbox}
+\begin{answerbox}[2022--2023 填空 1]
+题：设
+\[
+A=\begin{pmatrix}
+1&2&4&2\\
+1&3&9&0\\
+1&-1&1&2\\
+1&4&16&3
+\end{pmatrix},
+\]
+$M_{ij}$ 为矩阵 $A$ 的第 $i$ 行第 $j$ 列元素的余子式，$i,j=1,2,3,4$，则
+\[
+-8M_{14}+27M_{24}+M_{34}+64M_{44}=\underline{\qquad}.
+\]
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+这是按第 4 列余子式反造行列式。把第 4 列替换成 $(8,27,-1,64)^T$ 后按第 4 列展开，用列运算求值。
+\textbf{【答案】}
+
+\[120.\]
+\end{answerbox}
+\begin{answerbox}[2022--2023 填空 2]
+题：$\alpha=(c,0,\cdots,0,c)^T,c>0$，$A=E-\alpha\alpha^T$，$A^{-1}=E+c^{-1}\alpha\alpha^T$，求 $c$。
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+套
+\[
+(E-\alpha\alpha^T)^{-1}
+=E+\frac{\alpha\alpha^T}{1-\alpha^T\alpha}.
+\]
+而 $\alpha^T\alpha=2c^2$，与 $E+c^{-1}\alpha\alpha^T$ 比较：
+\textbf{【答案】}
+
+\[
+\frac1{1-2c^2}=\frac1c
+\Rightarrow c=1-2c^2
+\Rightarrow c=\frac12.
+\]
+\end{answerbox}
+\begin{answerbox}[2023--2024 填空 1]
+题：多项式
+\[
+f(x)=
+\begin{vmatrix}
+x&x&1&2x\\
+1&x&2&-1\\
+2&1&x&1\\
+2&-1&1&x
+\end{vmatrix}
+\]
+的常数项。
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+常数项就是令 $x=0$ 后的行列式：
+\textbf{【答案】}
+
+\[
+\begin{vmatrix}
+0&0&1&0\\
+1&0&2&-1\\
+2&1&0&1\\
+2&-1&1&0
+\end{vmatrix}=5.
+\]
+\end{answerbox}
+\begin{answerbox}[2023--2024 填空 2]
+题：若
+\[
+A=\begin{pmatrix}a&-1&-1\\-1&a&-1\\-1&-1&a\end{pmatrix}
+\]
+与
+\[
+B=\begin{pmatrix}1&1&0\\0&-1&1\\1&0&1\end{pmatrix}
+\]
+等价，即 $A$ 可经有限次初等变换化为 $B$，则 $a=\underline{\qquad}$。
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+等价矩阵秩相同。由标准，先化简 $B$ 得 $r(B)=2$；令 $r(A)=2$，即 $|A|=0$ 且二阶子式不全为 $0$，得
+\textbf{【答案】}
+
+\[a=2.\]
+\end{answerbox}
+\begin{answerbox}[2024--2025 填空 1]
+题：计算四阶行列式
+\[
+\begin{vmatrix}
+3&1&1&2\\
+-1&2&2&2\\
+1&2&-1&1\\
+-3&2&0&1
+\end{vmatrix}.
+\]
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+用行变换化上三角，注意交换行变号、倍加不变。结果：
+\textbf{【答案】}
+
+\[-13.\]
+\end{answerbox}
+\begin{answerbox}[2024--2025 填空 2]
+题：三阶方阵 $|A|=\frac13$，求 $|A^*|+|(2A)^{-1}-A^*|$。
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+\[|A^*|=|A|^2=\frac19,\quad A^*=\frac13 A^{-1},\quad (2A)^{-1}=\frac12A^{-1}.\]
+于是
+\[|(2A)^{-1}-A^*|=\left|\frac16A^{-1}\right|=\frac1{6^3}\cdot 3=\frac1{72},\]
+
+\textbf{【答案】}
+
+\[\frac19+\frac1{72}=\frac18.\]
+\end{answerbox}
+\bigskip\hrule\bigskip
+
+\section{矩阵方程与矩阵幂}
+
+\begin{identifybox}[高亮公式]
+$XA+M=N+2X \Rightarrow X(A-2E)=N-M$\\
+$A=PBP^{-1}\Rightarrow A^n=PB^nP^{-1}$\\
+若 $A^2=A$，则 $A^n=A\ (n\ge1)$。\\
+\end{identifybox}
+
+\begin{templatebox}[考场模板]
+
+\begin{enumerate}
+\item 把未知矩阵 $X$ 全部移到一边。
+\item 提出右乘或左乘的公共矩阵。
+\item 求逆时优先用已经给出的三角矩阵、伴随矩阵或相似关系。
+\item 求高次幂时先判断：幂等、对角矩阵、相似对角化、递推关系。
+\end{enumerate}
+
+\end{templatebox}
+\subsection{真题融合}
+
+\begin{answerbox}[2020--2021 解答二：相似表示与 |A+E|]
+题：$P=(\alpha,A\alpha,A^2\alpha)$ 可逆，且 $A^3\alpha=5A\alpha-4A^2\alpha$。求 $B$ 使 $A=PBP^{-1}$，求 $|A+E|$。
+
+\textbf{【题目分析】}
+
+\[
+AP=(A\alpha,A^2\alpha,A^3\alpha)=(\alpha,A\alpha,A^2\alpha)
+\begin{pmatrix}
+0&0&0\\
+1&0&5\\
+0&1&-4
+\end{pmatrix}.
+\]
+
+\textbf{【详细解答】}
+
+化简得
+\[B=\begin{pmatrix}0&0&0\\1&0&5\\0&1&-4\end{pmatrix}.\]
+
+\textbf{【最终答案】}
+
+由 $A$ 与 $B$ 相似：
+\[|A+E|=|B+E|=-8.\]
+\end{answerbox}
+\begin{answerbox}[2020--2021 解答六：矩阵方程 XA+2B=AB+2X]
+题：设
+\[
+A=\begin{pmatrix}3&0&0\\2&1&0\\2&1&3\end{pmatrix},\quad
+B=\begin{pmatrix}1&0&0\\0&1&0\\0&0&-1\end{pmatrix},
+\]
+矩阵 $X$ 满足
+\[
+XA+2B=AB+2X.
+\]
+（1）求 $(A-2E)^{-1}$；（2）求 $X^{2021}$。
+
+\textbf{【题目分析】}
+
+矩阵方程中 $X$ 在左侧，应整理成右乘公共矩阵后再右乘逆矩阵。
+
+\textbf{【详细解答】}
+
+参考答案行化简：
+\[
+(A-2E)^{-1}=
+\begin{pmatrix}
+-1&2&-4\\
+0&1&-1\\
+0&0&1
+\end{pmatrix}.
+\]
+由
+\[
+XA+2B=AB+2X
+\]
+得
+\[
+X(A-2E)=(A-2E)B.
+\]
+右乘 \((A-2E)^{-1}\)，得
+\[
+X=(A-2E)B(A-2E)^{-1}.
+\]
+因此
+\[
+X^{2021}=(A-2E)B^{2021}(A-2E)^{-1}.
+\]
+
+\textbf{【最终答案】}
+
+\[
+X^{2021}=
+\begin{pmatrix}
+1&0&-8\\
+0&1&-2\\
+0&0&1
+\end{pmatrix}.
+\]
+
+\textbf{【方法总结】}
+
+矩阵方程中若得到 \(X(A-2E)=M\)，只能右乘 \((A-2E)^{-1}\)，不能左乘或交换顺序。
+\end{answerbox}
+\begin{answerbox}[2020--2021 填空 4：置换矩阵幂]
+题：
+\[
+P=\begin{pmatrix}0&1&0\\1&0&0\\0&0&1\end{pmatrix},\quad
+Q=\begin{pmatrix}2&5&12\\1&4&9\\3&6&15\end{pmatrix},\quad
+R=\begin{pmatrix}1&0&-2\\0&1&0\\0&0&1\end{pmatrix},
+\]
+求 $P^{2021}QR$。
+
+\textbf{【考点】} 矩阵幂
+
+\textbf{【速解】}
+
+$P^2=E$，$\Rightarrow$ $P^{2021}=P$。
+\textbf{【答案】}
+
+\[
+P^{2021}QR=
+\begin{pmatrix}
+1&4&7\\
+2&5&8\\
+3&6&9
+\end{pmatrix}.
+\]
+\end{answerbox}
+\begin{answerbox}[2021--2022 解答一：低秩矩阵方程]
+题：设向量 $\alpha=(1,2)^T$，$\beta=\left(1,\frac12\right)^T$，
+\[
+\gamma=\begin{pmatrix}8&4\\16&8\end{pmatrix},
+\]
+令 $A=\alpha\beta^T,\ B=\beta^T\alpha$，其中 $\beta^T$ 表示列向量 $\beta$ 的转置，求解方程
+\[
+2B^2A^2X=A^4X+B^3X+\gamma.
+\]
+
+\textbf{【题目分析】}
+
+计算
+\[A^2=(\alpha^T\alpha)A,\]
+
+\textbf{【详细解答】}
+
+计算
+\[A^2=(\alpha^T\alpha)A,\]
+
+\textbf{【最终答案】}
+
+
+\[
+X=
+\begin{pmatrix}
+1&\frac12\\
+2&1
+\end{pmatrix}.
+\]
+
+\textbf{【方法总结】}
+
+低秩矩阵题先用 \(A^2=(\alpha^T\alpha)A\) 降幂，再代回原方程求 \(X\)。
+\end{answerbox}
+\begin{answerbox}[2021--2022 填空 2]
+题：设
+\[
+A=\begin{pmatrix}
+1&0&1\\
+0&2&0\\
+1&0&1
+\end{pmatrix},
+\]
+则 $A^{2022}-2A^{2021}=\underline{\qquad}$。
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+先验证 $A^2=2A$，$\Rightarrow$ $A^{2022}=2A^{2021}$，
+\textbf{【答案】}
+
+\[O.\]
+\end{answerbox}
+\begin{answerbox}[2022--2023 填空 3]
+题：已知三阶方阵
+\[
+A=\begin{pmatrix}0&1&0\\1&0&0\\0&0&1\end{pmatrix},\quad
+B=\begin{pmatrix}1&0&0\\0&1&2\\0&0&1\end{pmatrix},
+\]
+则矩阵 $A^{2023}B^{2024}$ 位于第二行第三列的元素的值为 $\underline{\qquad}$。
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+
+\[
+A=\begin{pmatrix}0&1&0\\1&0&0\\0&0&1\end{pmatrix},\quad
+B=\begin{pmatrix}1&0&0\\0&1&2\\0&0&1\end{pmatrix}.
+\]
+$A^2=E$，$\Rightarrow$ $A^{2023}=A$；$B=E+N,\ N^2=0$，$\Rightarrow$ $B^{2024}=E+2024N$。乘后取第二行第三列，
+\textbf{【答案】}
+
+\[0.\]
+\end{answerbox}
+\begin{answerbox}[2022--2023 解答三：矩阵方程]
+题：已知方阵
+\[
+A=\begin{pmatrix}
+1&1&0&0\\
+1&2&0&0\\
+0&0&0&1\\
+0&0&2&0
+\end{pmatrix}
+\]
+满足
+\[
+\left[(|A-E|^{-1}A)^*\right]^{-1}XA^{-1}=E-\frac12AX,
+\]
+求矩阵 $X$。
+
+\textbf{【题目分析】}
+
+计算
+\[|A|=-2,\quad |A-E|=1.\]
+
+\textbf{【详细解答】}
+
+原式化为
+\[X=2(A-E)^{-1}.\]
+
+\textbf{【最终答案】}
+
+
+\[
+X=
+\begin{pmatrix}
+-2&0&0&0\\
+2&0&0&0\\
+0&0&2&2\\
+0&0&4&2
+\end{pmatrix}.
+\]
+\end{answerbox}
+\begin{answerbox}[2021--2022 解答四：转移矩阵模型]
+题：某城市及郊区乡镇共有 $50$ 万人从事农、工、商工作，假设总人数在若干年内保持稳定不变。当前约有 $25$ 万人从事农业，约 $15$ 万人从事工业，约 $10$ 万人从事商业；在务农人员中，每年约有 $20\%$ 改为务工，$10\%$ 改为经商；在务工人员中，每年约有 $20\%$ 改为务农，$10\%$ 改为经商；在经商人员中，每年约有 $10\%$ 改为务农，$10\%$ 改为务工。
+（1）请写出 $1$ 年后从事农、工、商工作的人数分别是多少；
+（2）请预测 $n$ 年之后从事各行业人员总数及发展趋势。
+
+\textbf{【题目分析】}
+
+写状态转移矩阵
+\[
+A=\begin{pmatrix}
+0.7&0.2&0.1\\
+0.2&0.7&0.1\\
+0.1&0.1&0.8
+\end{pmatrix}.
+\]
+
+\textbf{【详细解答】}
+
+一年后
+\[
+A(25,15,10)^T=(21.5,16.5,12)^T.
+\]
+
+\textbf{【最终答案】}
+
+因 $1$ 是主特征值，其余特征值绝对值小于 $1$，长期趋于稳定分布：
+\[\left(\frac{50}{3},\frac{50}{3},\frac{50}{3}\right)^T.\]
+\end{answerbox}
+\begin{answerbox}[2023--2024 解答二：伴随矩阵方程]
+题：
+\[
+A=\begin{pmatrix}1&0&0\\0&1&0\\0&1&1\end{pmatrix},\quad
+B=\begin{pmatrix}1&0&0\\0&0&1\\0&1&0\end{pmatrix},
+\]
+且 $A^*X+B=2BA+2X$，求 $X$。
+
+\textbf{【题目分析】}
+
+\[A^*X-2X=2BA-B,\quad (A^*-2E)X=2BA-B.\]
+
+\textbf{【详细解答】}
+
+因此
+\[X=(A^*-2E)^{-1}(2BA-B).\]
+
+\textbf{【最终答案】}
+
+参考答案给出
+\[
+A^*=
+\begin{pmatrix}
+1&0&0\\
+0&1&0\\
+0&-1&1
+\end{pmatrix},
+\]
+故
+\[
+X=
+\begin{pmatrix}
+-1&0&0\\
+0&-2&-1\\
+0&1&1
+\end{pmatrix}.
+\]
+
+\textbf{【方法总结】}
+
+这里 \(X\) 在右侧公共因子之后，整理为 \((A^*-2E)X=\cdots\)，所以左乘 \((A^*-2E)^{-1}\)。
+\end{answerbox}
+\begin{answerbox}[2024--2025 解答二：BA+CB=\ensuremath{B^2} 与 \ensuremath{A^{2025}}]
+题：
+\[
+B=\begin{pmatrix}1&0&0\\1&1&0\\1&1&1\end{pmatrix},\quad
+C=\begin{pmatrix}0&0&0\\1&0&0\\1&1&1\end{pmatrix},
+\]
+满足 $BA+CB=B^2$，求 $A,A^{2025}$。
+
+\textbf{【题目分析】}
+
+\[BA=B^2-CB,\quad A=B^{-1}(B^2-CB).\]
+
+\textbf{【详细解答】}
+
+计算得
+\[
+A=\begin{pmatrix}
+1&0&0\\
+0&1&0\\
+-1&-1&0
+\end{pmatrix}.
+\]
+
+\textbf{【最终答案】}
+
+直接验证 $A^2=A$，得
+\[A^{2025}=A.\]
+\end{answerbox}
+\bigskip\hrule\bigskip
+
+\section{向量组、秩、极大线性无关组}
+
+\begin{identifybox}[高亮公式]
+列向量组问题统一写矩阵 $A=(\alpha_1,\ldots,\alpha_s)$。\\
+行最简形主元列对应原矩阵主元列；零空间维数 $=n-r(A)$。\\
+\end{identifybox}
+
+\begin{templatebox}[考场模板]
+
+\begin{enumerate}
+\item 把向量按列排成矩阵。
+\item 初等行变换到阶梯形。
+\item 主元列给极大无关组。
+\item 若问某向量能否由其余向量表示：看对应列是否非主元列，并从行最简形读系数。
+\end{enumerate}
+
+\end{templatebox}
+\subsection{真题融合}
+
+\begin{answerbox}[2021--2022 解答三：极大无关组与零空间]
+题：设矩阵
+\[
+A=\begin{pmatrix}
+1&-2&-1&1&-7\\
+1&-2&2&3&-1\\
+2&-4&1&8&-4
+\end{pmatrix}.
+\]
+（1）请给出矩阵 $A$ 的列向量组的一个极大无关组；
+（2）矩阵 $A$ 的零空间 $\operatorname{nul}(A)$ 的维数是多少？请给出零空间 $\operatorname{nul}(A)$ 的一组最小生成集。
+
+\textbf{【题目分析】}
+
+本题考查列向量组极大无关组与零空间。将列向量组成矩阵 \(A=(\alpha_1,\ldots,\alpha_5)\)，行化简后用主元列确定极大无关组。
+
+\textbf{【详细解答】}
+
+参考答案行最简形显示主元列为第 \(1,3,4\) 列，故
+\[
+r(A)=3.
+\]
+主元列对应原矩阵列向量，不是化简后矩阵的列向量。
+
+\textbf{【最终答案】}
+
+一个极大线性无关组为
+\[
+\alpha_1,\alpha_3,\alpha_4.
+\]
+零空间维数为
+\[
+\nul(A)=5-r(A)=2.
+\]
+零空间的一组最小生成集可取
+\[
+\xi_1=(2,1,0,0,0)^T,\qquad
+\xi_2=\left(\frac{20}{3},0,-\frac43,-1,1\right)^T.
+\]
+
+\textbf{【方法总结】}
+
+极大无关组必须由原矩阵的主元列给出；零空间维数等于列数减秩。
+\end{answerbox}
+\begin{answerbox}[2022--2023 解答二：含参数向量组]
+题：已知向量组
+\[
+\alpha_1=(1,0,1,0)^T,\quad
+\alpha_2=(3,-1,2,1)^T,\quad
+\alpha_3=(1,a,b,0)^T,\quad
+\alpha_4=(1,2,-2,1)^T.
+\]
+（1）求向量组的秩和一个极大线性无关组；
+（2）$\alpha_3$ 能否由其余向量线性表示？若能，请给出线性表示的表达式。
+
+\textbf{【题目分析】}
+
+把四个向量作列，按化简：
+\[
+(\alpha_1,\alpha_2,\alpha_4,\alpha_3)
+\sim
+\begin{pmatrix}
+1&3&1&1\\
+0&1&1&0\\
+0&0&3&a\\
+0&0&0&2a+3b-3
+\end{pmatrix}.
+\]
+
+\textbf{【详细解答】}
+
+把四个向量作列，按化简：
+\[
+(\alpha_1,\alpha_2,\alpha_4,\alpha_3)
+\sim
+\begin{pmatrix}
+1&3&1&1\\
+0&1&1&0\\
+0&0&3&a\\
+0&0&0&2a+3b-3
+\end{pmatrix}.
+\]
+
+\textbf{【最终答案】}
+
+分类讨论：
+\begin{enumerate}
+\item 若 $2a+3b\ne3$，则 $r=4$，极大无关组为 $\alpha_1,\alpha_2,\alpha_3,\alpha_4$，$\alpha_3$ 不能由其余向量表示。
+\item 若 $2a+3b=3$，则 $r=3$，取极大无关组 $\alpha_1,\alpha_2,\alpha_4$，且
+\end{enumerate}
+\[
+\alpha_3=\left(1+\frac{2a}{3}\right)\alpha_1-\frac a3\alpha_2+\frac a3\alpha_4.
+\]
+\end{answerbox}
+\begin{answerbox}[2023--2024 解答三：参数 p 与秩]
+题：
+\[
+\alpha_1=(1,1,2,3)^T,\ \alpha_2=(-1,-3,0,5)^T,\
+\alpha_3=(3,2,p+2,-1)^T,\ \alpha_4=(-2,-6,p,10)^T.
+\]
+问 $p$ 何值时相关，并求秩与全部极大无关组。
+
+\textbf{【题目分析】}
+
+构造 $A=(\alpha_1,\alpha_2,\alpha_3,\alpha_4)$，令 $|A|=0$ 得
+\[p=0.\]
+
+\textbf{【详细解答】}
+
+构造 $A=(\alpha_1,\alpha_2,\alpha_3,\alpha_4)$，令 $|A|=0$ 得
+\[p=0.\]
+
+\textbf{【最终答案】}
+
+代回行化简，$r(A)=3$，全部极大无关组为
+\[\alpha_1,\alpha_2,\alpha_3;\qquad \alpha_1,\alpha_3,\alpha_4.\]
+\end{answerbox}
+\begin{answerbox}[2024--2025 解答三：参数 \ensuremath{\mu} 与全部极大无关组]
+题：
+\[
+(1,2,0,3)^T,\ (-1,-4,6,1)^T,\ (3,5,-4,\mu+5)^T,\ (-2,-8,12,\mu+3)^T
+\]
+线性相关，求 $\mu$ 与全部极大无关组。
+
+\textbf{【题目分析】}
+
+设四向量为列，行列式为零：
+\[|A|=0\Rightarrow \mu=-1.\]
+
+\textbf{【详细解答】}
+
+设四向量为列，行列式为零：
+\[|A|=0\Rightarrow \mu=-1.\]
+
+\textbf{【最终答案】}
+
+代回后 $r(A)=3$，行最简形显示第 $4$ 列可由第 $2$ 列表示，极大无关组为
+\[\alpha_1,\alpha_2,\alpha_3;\qquad \alpha_1,\alpha_3,\alpha_4.\]
+\end{answerbox}
+\begin{answerbox}[2020--2021 证明八(1)：基础解系变换]
+题：设向量组 $\alpha_1,\alpha_2,\alpha_3$ 是齐次线性方程组 $AX=0$ 的基础解系，证明：
+\[
+\alpha_1+\alpha_2+\alpha_3,\quad
+\alpha_1+9\alpha_2+16\alpha_3,\quad
+\alpha_1-3\alpha_2-4\alpha_3
+\]
+也是 $AX=0$ 的基础解系。
+
+\textbf{【证明思路】}
+
+先说明新向量都是原解的线性组合，$\Rightarrow$仍是解；写过渡矩阵 $C$，证明
+\[|C|\ne0.\]
+
+\textbf{【详细证明】}
+
+先说明新向量都是原解的线性组合，$\Rightarrow$仍是解；写过渡矩阵 $C$，证明
+\[|C|\ne0.\]
+
+\textbf{【最终答案】}
+
+$\Rightarrow$新向量组线性无关，个数又等于零空间维数，$\Rightarrow$仍为基础解系。
+\end{answerbox}
+\Needspace{20\baselineskip}
+\bigskip\hrule\bigskip
+
+\section{线性方程组：有解、无穷多解、通解}
+
+\begin{identifybox}[高亮公式]
+$Ax=b$ 有解 $\Longleftrightarrow r(A)=r(A,b)$。\\
+唯一解 $\Longleftrightarrow r(A)=r(A,b)=n$。\\
+无穷多解 $\Longleftrightarrow r(A)=r(A,b)<n$。\\
+通解：$x=\eta_0+k_1\xi_1+\cdots+k_{n-r}\xi_{n-r}$。\\
+\end{identifybox}
+
+\begin{templatebox}[考场模板]
+
+\begin{enumerate}
+\item 写增广矩阵 $(A,b)$。
+\item 行化简，比较 $r(A)$ 与 $r(A,b)$。
+\item 有参数时先分母/主元为零处分情况讨论。
+\item 通解必须写成“一个特解 + 导出组基础解系”。
+\end{enumerate}
+
+\end{templatebox}
+\subsection{真题融合}
+
+\begin{answerbox}[2020--2021 解答三：含参数三元方程组]
+题：线性方程组
+\[
+\begin{cases}
+x_1+x_2+3x_3=5,\\
+x_1+2x_2+4x_3=7,\\
+x_1+(a+3)x_2+(a^2+3)x_3=3a+10,
+\end{cases}
+\]
+其中 $a$ 为常数。
+（1）写出该方程组的增广矩阵；
+（2）$a$ 为何值时方程组有解？有解时求出所有的解。
+
+\textbf{【题目分析】}
+
+方程组为
+\[
+\begin{cases}
+x_1+x_2+3x_3=5,\\
+x_1+2x_2+4x_3=7,\\
+x_1+(a+3)x_2+(a^2+3)x_3=3a+10.
+\end{cases}
+\]
+
+\textbf{【详细解答】}
+
+构造增广矩阵：
+\[
+(A|b)=
+\begin{pmatrix}
+1&1&3&5\\
+1&2&4&7\\
+1&a+3&a^2+3&3a+10
+\end{pmatrix}.
+\]
+行化简得
+\[
+(A|b)\sim
+\begin{pmatrix}
+1&1&3&5\\
+0&1&1&2\\
+0&0&(a-2)(a+1)&a+1
+\end{pmatrix}.
+\]
+
+分类讨论：
+\begin{enumerate}
+\item $a\ne2,-1$ 时，
+\[
+r(A)=r(A|b)=3,
+\]
+方程组有唯一解
+\end{enumerate}
+\[
+x=\left(\frac{3a-8}{a-2},\frac{2a-5}{a-2},\frac1{a-2}\right)^T.
+\]
+
+\begin{enumerate}
+\item $a=-1$ 时，
+\[
+(A|b)\sim
+\begin{pmatrix}
+1&0&2&3\\
+0&1&1&2\\
+0&0&0&0
+\end{pmatrix},
+\qquad r(A)=r(A|b)=2<3,
+\]
+方程组有无穷多解
+\end{enumerate}
+\[
+x=(3,2,0)^T+k(-2,-1,1)^T,\quad k\in\mathbb R.
+\]
+
+\textbf{【最终答案】}
+
+\begin{enumerate}
+\item $a\ne2,-1$ 时，
+\[
+x=\left(\frac{3a-8}{a-2},\frac{2a-5}{a-2},\frac1{a-2}\right)^T.
+\]
+\item $a=-1$ 时，
+\[
+x=(3,2,0)^T+k(-2,-1,1)^T,\quad k\in\mathbb R.
+\]
+\item $a=2$ 时，
+\[
+r(A)=2,\qquad r(A|b)=3,
+\]
+方程组无解。
+\end{enumerate}
+
+\textbf{【方法总结】}
+
+含参数线性方程组必须先写增广矩阵，再由主元 \((a-2)(a+1)\) 分情况讨论；无穷多解时通解写成“特解 + 齐次基础解系”。
+\end{answerbox}
+\begin{answerbox}[2021--2022 解答二：两个方程组同解]
+题：考虑如下非齐次方程组
+\[
+I:\begin{cases}
+x_1+x_2-2x_4=-6,\\
+4x_1-x_2-x_3-x_4=1,\\
+3x_1-x_2-x_3=3,
+\end{cases}
+\quad
+II:\begin{cases}
+x_1+ax_2-x_3-x_4=-5,\\
+bx_2-x_3-2x_4=-11,\\
+x_3-2x_4=-c+1.
+\end{cases}
+\]
+（1）求解方程组 $I$，用导出组基础解系表示通解；
+（2）方程组 $I$ 与方程组 $II$ 同解，求参数 $a,b,c$ 的值。
+
+\textbf{【题目分析】}
+
+第一步化简 I：
+\[
+x=(-2,-4,-5,0)^T+k(1,1,2,1)^T.
+\]
+
+\textbf{【详细解答】}
+
+第一步化简 I：
+\[
+x=(-2,-4,-5,0)^T+k(1,1,2,1)^T.
+\]
+
+\textbf{【最终答案】}
+
+第二步：同解的意思是 II 必须对上面通解恒成立。把通解代入 II，比较常数项与 $k$ 的系数：
+\[a=2,\quad b=4,\quad c=6.\]
+\end{answerbox}
+\begin{answerbox}[2022--2023 填空 4]
+题：$n$ 阶方阵 $A$ 作系数矩阵，非齐次方程组 $Ax=b$ 仅有两个线性无关解，求 $r(A^*)$。
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+非齐次解集不是线性空间；“仅有两个线性无关解”说明导出组解空间维数为 $1$，得
+\[n-r(A)=1,\quad r(A)=n-1.\]
+故 $A$ 不可逆且秩为 $n-1$。
+\textbf{【答案】}
+
+\[r(A^*)=1.\]
+\end{answerbox}
+\begin{answerbox}[2022--2023 解答五：非齐次方程组有三个无关解]
+题：已知非齐次线性方程组
+\[
+\begin{cases}
+x_1+x_2+x_3+x_4=-1,\\
+4x_1+3x_2+5x_3-x_4=-1,\\
+ax_1+x_2+3x_3+bx_4=1
+\end{cases}
+\]
+有三个线性无关的解。
+（1）求 $a,b$ 的值；
+（2）求线性方程组的通解。
+
+\textbf{【题目分析】}
+
+三个线性无关解推出非齐次解集方向空间维数为 \(2\)，故 \(n-r(A)=2\)，于是 \(r(A)=2\)。
+
+\textbf{【详细解答】}
+
+参考答案对系数矩阵行化简：
+\[
+\begin{pmatrix}
+1&1&1&1\\
+4&3&5&-1\\
+a&1&3&b
+\end{pmatrix}
+\sim
+\begin{pmatrix}
+1&1&1&1\\
+0&2&1&-4\\
+0&0&a-2&b+3
+\end{pmatrix}.
+\]
+由 \(r(A)=2\) 得
+\[
+a=2,\qquad b=-3.
+\]
+此时增广矩阵化为
+\[
+(A|b)\sim
+\begin{pmatrix}
+1&0&2&-4&2\\
+0&1&-1&5&-3\\
+0&0&0&0&0
+\end{pmatrix}.
+\]
+
+\textbf{【最终答案】}
+
+主元变量为 \(x_1,x_2\)，自由变量为 \(x_3,x_4\)。通解为
+\[
+X=
+\begin{pmatrix}2\\-3\\0\\0\end{pmatrix}
+k_1\begin{pmatrix}-2\\1\\1\\0\end{pmatrix}
+k_2\begin{pmatrix}4\\-5\\0\\1\end{pmatrix},
+\qquad k_1,k_2\in\mathbb R.
+\]
+
+\textbf{【方法总结】}
+
+非齐次通解必须写成“特解 + 齐次方程组基础解系”，不能只写模板。
+\end{answerbox}
+\begin{answerbox}[2023--2024 填空 3]
+题：
+\[A=\begin{pmatrix}1&0&-1\\1&1&-1\\0&1&a^2-1\end{pmatrix},\quad b=(0,1,a)^T,\]
+若 $Ax=b$ 有无穷多解，求 $a$。
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+无穷多解要求
+\[|A|=0,\quad r(A)=r(A,b)<3.\]
+代入检查可得
+\textbf{【答案】}
+
+\[a=-1.\]
+\end{answerbox}
+\begin{answerbox}[2023--2024 填空 4]
+题：$A=(a_{ij})$ 是三阶正交矩阵，$a_{11}=1$，$b=(1,0,0)^T$，求 $Ax=b$ 的解。
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+正交矩阵满足 $A^{-1}=A^T$。由 $a_{11}=1$ 且第一行长度为 $1$，第一行只能是 $(1,0,0)$；同理第一列也是 $(1,0,0)^T$。因此
+\textbf{【答案】}
+
+\[
+x=A^Tb=(1,0,0)^T.
+\]
+\end{answerbox}
+\begin{answerbox}[2023--2024 解答四]
+题：
+\[
+A=\begin{pmatrix}\lambda&1&1\\0&\lambda-1&0\\1&1&\lambda\end{pmatrix},\quad
+b=(a,1,1)^T,
+\]
+且 $Ax=b$ 有两个不同解。求 $\lambda,a$ 与通解。
+
+\textbf{【题目分析】}
+
+两个不同解即无穷多解：
+\[|A|=0,\quad r(A)=r(A,b)<3.\]
+
+\textbf{【详细解答】}
+
+由增广矩阵化简得：
+\[\lambda=-1,\quad a=-2.\]
+
+\textbf{【最终答案】}
+
+此时
+\[
+(A|b)\sim
+\begin{pmatrix}
+1&0&-1&\frac32\\
+0&1&0&-\frac12\\
+0&0&0&0
+\end{pmatrix}.
+\]
+主元变量为 \(x_1,x_2\)，自由变量为 \(x_3\)。通解为
+\[
+x=
+\begin{pmatrix}
+\frac32\\[0.2em]
+-\frac12\\[0.2em]
+0
+\end{pmatrix}
+k
+\begin{pmatrix}
+1\\0\\1
+\end{pmatrix},
+\qquad k\in\mathbb R.
+\]
+
+\textbf{【方法总结】}
+
+有两个不同解说明无穷多解，必须同时满足 \(r(A)=r(A|b)<n\)。
+\end{answerbox}
+\begin{answerbox}[2024--2025 填空 5]
+题：非零三阶方阵 $A$ 的每一列都是齐次方程组
+\[
+\begin{cases}
+x_1+2x_2-2x_3=0,\\
+3x_1+x_2+\lambda x_3=0,\\
+4x_1+3x_2-3x_3=0
+\end{cases}
+\]
+的解，求 $\lambda+r(A)$。
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+$A\ne O$ 且每列在解空间中，$\Rightarrow$齐次方程组有非零解：
+\[
+\left|\begin{matrix}1&2&-2\\3&1&\lambda\\4&3&-3\end{matrix}\right|=0
+\Rightarrow \lambda=-1.
+\]
+此时系数矩阵秩为 $2$，解空间维数为 $1$，$\Rightarrow$非零矩阵 $A$ 的列均在一维空间中，$r(A)=1$。
+\textbf{【答案】}
+
+\[\lambda+r(A)=0.\]
+\end{answerbox}
+\begin{answerbox}[2024--2025 解答四：由三个解求通解]
+题：$r(A)=2$，$\eta_1,\eta_2,\eta_3$ 是 $Ax=b$ 的三个解，且
+\[4\eta_1-\eta_2=(3,0,-3)^T,\quad 5\eta_1-3\eta_3=(-4,12,2)^T.\]
+求通解。
+
+\textbf{【题目分析】}
+
+三阶方阵 \(A\) 满足 \(r(A)=2\)，故齐次方程组 \(Ax=0\) 的基础解系由
+\[
+n-r(A)=3-2=1
+\]
+个解向量构成。非齐次方程组解的仿射组合仍为非齐次方程组的解。
+
+\textbf{【详细解答】}
+
+由题设
+\[
+4\eta_1-\eta_2=
+\begin{pmatrix}3\\0\\-3\end{pmatrix},
+\qquad
+5\eta_1-3\eta_3=
+\begin{pmatrix}-4\\12\\2\end{pmatrix}.
+\]
+因为 \(4-1=3\)、\(5-3=2\)，所以
+\[
+\frac13(4\eta_1-\eta_2)=
+\begin{pmatrix}1\\0\\-1\end{pmatrix},
+\qquad
+\frac12(5\eta_1-3\eta_3)=
+\begin{pmatrix}-2\\6\\1\end{pmatrix}
+\]
+都是 \(Ax=b\) 的解。
+
+两解相减得
+\[
+\begin{pmatrix}3\\-6\\-2\end{pmatrix}
+=
+\begin{pmatrix}1\\0\\-1\end{pmatrix}
+-
+\begin{pmatrix}-2\\6\\1\end{pmatrix},
+\]
+这是 \(Ax=0\) 的一个非零解。又 \(Ax=0\) 的基础解系只含一个向量，故它可作为基础解系。
+
+\textbf{【最终答案】}
+
+取特解
+\[
+\eta_0=
+\begin{pmatrix}1\\0\\-1\end{pmatrix},
+\qquad
+\xi=
+\begin{pmatrix}3\\-6\\-2\end{pmatrix}.
+\]
+所以 \(Ax=b\) 的通解为
+\[
+x=
+k\begin{pmatrix}3\\-6\\-2\end{pmatrix}
++
+\begin{pmatrix}1\\0\\-1\end{pmatrix},
+\qquad k\in\mathbb R.
+\]
+
+\textbf{【方法总结】}
+
+本题按参考答案写法：先构造两个非齐次特解，再用“两个特解之差”得到齐次方程组的基础解系。
+\end{answerbox}
+\bigskip\hrule\bigskip
+
+\section{基、坐标、过渡矩阵}
+
+\begin{identifybox}[高亮公式]
+若 $(\beta_1,\ldots,\beta_n)=(\alpha_1,\ldots,\alpha_n)C$，则 $C$ 是“新基向量在旧基下的坐标矩阵”。\\
+同一向量：$[v]_\alpha=C[v]_\beta$，$\Rightarrow$ $[v]_\beta=C^{-1}[v]_\alpha$。\\
+\end{identifybox}
+
+\begin{templatebox}[考场模板]
+
+\begin{enumerate}
+\item 先写 $(\beta)=(\alpha)C$。
+\item 判断是否为基：只看 $|C|\ne0$。
+\item 坐标变换：旧坐标 $=C$ 新坐标；新坐标 $=C^{-1}$ 旧坐标。
+\item “两组基下坐标相同”：设共同坐标为 $x$，写 $(\alpha)x=(\beta)x$，化成 $(C-E)x=0$。
+\end{enumerate}
+
+\end{templatebox}
+\subsection{真题融合}
+
+\begin{answerbox}[2020--2021 解答四：子空间、基与过渡矩阵]
+题：设 $V$ 是由
+\[
+\alpha_1=(2,3,1,1)^T,\quad \alpha_2=(1,2,-1,1)^T
+\]
+所张成的子空间，
+\[
+\beta_1=(4,7,-1,3)^T,\quad \beta_2=(3,4,3,1)^T.
+\]
+（1）求子空间 $V$ 的维数 $\dim(V)$；
+（2）判断是否有 $\beta_1\in V,\ \beta_2\in V$，并说明理由；
+（3）$\beta_1,\beta_2$ 是否是子空间 $V$ 的基？请说明理由。如果是，求基 $\beta_1,\beta_2$ 到基 $\alpha_1,\alpha_2$ 的过渡矩阵。
+
+\textbf{【题目分析】}
+
+把生成向量作列行化简，卷得到
+\[\dim V=2.\]
+
+\textbf{【详细解答】}
+
+把待判向量并入列，若秩不变则属于 $V$。由
+\[(\beta_1,\beta_2)=(\alpha_1,\alpha_2)C\]
+
+\textbf{【最终答案】}
+
+直接读出过渡矩阵。
+\end{answerbox}
+\begin{answerbox}[2021--2022 填空 5]
+题：向量 $(5,6)^T$ 在基 $(1,2)^T,(3,4)^T$ 下的坐标。
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+\[x(1,2)^T+y(3,4)^T=(5,6)^T.\]
+解得
+\textbf{【答案】}
+
+\[[v]_{\alpha}=(-1,2)^T.\]
+\end{answerbox}
+\begin{answerbox}[2022--2023 解答六：三维基与过渡矩阵]
+题：$\alpha_1=(1,2,1)^T,\alpha_2=(1,3,2)^T,\alpha_3=(1,a,3)^T$ 是一组基，$\beta=(1,1,1)^T$ 在该基下坐标为 $(b,c,1)^T$。求 $a,b,c$，并求新旧基过渡矩阵。
+
+\textbf{【题目分析】}
+
+先用
+\[\beta=b\alpha_1+c\alpha_2+\alpha_3\]
+
+\textbf{【详细解答】}
+
+比较分量：
+\[
+(1,1,1)^T=b(1,2,1)^T+c(1,3,2)^T+(1,a,3)^T.
+\]
+解得
+\[
+a=3,\qquad b=2,\qquad c=-2.
+\]
+又
+\[
+(\alpha_2,\alpha_3,\beta)=(\alpha_1,\alpha_2,\alpha_3)
+C,
+\]
+其中
+\[
+C=
+\begin{pmatrix}
+0&0&2\\
+1&0&-2\\
+0&1&1
+\end{pmatrix}.
+\]
+因为 \(|C|\ne0\)，所以 \(\alpha_2,\alpha_3,\beta\) 是一组基。
+
+\textbf{【最终答案】}
+
+题目要求由 $(\alpha_2,\alpha_3,\beta)$ 到 $(\alpha_1,\alpha_2,\alpha_3)$，故过渡矩阵取 $C^{-1}$。
+\[
+M=C^{-1}=
+\begin{pmatrix}
+1&1&0\\
+-\frac12&0&1\\
+\frac12&0&0
+\end{pmatrix}.
+\]
+
+\textbf{【方法总结】}
+
+\((\beta)=(\alpha)C\) 时，\(C\) 的第 \(j\) 列是新基第 \(j\) 个向量在旧基下的坐标；由新基到旧基的坐标变换矩阵为 \(C\)，由旧基到新基为 \(C^{-1}\)。
+\end{answerbox}
+\begin{answerbox}[2023--2024 填空 5]
+题：已知 $\gamma=k_1\alpha_1+k_2\alpha_2+k_3\alpha_3$，且 $\gamma^T\alpha_i=\beta^T\alpha_i$，求 $k_1^2+k_2^2+k_3^2$。
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+因为 $\alpha_1,\alpha_2,\alpha_3$ 是基，条件等价于
+\[(\gamma-\beta)^T\alpha_i=0,\ i=1,2,3,\]
+$\Rightarrow$ $\gamma=\beta$。求 $\beta$ 在 $\alpha$ 基下坐标，
+\textbf{【答案】}
+
+\[k_1^2+k_2^2+k_3^2=9.\]
+\end{answerbox}
+\begin{answerbox}[2023--2024 解答五：一般 n 维基变换]
+题：设向量组（I）：$\alpha_1,\alpha_2,\cdots,\alpha_n$ 是向量空间 $V$ 的一组基。
+（1）设 $\beta_1=\alpha_1,\ \beta_i=\alpha_1+\alpha_i\ (2\le i\le n)$，证明向量组（II）：$\beta_1,\beta_2,\cdots,\beta_n$ 也是 $V$ 的一组基；
+（2）求基（II）到基（I）的过渡矩阵；
+（3）向量 $\alpha$ 在基（I）下的坐标为 $(1,1,\cdots,1)^T$，求 $\alpha$ 在基（II）下的坐标。
+
+\textbf{【题目分析】}
+
+\[
+(\beta_1,\ldots,\beta_n)=(\alpha_1,\ldots,\alpha_n)
+\begin{pmatrix}
+1&1&\cdots&1\\
+0&1&\cdots&0\\
+\vdots& &\ddots&\vdots\\
+0&0&\cdots&1
+\end{pmatrix}.
+\]
+
+\textbf{【详细解答】}
+
+\[
+(\beta_1,\ldots,\beta_n)=(\alpha_1,\ldots,\alpha_n)
+\begin{pmatrix}
+1&1&\cdots&1\\
+0&1&\cdots&0\\
+\vdots& &\ddots&\vdots\\
+0&0&\cdots&1
+\end{pmatrix}.
+\]
+
+\textbf{【最终答案】}
+
+该矩阵行列式为 $1$，$\Rightarrow$ $\beta$ 是基。若 $[\alpha]_{\text{基 I}}=(1,1,\ldots,1)^T$，则
+\[[\alpha]_{\text{基 II}}=(2-n,1,\ldots,1)^T.\]
+\end{answerbox}
+\begin{answerbox}[2024--2025 填空 4]
+题：设 $\alpha_1,\alpha_2,\alpha_3$ 是三维向量空间 $\mathbb R^3$ 的一个基，则由基
+\[
+\alpha_1,\ 2\alpha_2,\ 3\alpha_3
+\]
+到基
+\[
+\alpha_1+\alpha_2,\ \alpha_2+\alpha_3,\ \alpha_3+\alpha_1
+\]
+的过渡矩阵为 $\underline{\qquad}$。
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+以原始 $\alpha$ 为坐标，旧基矩阵
+\[D=\operatorname{diag}(1,2,3),\]
+新基矩阵
+\[C=\begin{pmatrix}1&0&1\\1&1&0\\0&1&1\end{pmatrix}.\]
+若采用“旧坐标 = 过渡矩阵 × 新坐标”，则
+\textbf{【答案】}
+
+\[
+P=D^{-1}C=
+\begin{pmatrix}
+1&0&1\\
+\frac12&\frac12&0\\
+0&\frac13&\frac13
+\end{pmatrix}.
+\]
+若按参考答案“由基 \((\alpha_1,2\alpha_2,3\alpha_3)\) 到基 \((\alpha_1+\alpha_2,\alpha_2+\alpha_3,\alpha_3+\alpha_1)\)”的坐标方向，则过渡矩阵写为上式。
+\end{answerbox}
+\begin{answerbox}[2024--2025 解答五：坐标相同的全部向量]
+题：$\beta_1=\alpha_1-\alpha_2,\ \beta_2=2\alpha_2-\alpha_3,\ \beta_3=3\alpha_3$。证明 $\beta$ 为基，并求在两组基下坐标相同的全部向量。
+
+\textbf{【题目分析】}
+
+\[
+(\beta_1,\beta_2,\beta_3)=(\alpha_1,\alpha_2,\alpha_3)
+\begin{pmatrix}
+1&0&0\\
+-1&2&0\\
+0&-1&3
+\end{pmatrix},
+\]
+
+\textbf{【详细解答】}
+
+行列式 $=6\ne0$，$\Rightarrow$为基。设共同坐标 $x$，则
+\[(\alpha)x=(\beta)x=(\alpha)Cx,\]
+
+因此
+\[(C-E)x=0.\]
+
+\textbf{【最终答案】}
+
+解出 $x$ 后，向量为
+\[\gamma=(\alpha_1,\alpha_2,\alpha_3)x.\]
+\end{answerbox}
+\bigskip\hrule\bigskip
+
+\section{特征值、特征向量、相似对角化、实对称矩阵}
+
+\begin{identifybox}[高亮公式]
+$A\alpha=\lambda\alpha\Rightarrow f(A)\alpha=f(\lambda)\alpha$。\\
+实对称矩阵：不同特征值对应特征向量正交；一定可正交对角化。\\
+对角化步骤：求特征值 -> 求特征向量 -> 组 $P$ 或正交单位化组 $Q$。\\
+\end{identifybox}
+
+\begin{templatebox}[考场模板]
+
+\begin{enumerate}
+\item 看到“实对称”先写：可正交对角化。
+\item 已知特征向量时，用 $A\alpha_i=\lambda_i\alpha_i$ 反求未知参数。
+\item 正交矩阵 $Q$ 的列必须是单位正交特征向量。
+\item 求 $A$：写 $A=Q\Lambda Q^T$ 或 $A=P\Lambda P^{-1}$。
+\end{enumerate}
+
+\end{templatebox}
+\subsection{真题融合}
+
+\begin{answerbox}[2020--2021 填空 5]
+题：设 $A$ 为 $3$ 阶实对称矩阵，
+\[
+\alpha_1=\begin{pmatrix}2\\a+4\\-3\end{pmatrix},\quad
+\alpha_2=\begin{pmatrix}a+1\\1\\1\end{pmatrix},
+\]
+且 $A\alpha_1=\alpha_1,\ A\alpha_2=2\alpha_2$，则 $a=\underline{\qquad}$。
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+实对称矩阵对应不同特征值的特征向量正交。直接令
+\textbf{【答案】}
+
+\[\alpha_1^T\alpha_2=0\]
+解参数， $-2$。
+\end{answerbox}
+\begin{answerbox}[2020--2021 解答五：实对称矩阵补特征向量]
+题：三阶实对称矩阵 $A$ 的三个特征值为 $\lambda_1=\lambda_2=1,\ \lambda_3=2$，且对应于 $\lambda_1=\lambda_2=1$ 的特征向量为
+\[
+\alpha_1=(1,1,-1)^T,\quad \alpha_2=(-2,-3,3)^T.
+\]
+（1）求 $A$ 的对应于特征值 $\lambda_3=2$ 的特征向量；
+（2）求正交矩阵 $Q$ 及对角形矩阵 $\Lambda$，使 $Q^{-1}AQ=\Lambda$。
+
+\textbf{【题目分析】}
+
+$\lambda=2$ 的特征向量必须与已知两个向量都正交。设 $\xi=(x_1,x_2,x_3)^T$，解
+\[\xi^T\xi_1=0,\quad \xi^T\xi_2=0.\]
+
+\textbf{【详细解答】}
+
+$\lambda=2$ 的特征向量必须与已知两个向量都正交。设 $\xi=(x_1,x_2,x_3)^T$，解
+\[\xi^T\xi_1=0,\quad \xi^T\xi_2=0.\]
+
+\textbf{【最终答案】}
+
+得 $\xi=k(0,1,1)^T$。把三个特征向量正交单位化，作
+\[Q=(e_1,e_2,e_3),\quad Q^TAQ=\operatorname{diag}(-1,-1,2).\]
+\end{answerbox}
+\begin{answerbox}[2022--2023 填空 5]
+题：三阶矩阵满足 $|A-E|=|A-2E|=|A-3E|=0$，求 $|A-4E|$。
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+特征值为 $1,2,3$。
+\textbf{【答案】}
+
+\[|A-4E|=(1-4)(2-4)(3-4)=-6.\]
+\end{answerbox}
+\begin{answerbox}[2022--2023 解答四：四阶矩阵对角化]
+题：设四阶矩阵
+\[
+A=\begin{pmatrix}
+3&2&2&2\\
+a&1&b&c\\
+d&e&1&f\\
+g&h&k&1
+\end{pmatrix}
+\]
+对应特征值 $\lambda=3$ 有三个线性无关的特征向量，其中 $a,b,c,d,e,f,g,h,k$ 为常数。
+（1）求矩阵 $A$；
+（2）求可逆矩阵 $P$ 和对角形矩阵 $\Lambda$，使 $P^{-1}AP=\Lambda$。
+
+\textbf{【题目分析】}
+
+先由 $(A-3E)x=0$ 的维数为 $3$ 写出参数限制，求出矩阵 $A$。补另一个特征值及特征向量。
+
+\textbf{【详细解答】}
+
+由 \(r(3E-A)=1\) 得
+\[
+A=
+\begin{pmatrix}
+3&2&2&2\\
+0&1&-2&-2\\
+0&-2&1&-2\\
+0&-2&-2&1
+\end{pmatrix}.
+\]
+由 \(\operatorname{tr}(A)=6\)，第四个特征值为 \(-3\)。可取
+\[
+\xi_1=(1,0,0,0)^T,\quad
+\xi_2=(0,-1,1,0)^T,\quad
+\xi_3=(0,-1,0,1)^T,
+\]
+\[
+\xi_4=(-1,1,1,1)^T.
+\]
+
+\textbf{【最终答案】}
+
+\[
+P=
+\begin{pmatrix}
+1&0&0&-1\\
+0&-1&-1&1\\
+0&1&0&1\\
+0&0&1&1
+\end{pmatrix},
+\qquad
+\Lambda=\operatorname{diag}(3,3,3,-3).
+\]
+\[
+P^{-1}AP=\Lambda.
+\]
+
+\textbf{【方法总结】}
+
+\(P\) 的列向量顺序必须与 \(\Lambda\) 的对角元顺序一致。
+\end{answerbox}
+\begin{answerbox}[2023--2024 填空 6]
+题：设二阶矩阵 $A$ 有两个不同特征值，$\alpha_1,\alpha_2$ 是 $A$ 的线性无关的特征向量，且满足
+\[A^2(\alpha_1+\alpha_2)=\alpha_1+\alpha_2.\]
+求 $|A|$。
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+设对应特征值为 $\lambda_1,\lambda_2$。由线性无关得
+\[\lambda_1^2=1,\quad \lambda_2^2=1.\]
+又两个特征值不同，得特征值为 $1,-1$。
+\textbf{【答案】}
+
+\[|A|=-1.\]
+\end{answerbox}
+\begin{answerbox}[2023--2024 解答六：实对称矩阵由多项式确定]
+题：三阶实对称矩阵 $A$ 可逆，满足 $A^3-3A^2+2A=O$，且 $Ax=x$ 的基础解系为 $(1,1,0)^T$。求全部特征值、正交矩阵 $Q$ 与 $A$。
+
+\textbf{【题目分析】}
+
+\[A(A-E)(A-2E)=O.\]
+
+\textbf{【详细解答】}
+
+因 $A$ 可逆，特征值只可能为 $1,2$。又 $\lambda=1$ 的特征子空间维数为 $1$，$\Rightarrow$特征值为
+\[1,2,2.\]
+
+取
+\[e_1=\frac1{\sqrt2}(1,1,0)^T,\]
+
+\textbf{【最终答案】}
+
+取
+\[
+\eta_1=\frac1{\sqrt2}(1,1,0)^T,\qquad
+\eta_2=\frac1{\sqrt2}(-1,1,0)^T,\qquad
+\eta_3=(0,0,1)^T.
+\]
+令
+\[
+Q=(\eta_1,\eta_2,\eta_3)=
+\begin{pmatrix}
+\frac1{\sqrt2}&-\frac1{\sqrt2}&0\\
+\frac1{\sqrt2}&\frac1{\sqrt2}&0\\
+0&0&1
+\end{pmatrix},
+\quad
+\Lambda=\operatorname{diag}(1,2,2).
+\]
+\[
+Q^TAQ=\Lambda,\qquad
+A=Q\Lambda Q^T=
+\begin{pmatrix}
+\frac32&-\frac12&0\\
+-\frac12&\frac32&0\\
+0&0&2
+\end{pmatrix}.
+\]
+
+\textbf{【方法总结】}
+
+实对称矩阵正交对角化时，\(Q\) 的列必须是单位正交特征向量。
+\end{answerbox}
+\begin{answerbox}[2024--2025 填空 3]
+题：设三阶实对称矩阵 $A$ 的行列式 $|A|=6$，并且
+\[
+|A+E|+|A-3E|=0.
+\]
+求二次型
+\[
+f(x_1,x_2,x_3)=X^TAX,\qquad X=(x_1,x_2,x_3)^T
+\]
+的正惯性指数，这里 $E$ 为 $3$ 阶单位矩阵。
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+特征值满足
+\[\lambda^3-7\lambda-6=0=(\lambda-3)(\lambda+1)(\lambda+2).\]
+乘积 $3\cdot(-1)\cdot(-2)=6$ 与 $|A|$ 符合，正特征值只有一个，$\Rightarrow$正惯性指数为
+\textbf{【答案】}
+
+\[1.\]
+\end{answerbox}
+\begin{answerbox}[2024--2025 填空 6]
+题：$A$ 有特征值 $-1,1,2,\ldots,2$，$\xi_1,\xi_2$ 分别属于 $-1,1$，问 $7\xi_1-3\xi_2$ 是 $A^{100}$ 的哪个特征值的特征向量。
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+\[A^{100}\xi_1=(-1)^{100}\xi_1=\xi_1,\quad A^{100}\xi_2=\xi_2.\]
+所以
+\textbf{【答案】}
+
+\[A^{100}(7\xi_1-3\xi_2)=1\cdot(7\xi_1-3\xi_2),\]
+ $1$。
+\end{answerbox}
+\begin{answerbox}[2024--2025 解答六：由特征向量和第一行求实对称矩阵]
+题：三阶实方阵 $A$ 第一行为 $(1,2,0)$，且
+\[\alpha_1=(-1,0,1)^T,\quad \alpha_2=(1,1,1)^T,\quad \alpha_3=(1,-2,1)^T\]
+为三个特征向量。求正交矩阵 $Q$ 与 $A$。
+
+\textbf{【题目分析】}
+
+先由第一行计算特征值：
+\[\lambda_i=\frac{(1,2,0)\alpha_i}{(\alpha_i)_1},\]
+
+\textbf{【详细解答】}
+
+先由第一行计算特征值：
+\[\lambda_i=\frac{(1,2,0)\alpha_i}{(\alpha_i)_1},\]
+得
+\[
+\lambda_1=1,\qquad \lambda_2=3,\qquad \lambda_3=-3.
+\]
+将三个特征向量单位化：
+\[
+\eta_1=\frac1{\sqrt2}(-1,0,1)^T,\quad
+\eta_2=\frac1{\sqrt3}(1,1,1)^T,\quad
+\eta_3=\frac1{\sqrt6}(1,-2,1)^T.
+\]
+
+\textbf{【最终答案】}
+
+\[
+Q=
+\begin{pmatrix}
+-\frac1{\sqrt2}&\frac1{\sqrt3}&\frac1{\sqrt6}\\
+0&\frac1{\sqrt3}&-\frac2{\sqrt6}\\
+\frac1{\sqrt2}&\frac1{\sqrt3}&\frac1{\sqrt6}
+\end{pmatrix},
+\qquad
+\Lambda=\operatorname{diag}(1,3,-3).
+\]
+\[
+Q^TAQ=\Lambda.
+\]
+按参考答案计算
+\[
+A=Q\Lambda Q^T=
+\begin{pmatrix}
+1&2&0\\
+2&-1&2\\
+0&2&1
+\end{pmatrix}.
+\]
+
+\textbf{【方法总结】}
+
+已知第一行和特征向量时，先用第一行点乘特征向量求特征值，再用 \(A=Q\Lambda Q^T\) 求矩阵。
+\end{answerbox}
+\bigskip\hrule\bigskip
+
+\section{二次型：正定、惯性指数、标准形、正交变换}
+
+\begin{identifybox}[高亮公式]
+二次型 $f=x^TAx$ 必须先写对称矩阵 $A$。\\
+正定：顺序主子式全正；负定：$(-1)^kD_k>0$。\\
+实对称正交化：求特征值和单位特征向量，$x=Qy$，标准形为 $\lambda_1y_1^2+\cdots+\lambda_ny_n^2$。\\
+\end{identifybox}
+
+\begin{templatebox}[考场模板]
+
+\begin{enumerate}
+\item 把交叉项系数除以 $2$ 写入矩阵。
+\item 问正定/负定：优先顺序主子式。
+\item 问正交变换：求特征值、特征向量、单位化。
+\item 问是否存在正交变换把 $f$ 化为 $g$：比较特征值；只合同则比较正负惯性指数。
+\end{enumerate}
+
+\end{templatebox}
+\subsection{真题融合}
+
+\begin{answerbox}[2020--2021 填空 6]
+题：二次型
+\[
+f(x_1,x_2,x_3)=
+\begin{pmatrix}x_1&x_2&x_3\end{pmatrix}
+\begin{pmatrix}
+1&2&2\\
+0&1&2\\
+0&0&1
+\end{pmatrix}
+\begin{pmatrix}x_1\\x_2\\x_3\end{pmatrix}
+\]
+的秩为 $\underline{\qquad}$。
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+二次型秩就是对应对称矩阵的秩。行化简得
+\textbf{【答案】}
+
+\[r(A)=1.\]
+\end{answerbox}
+\begin{answerbox}[2020--2021 解答七：循环平方和二次型正定]
+题：
+\[f=(x_1+a_1x_2)^2+(x_2+a_2x_3)^2+\cdots+(x_n+a_nx_1)^2.\]
+证明半正定，并求正定条件。
+
+\textbf{【题目分析】}
+
+由平方和结构
+\[f\ge0.\]
+
+\textbf{【详细解答】}
+
+正定要求齐次方程组
+\[x_1+a_1x_2=0,\ldots,x_n+a_nx_1=0\]
+
+\textbf{【最终答案】}
+
+只有零解，即系数行列式非零。条件：
+\[a_1a_2\cdots a_n\ne(-1)^n.\]
+\end{answerbox}
+\begin{answerbox}[2021--2022 填空 6]
+题：
+\[f=(x_1+ax_2)^2+(x_2+bx_3)^2+(x_3+cx_1)^2\]
+何时正定。
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+同上，正定等价于线性变换可逆：
+\textbf{【答案】}
+
+\[abc\ne -1.\]
+\end{answerbox}
+\begin{answerbox}[2021--2022 解答五：三元二次型正交标准形]
+题：
+\[f=ax_1^2+2x_2^2-2x_3^2+2bx_1x_3,\quad a,b>0,\]
+已知矩阵特征值之和为 $1$、积为 $-12$，求 $a,b$ 并正交化。
+
+\textbf{【题目分析】}
+
+先写矩阵
+\[A=\begin{pmatrix}a&0&b\\0&2&0\\b&0&-2\end{pmatrix}.\]
+
+\textbf{【详细解答】}
+
+由迹与行列式：
+\[a=1,\quad 2(-2a-b^2)=-12.\]
+
+因 $b>0$，得
+\[a=1,\quad b=2.\]
+
+\textbf{【最终答案】}
+
+此时特征值为 $2,2,-3$，正交变换后标准形为
+\[f=2y_1^2+2y_2^2-3y_3^2.\]
+可取正交矩阵
+\[
+Q=
+\begin{pmatrix}
+\frac2{\sqrt5}&0&\frac1{\sqrt5}\\
+0&1&0\\
+\frac1{\sqrt5}&0&-\frac2{\sqrt5}
+\end{pmatrix},
+\qquad x=Qy.
+\]
+
+\textbf{【方法总结】}
+
+正交化题必须写对称矩阵、特征值、单位特征向量和标准形。
+\end{answerbox}
+\begin{answerbox}[2022--2023 填空 6]
+题：
+\[f=tx_1^2+tx_2^2+(t-2)x_3^2+2x_1x_2\]
+负定，求 $t$ 范围。
+
+\textbf{【考点】} 基础计算
+
+\textbf{【速解】}
+
+写对称矩阵
+\[A=\begin{pmatrix}t&1&0\\1&t&0\\0&0&t-2\end{pmatrix}.\]
+负定条件：
+\[D_1<0,\quad D_2>0,\quad D_3<0.\]
+即
+\[t<0,\quad t^2-1>0,\quad (t^2-1)(t-2)<0.\]
+合并得
+\textbf{【答案】}
+
+\[t<-1.\]
+\end{answerbox}
+\begin{answerbox}[2022--2023 解答七：实对称矩阵与二次型]
+题：设三阶实对称矩阵 $A$ 的特征值为 $1,1,4$，向量
+\[
+\xi_1=(-1,1,0)^T,\quad \xi_2=(-1,0,1)^T
+\]
+是 $A$ 的对应特征值 $\lambda=1$ 的特征向量。记 $X=(x_1,x_2,x_3)^T$，二次型
+\[
+f(x_1,x_2,x_3)=X^TAX.
+\]
+（1）判断二次型 $f(x_1,x_2,x_3)$ 是否正定并说明理由；
+（2）用正交变换将二次型 $f(x_1,x_2,x_3)$ 化为标准型，写出所用的正交变换；
+（3）求出二次型 $f(x_1,x_2,x_3)$。
+
+\textbf{【题目分析】}
+
+特征值全正，$\Rightarrow$正定。把两个已知特征向量正交单位化，取它们的正交补作 $\lambda=4$ 的单位特征向量，得
+
+\textbf{【详细解答】}
+
+参考答案将 \(\lambda=1\) 的两个特征向量正交化、单位化：
+\[
+\eta_1=\left(-\frac1{\sqrt2},\frac1{\sqrt2},0\right)^T,\qquad
+\eta_2=\left(-\frac1{\sqrt6},-\frac1{\sqrt6},\frac2{\sqrt6}\right)^T.
+\]
+\(\lambda=4\) 的单位特征向量取
+\[
+\eta_3=\left(\frac1{\sqrt3},\frac1{\sqrt3},\frac1{\sqrt3}\right)^T.
+\]
+令 \(Q=(\eta_1,\eta_2,\eta_3)\)。
+
+\textbf{【最终答案】}
+
+\[
+Q=
+\begin{pmatrix}
+-\frac1{\sqrt2}&-\frac1{\sqrt6}&\frac1{\sqrt3}\\
+\frac1{\sqrt2}&-\frac1{\sqrt6}&\frac1{\sqrt3}\\
+0&\frac2{\sqrt6}&\frac1{\sqrt3}
+\end{pmatrix},
+\qquad
+Q^TAQ=\operatorname{diag}(1,1,4).
+\]
+在正交变换 \(X=QY\) 下
+\[
+f=y_1^2+y_2^2+4y_3^2.
+\]
+并且
+\[
+A=Q\operatorname{diag}(1,1,4)Q^T=
+\begin{pmatrix}
+2&1&1\\
+1&2&1\\
+1&1&2
+\end{pmatrix},
+\]
+\[
+f(x_1,x_2,x_3)=2x_1^2+2x_2^2+2x_3^2+2x_1x_2+2x_1x_3+2x_2x_3.
+\]
+
+\textbf{【方法总结】}
+
+同一特征值下给出的特征向量若不正交，先施密特正交化，再单位化。
+\end{answerbox}
+\begin{answerbox}[2023--2024 解答七：合同与正交的区别]
+题：
+\[f=x_1^2+2x_2^2+2x_3^2+2x_1x_2-2x_1x_3,\]
+\[g=y_1^2+y_2^2+y_3^2+2y_2y_3.\]
+求 $f$ 规范形，找可逆变换使 $f$ 化为 $g$，并判断是否存在正交变换。
+
+\textbf{【题目分析】}
+
+二次型矩阵分别为
+\[
+A=\begin{pmatrix}1&1&-1\\1&2&0\\-1&0&2\end{pmatrix},
+\qquad
+B=\begin{pmatrix}1&0&0\\0&1&1\\0&1&1\end{pmatrix}.
+\]
+参考答案给出
+\[
+f=(x_1+x_2-x_3)^2+(x_2+x_3)^2,
+\]
+故 \(f\) 的规范形为
+\[
+z_1^2+z_2^2.
+\]
+
+\textbf{【详细解答】}
+
+令
+\[
+y_1=x_1+x_2-x_3,\qquad y_2=x_2,\qquad y_3=x_3,
+\]
+即
+\[
+x=Py,\qquad
+P=
+\begin{pmatrix}
+1&-1&1\\
+0&1&0\\
+0&0&1
+\end{pmatrix}.
+\]
+则
+\[
+P^TAP=B,
+\]
+故可逆线性变换 \(x=Py\) 可将 \(f\) 化为 \(g\)。
+
+\textbf{【最终答案】}
+
+\[
+f\text{ 的规范形为 }z_1^2+z_2^2.
+\]
+\[
+P=
+\begin{pmatrix}
+1&-1&1\\
+0&1&0\\
+0&0&1
+\end{pmatrix}
+\]
+可使 \(x=Py\) 将 \(f\) 化为 \(g\)。又
+\[
+\operatorname{tr}(A)=5,\qquad \operatorname{tr}(B)=3,
+\]
+故 \(A,B\) 不相似，不存在正交变换把 \(f\) 化为 \(g\)。
+
+\textbf{【方法总结】}
+
+合同只保惯性指数；正交变换要求矩阵正交相似，必须比较特征值或迹等相似不变量。
+\end{answerbox}
+\begin{answerbox}[2024--2025 解答七：秩为 2 的二次型]
+题：
+\[f=(1-a)x_1^2+(1-a)x_2^2+2x_3^2+2(1+a)x_1x_2\]
+秩为 $2$。求 $a$，并正交化。
+
+\textbf{【题目分析】}
+
+矩阵为
+\[A=\begin{pmatrix}1-a&1+a&0\\1+a&1-a&0\\0&0&2\end{pmatrix}.\]
+
+\textbf{【详细解答】}
+
+秩为 $2$ 等价于一个特征值为 $0$，得
+\[a=0.\]
+
+此时特征值为 $2,2,0$。取单位特征向量组成
+\[
+P=\begin{pmatrix}
+\frac{\sqrt2}{2}&0&\frac{\sqrt2}{2}\\
+\frac{\sqrt2}{2}&0&-\frac{\sqrt2}{2}\\
+0&1&0
+\end{pmatrix},
+\]
+
+\textbf{【最终答案】}
+
+标准形为
+\[f=2y_1^2+2y_2^2.\]
+规范形为
+\[
+z_1^2+z_2^2.
+\]
+正惯性指数为 \(2\)，负惯性指数为 \(0\)，秩为 \(2\)。
+
+\textbf{【方法总结】}
+
+秩为 \(2\) 表示只有两个非零平方项；正交标准形保留特征值，规范形只保留正负号。
+\end{answerbox}
+\bigskip\hrule\bigskip
+
+\section{证明题：固定套路}
+
+\begin{identifybox}[高亮公式]
+证明“仍为基础解系”：先证明都是解，证明线性无关，个数等于维数。\\
+证明“可逆”：常用 $|A|\ne0$、零空间只有 $0$、特征值不含 $0$。\\
+证明“可对角化”：凑够 $n$ 个线性无关特征向量。\\
+\end{identifybox}
+
+\subsection{真题融合}
+
+\begin{answerbox}[2020--2021 证明八(2)：\ensuremath{A^T=A^*} 推正交矩阵]
+题：$A$ 为 $n$ 阶非零实矩阵，$n>2$，$A^T=A^*$，证明 $A$ 为正交矩阵。
+
+\textbf{【证明思路】}
+
+\[AA^T=AA^*=|A|E.\]
+
+\textbf{【详细证明】}
+
+先由非零行说明 $|A|>0$。两边取行列式：
+\[|A|^2=|A|^n.\]
+
+因 $n>2$ 且 $|A|>0$，得 $|A|=1$，故
+\[AA^T=E,\]
+
+\textbf{【最终答案】}
+
+$\Rightarrow$ $A$ 正交。
+\end{answerbox}
+\begin{answerbox}[2021--2022 证明一：由递推关系证明矩阵可逆]
+题：$\alpha,A\alpha,A^2\alpha$ 线性无关，且 $A^3\alpha=3A\alpha-2A^2\alpha$，证明由若干列构成的矩阵 $B$ 可逆。
+
+\textbf{【证明思路】}
+
+把 $B$ 的列全部写成 $\alpha,A\alpha,A^2\alpha$ 的线性组合：
+\[B=(\alpha,A\alpha,A^2\alpha)C.\]
+
+\textbf{【详细证明】}
+
+左边第一矩阵可逆，算
+\[|C|\ne0.\]
+
+\textbf{【最终答案】}
+
+因此 $B$ 可逆。
+\end{answerbox}
+\begin{answerbox}[2021--2022 证明二：幂等矩阵相似标准形]
+题：$A^2=A,\ r(A)=r$，证明
+\[A\sim \begin{pmatrix}E_r&0\\0&0\end{pmatrix}.\]
+
+\textbf{【证明思路】}
+
+$A^2=A$ 的特征值只可能为 $0,1$。又 $r(A)=r$，说明 $\lambda=1$ 的特征向量取 $r$ 个，$\lambda=0$ 的特征向量取 $n-r$ 个。合成 $n$ 个线性无关特征向量，对角化为上式。
+
+\textbf{【详细证明】}
+
+$A^2=A$ 的特征值只可能为 $0,1$。又 $r(A)=r$，说明 $\lambda=1$ 的特征向量取 $r$ 个，$\lambda=0$ 的特征向量取 $n-r$ 个。合成 $n$ 个线性无关特征向量，对角化为上式。
+
+\textbf{【最终答案】}
+
+$A^2=A$ 的特征值只可能为 $0,1$。又 $r(A)=r$，说明 $\lambda=1$ 的特征向量取 $r$ 个，$\lambda=0$ 的特征向量取 $n-r$ 个。合成 $n$ 个线性无关特征向量，对角化为上式。
+\end{answerbox}
+\begin{answerbox}[2022--2023 证明一：伴随矩阵与基础解系]
+题：四阶矩阵 $A=(\alpha_1,\alpha_2,\alpha_3,\alpha_4)$，$AX=0$ 的基础解系为 $(1,2,0,0)^T$，证明若干列向量是 $A^*x=0$ 的基础解系。
+
+\textbf{【证明思路】}
+
+由基础解系可知
+\[\alpha_1+2\alpha_2=0,\quad r(A)=3.\]
+
+\textbf{【详细证明】}
+
+由基础解系可知
+\[\alpha_1+2\alpha_2=0,\quad r(A)=3.\]
+
+\textbf{【最终答案】}
+
+$\Rightarrow$ $r(A^*)=1$，$A^*x=0$ 的解空间维数为 $3$。验证三个向量都是解且线性无关，即为基础解系。
+\end{answerbox}
+\begin{answerbox}[2022--2023 证明二：二次多项式条件下可对角化]
+题：$A^2-(a+b)A+abE=O,\ a\ne b$。证明
+\[r(A-aE)+r(A-bE)=n,\]
+且 $A$ 可对角化。
+
+\textbf{【证明思路】}
+
+\[(A-aE)(A-bE)=O.\]
+
+\textbf{【详细证明】}
+
+利用
+\[\mathbb R^n=N(A-aE)\oplus N(A-bE)\]
+
+\textbf{【最终答案】}
+
+证明两个特征子空间维数之和为 $n$，$\Rightarrow$有 $n$ 个线性无关特征向量，$A$ 可对角化。
+\end{answerbox}
+\begin{answerbox}[2023--2024 证明一：非齐次解组线性无关]
+题：$b\ne0$，$\eta_0$ 是 $Ax=b$ 的一个解，$\xi_1,\ldots,\xi_{n-r}$ 是 $Ax=0$ 的基础解系，令 $\eta_i=\eta_0+\xi_i$。证明 $\eta_0,\eta_1,\ldots,\eta_{n-r}$ 线性无关。
+
+\textbf{【证明思路】}
+
+设
+\[k_0\eta_0+k_1\eta_1+\cdots+k_s\eta_s=0.\]
+
+\textbf{【详细证明】}
+
+代入 $\eta_i=\eta_0+\xi_i$：
+\[(k_0+\cdots+k_s)\eta_0+k_1\xi_1+\cdots+k_s\xi_s=0.\]
+
+两边左乘 $A$：
+\[(k_0+\cdots+k_s)b=0.\]
+
+\textbf{【最终答案】}
+
+因 $b\ne0$，得 $k_0+\cdots+k_s=0$。由 $\xi_i$ 线性无关得 $k_1=\cdots=k_s=0$，$\Rightarrow$ $k_0=0$。
+\end{answerbox}
+\begin{answerbox}[2023--2024 证明二：\ensuremath{CC^T=O} 与迹技巧]
+题：$A,B,C$ 为 $n$ 阶实矩阵。证明：若 $CC^T=O$，则 $C=O$；若 $AB-BA=CC^T$，则 $AB=BA$。
+
+\textbf{【证明思路】}
+
+\begin{enumerate}
+\item $CC^T=O$ 时，第 $i$ 个对角元为 $C$ 第 $i$ 行元素平方和，$\Rightarrow$每行全零，$C=O$。
+\item 两边取迹：
+\end{enumerate}
+\[\operatorname{tr}(AB-BA)=0.\]
+
+\textbf{【详细证明】}
+
+故
+\[\operatorname{tr}(CC^T)=0.\]
+
+\textbf{【最终答案】}
+
+平方和为 $0$，得 $C=O$，$\Rightarrow$ $AB-BA=O$。
+\end{answerbox}
+\begin{answerbox}[2024--2025 证明一：Vandermonde 型线性无关]
+题：$A$ 有三个不同特征值 $\lambda_1,\lambda_2,\lambda_3$，对应特征向量 $\alpha_1,\alpha_2,\alpha_3$，$\beta=\alpha_1+\alpha_2+\alpha_3$。证明 $\beta,A\beta,A^2\beta$ 线性无关。
+
+\textbf{【证明思路】}
+
+设
+\[k_1\beta+k_2A\beta+k_3A^2\beta=0.\]
+
+\textbf{【详细证明】}
+
+展开：
+\[\sum_{i=1}^3(k_1+k_2\lambda_i+k_3\lambda_i^2)\alpha_i=0.\]
+
+不同特征值对应特征向量线性无关，得
+\[k_1+k_2\lambda_i+k_3\lambda_i^2=0,\quad i=1,2,3.\]
+
+系数矩阵是 Vandermonde 矩阵，行列式
+\[\prod_{i<j}(\lambda_j-\lambda_i)\ne0,\]
+
+\textbf{【最终答案】}
+
+$\Rightarrow$ $k_1=k_2=k_3=0$。
+\end{answerbox}
+\begin{answerbox}[2024--2025 证明二：秩一矩阵逆公式]
+题：$r(A)=1,\ \operatorname{tr}(A)=2$，证明 $I+A$ 可逆且
+\[(I+A)^{-1}=I-\frac13A.\]
+
+\textbf{【证明思路】}
+
+秩为 $1$，非零特征值只有一个；迹为 $2$，$\Rightarrow$特征值为 $2,0,\ldots,0$。$\Rightarrow$ $I+A$ 的特征值为 $3,1,\ldots,1$，可逆。由秩一矩阵满足
+\[A^2=\operatorname{tr}(A)A=2A,\]
+
+\textbf{【详细证明】}
+
+秩为 $1$，非零特征值只有一个；迹为 $2$，$\Rightarrow$特征值为 $2,0,\ldots,0$。$\Rightarrow$ $I+A$ 的特征值为 $3,1,\ldots,1$，可逆。由秩一矩阵满足
+\[A^2=\operatorname{tr}(A)A=2A,\]
+
+\textbf{【最终答案】}
+
+直接验算：
+\[
+(I+A)\left(I-\frac13A\right)
+=I+\frac23A-\frac13A^2
+=I.
+\]
+\end{answerbox}
+\bigskip\hrule\bigskip
+
+\section{考前速背清单}
+\begin{scorebox}[考前速背清单]
+
+\begin{enumerate}
+\item 行列式题：先看倍乘、伴随、列变换，不硬展开。
+\item 秩题：先写矩阵，行化简，主元列对应极大无关组。
+\item 方程组题：永远先比较 $r(A)$ 与 $r(A,b)$。
+\item 通解题：必须写“特解 + 基础解系”。
+\item 基变换题：先写 $(\beta)=(\alpha)C$，决定取 $C$ 还是 $C^{-1}$。
+\item 实对称题：正交对角化；不同特征值的特征向量正交。
+\item 二次型题：交叉项除以 $2$ 写矩阵；正交标准形看特征值。
+\item 证明题：先把目标翻译成“线性无关、可逆、秩、特征值、迹”之一。
+\end{enumerate}
+\end{scorebox}
+
+\end{document}
+
+
+

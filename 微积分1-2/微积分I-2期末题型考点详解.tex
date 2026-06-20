@@ -1,0 +1,1987 @@
+﻿\documentclass[11pt,a4paper,UTF8]{ctexart}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage[colorlinks=true,linkcolor=MidnightBlue,urlcolor=MidnightBlue]{hyperref}
+\usepackage{newunicodechar}
+\newunicodechar{π}{\ensuremath{\pi}}
+\newunicodechar{∫}{\ensuremath{\int}}
+\newunicodechar{Σ}{\ensuremath{\sum}}
+\newunicodechar{∞}{\ensuremath{\infty}}
+\newunicodechar{≤}{\ensuremath{\le}}
+\newunicodechar{≥}{\ensuremath{\ge}}
+\newunicodechar{≠}{\ensuremath{\ne}}
+\newunicodechar{∇}{\ensuremath{\nabla}}
+\newunicodechar{λ}{\ensuremath{\lambda}}
+\newunicodechar{θ}{\ensuremath{\theta}}
+\newunicodechar{α}{\ensuremath{\alpha}}
+\newunicodechar{Ω}{\ensuremath{\Omega}}
+\newunicodechar{√}{\ensuremath{\sqrt{\ }}}
+\newunicodechar{×}{\ensuremath{\times}}
+\newunicodechar{·}{\ensuremath{\cdot}}
+\newunicodechar{±}{\ensuremath{\pm}}
+
+\geometry{left=2.1cm,right=2.1cm,top=2.2cm,bottom=2.2cm}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.35em}
+\linespread{1.08}
+
+\definecolor{bluebg}{RGB}{235,245,255}
+\definecolor{bluebd}{RGB}{41,128,185}
+\definecolor{greenbg}{RGB}{235,255,240}
+\definecolor{greenbd}{RGB}{39,174,96}
+\definecolor{orangebg}{RGB}{255,246,235}
+\definecolor{orangebd}{RGB}{230,126,34}
+\definecolor{redbg}{RGB}{255,240,240}
+\definecolor{redbd}{RGB}{192,57,43}
+
+\newtcolorbox{identifybox}[1][]{
+  enhanced,breakable,colback=bluebg,colframe=bluebd,
+  title=#1,fonttitle=\bfseries,arc=2mm,boxrule=0.8pt
+}
+\newtcolorbox{templatebox}[1][]{
+  enhanced,breakable,colback=orangebg,colframe=orangebd,
+  title=#1,fonttitle=\bfseries,arc=2mm,boxrule=0.9pt
+}
+\newtcolorbox{answerbox}[1][]{
+  enhanced,breakable,colback=greenbg,colframe=greenbd,
+  title=#1,fonttitle=\bfseries,arc=2mm,boxrule=0.8pt
+}
+\newtcolorbox{scorebox}[1][]{
+  enhanced,breakable,colback=redbg,colframe=redbd,
+  title=#1,fonttitle=\bfseries,arc=2mm,boxrule=0.8pt
+}
+
+\newcommand{\dd}{\,\mathrm d}
+\newcommand{\ee}{\mathrm e}
+\newcommand{\R}{\mathbb R}
+
+\title{\Huge 四川大学微积分（I）-2 期末真题融合讲义\\[0.25em]
+\Large 2020--2025 历年真题按题型考点分类详解}
+\author{按近五年试题整理}
+\date{\today}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\begin{scorebox}[定位]
+本讲义按\textbf{知识点模块}组织 2020--2025 微积分（I）-2 真题。每道题均标注年份和原题编号；解答按\textbf{考场模板、关键公式、规范结论}整理。
+
+多元函数极值统一采用：
+\[
+A=f_{xx},\qquad B=f_{xy},\qquad C=f_{yy},\qquad \Delta=AC-B^2.
+\]
+判别：$\Delta>0,A>0$ 为极小值；$\Delta>0,A<0$ 为极大值；$\Delta<0$ 为鞍点；$\Delta=0$ 失效。
+\end{scorebox}
+
+\tableofcontents
+\newpage
+
+\section{全题覆盖索引}
+
+\begin{longtable}{p{2.0cm}p{1.8cm}p{4.2cm}p{6.2cm}}
+\toprule
+\textbf{年份} & \textbf{原题编号} & \textbf{考点} & \textbf{讲义位置}\\
+\midrule
+2020--2021 & 一-1 & 空间曲线法平面 & 空间解析几何、曲线与曲面\\
+2020--2021 & 一-2 & 偏导计算 & 多元函数偏导、全微分与方向导数\\
+2020--2021 & 一-3 & 第一类曲线积分 & 第一类曲线积分与第一类曲面积分\\
+2020--2021 & 一-4 & 可分离变量方程 & 微分方程\\
+2020--2021 & 一-5 & 傅里叶级数和函数 & 傅里叶级数\\
+2020--2021 & 二-6 & 隐函数二阶偏导 & 隐函数求导与复合函数求导\\
+2020--2021 & 二-7 & 圆域二重积分 & 二重积分、三重积分与变量替换\\
+2020--2021 & 二-8 & 路径无关曲线积分 & 第二类曲线积分与格林公式\\
+2020--2021 & 二-9 & 二阶常系数非齐次方程 & 微分方程\\
+2020--2021 & 三-10 & 可微性与方向导数 & 多元函数偏导、全微分与方向导数\\
+2020--2021 & 三-11 & 高斯公式 & 第二类曲面积分、高斯公式与斯托克斯公式\\
+2020--2021 & 四-12 & 空间体积 & 二重积分、三重积分与变量替换\\
+2020--2021 & 四-13 & 泰勒级数 & 级数、幂级数与泰勒展开\\
+2020--2021 & 四-14 & 条件极值 & 多元函数极值、条件极值与闭区域最值\\
+2020--2021 & 五-15 & 幂级数与积分证明 & 级数、幂级数与泰勒展开\\
+2021--2022 & 一-1 & 曲面切平面 & 空间解析几何、曲线与曲面\\
+2021--2022 & 一-2 & 偏导计算 & 多元函数偏导、全微分与方向导数\\
+2021--2022 & 一-3 & 空间曲线第一类积分 & 第一类曲线积分与第一类曲面积分\\
+2021--2022 & 一-4 & 正弦级数和函数 & 傅里叶级数\\
+2021--2022 & 一-5 & 方向导数 & 多元函数偏导、全微分与方向导数\\
+2021--2022 & 二-6 & 积分方程 & 积分方程与综合计算\\
+2021--2022 & 二-7 & 第一类曲面积分 & 第一类曲线积分与第一类曲面积分\\
+2021--2022 & 二-8 & 隐函数二阶偏导 & 隐函数求导与复合函数求导\\
+2021--2022 & 二-9 & 格林公式 & 第二类曲线积分与格林公式\\
+2021--2022 & 三-10 & 二阶常系数非齐次方程 & 微分方程\\
+2021--2022 & 三-11 & 函数展开与级数求和 & 级数、幂级数与泰勒展开\\
+2021--2022 & 三-12 & 三重积分 & 二重积分、三重积分与变量替换\\
+2021--2022 & 四-13 & 曲面面积与形心 & 第一类曲线积分与第一类曲面积分\\
+2021--2022 & 四-14 & 第二类曲面积分 & 第二类曲面积分、高斯公式与斯托克斯公式\\
+2021--2022 & 五-15 & 级数证明 & 综合证明题与级数敛散性判别\\
+2022--2023 & 一-1 & 空间向量数量积 & 空间解析几何、曲线与曲面\\
+2022--2023 & 一-2 & 空间曲线法平面 & 空间解析几何、曲线与曲面\\
+2022--2023 & 一-3 & 偏导计算 & 多元函数偏导、全微分与方向导数\\
+2022--2023 & 一-4 & 第一类曲线积分 & 第一类曲线积分与第一类曲面积分\\
+2022--2023 & 一-5 & 幂级数收敛域 & 级数、幂级数与泰勒展开\\
+2022--2023 & 一-6 & 傅里叶系数 & 傅里叶级数\\
+2022--2023 & 二-1 & 隐函数关系式 & 隐函数求导与复合函数求导\\
+2022--2023 & 三-10 & 连续偏导与可微性 & 多元函数偏导、全微分与方向导数\\
+2022--2023 & 二-2 & 条件极值与距离 & 多元函数极值、条件极值与闭区域最值\\
+2022--2023 & 二-3 & 积分方程 & 积分方程与综合计算\\
+2022--2023 & 二-4 & 路径无关积分 & 第二类曲线积分与格林公式\\
+2022--2023 & 二-5 & 高斯公式补面 & 第二类曲面积分、高斯公式与斯托克斯公式\\
+2022--2023 & 三-11 & Taylor 系数 & 级数、幂级数与泰勒展开\\
+2022--2023 & 三-12 & 旋转曲面与质心 & 积分方程与综合计算\\
+2022--2023 & 五-15 & 参数级数敛散性 & 综合证明题与级数敛散性判别\\
+2023--2024 & 一-1 & 空间向量垂直 & 空间解析几何、曲线与曲面\\
+2023--2024 & 一-2 & 旋转抛物面体积 & 二重积分、三重积分与变量替换\\
+2023--2024 & 一-3 & 第一类曲线积分 & 第一类曲线积分与第一类曲面积分\\
+2023--2024 & 一-4 & 曲面切平面 & 空间解析几何、曲线与曲面\\
+2023--2024 & 一-5 & 正弦级数系数 & 傅里叶级数\\
+2023--2024 & 二-1 & 复合函数偏导 & 隐函数求导与复合函数求导\\
+2023--2024 & 二-2 & 方向导数 & 多元函数偏导、全微分与方向导数\\
+2023--2024 & 二-3 & 普通极值 & 多元函数极值、条件极值与闭区域最值\\
+2023--2024 & 二-4 & 二次积分换序 & 二重积分、三重积分与变量替换\\
+2023--2024 & 二-5 & 幂级数和函数 & 级数、幂级数与泰勒展开\\
+2023--2024 & 三-1 & 曲面面积与形心 & 第一类曲线积分与第一类曲面积分\\
+2023--2024 & 三-2 & 格林公式补线 & 第二类曲线积分与格林公式\\
+2023--2024 & 三-3 & 第二类曲面积分 & 第二类曲面积分、高斯公式与斯托克斯公式\\
+2023--2024 & 四-1 & 级数判别 & 综合证明题与级数敛散性判别\\
+2024--2025 & 一-1 & 两直线夹角 & 空间解析几何、曲线与曲面\\
+2024--2025 & 一-2 & 偏导计算 & 多元函数偏导、全微分与方向导数\\
+2024--2025 & 一-3 & 二次积分换序 & 二重积分、三重积分与变量替换\\
+2024--2025 & 一-4 & 第一类曲线积分 & 第一类曲线积分与第一类曲面积分\\
+2024--2025 & 一-5 & 球面对称积分 & 第一类曲线积分与第一类曲面积分\\
+2024--2025 & 一-6 & 傅里叶和函数 & 傅里叶级数\\
+2024--2025 & 二 & 隐函数求导 & 隐函数求导与复合函数求导\\
+2024--2025 & 三 & 平行切平面 & 空间解析几何、曲线与曲面\\
+2024--2025 & 四 & 幂级数和函数 & 级数、幂级数与泰勒展开\\
+2024--2025 & 五 & 闭区域最值 & 多元函数极值、条件极值与闭区域最值\\
+2024--2025 & 六 & 质心 & 二重积分、三重积分与变量替换\\
+2024--2025 & 七 & 高斯公式补面 & 第二类曲面积分、高斯公式与斯托克斯公式\\
+2024--2025 & 八 & 二阶混合偏导 & 多元函数偏导、全微分与方向导数\\
+2024--2025 & 九 & 格林公式补线 & 第二类曲线积分与格林公式\\
+2024--2025 & 十 & 正项级数证明 & 综合证明题与级数敛散性判别\\
+\bottomrule
+\end{longtable}
+
+\newpage\section{空间解析几何、曲线与曲面}
+
+\begin{identifybox}[考频定位]
+常考：空间曲线法平面、曲面切平面、空间向量夹角、旋转曲面方程。先找切向量或法向量，再写点法式方程。
+\end{identifybox}
+
+\begin{templatebox}[考场模板]
+曲线 $\boldsymbol r(t)=(x(t),y(t),z(t))$：
+\[
+\boldsymbol r'(t_0)=(x'(t_0),y'(t_0),z'(t_0)).
+\]
+法平面以切向量为法向量：
+\[
+\boldsymbol r'(t_0)\cdot((x,y,z)-(x_0,y_0,z_0))=0.
+\]
+隐式曲面 $F(x,y,z)=0$ 在 $P_0$ 处切平面：
+\[
+F_x(P_0)(x-x_0)+F_y(P_0)(y-y_0)+F_z(P_0)(z-z_0)=0.
+\]
+\end{templatebox}
+
+\begin{answerbox}[2020--2021 一-1]
+\textbf{【考点】} 空间曲线法平面
+
+\textbf{原题}：曲线 $x=\ee^t,\ y=t^2+\sin t,\ z=2t+1$ 上过点 $(1,0,1)$ 的法平面方程。
+
+\textbf{【速解】}：点 $(1,0,1)$ 对应 $t=0$。切向量
+\[
+\boldsymbol r'(t)=(\ee^t,2t+\cos t,2),\qquad \boldsymbol r'(0)=(1,1,2).
+\]
+法平面：
+\[
+(x-1)+y+2(z-1)=0.
+\]
+\textbf{【答案】}：$x+y+2z=3$。
+\end{answerbox}
+
+\begin{answerbox}[2022--2023 一-2]
+\textbf{【考点】} 空间曲线法平面
+
+\textbf{原题}：求空间曲线
+\[
+\begin{cases}
+y=x^2+x,\\
+z=x^3+x^2
+\end{cases}
+\]
+在点 $(1,2,2)$ 处的法平面方程。
+
+\textbf{【速解】}：由参数方程求切向量 $\boldsymbol r'(t_0)=(1,3,5)$。法平面
+\[
+1(x-x_0)+3(y-y_0)+5(z-z_0)=0.
+\]
+代入给定点得
+\[
+x+3y+5z=17.
+\]
+\textbf{【答案】}：$x+3y+5z=17$。
+\end{answerbox}
+
+\begin{answerbox}[2023--2024 一-1]
+\textbf{【考点】} 空间向量垂直
+
+\textbf{一1 原题}：设互相垂直的单位向量 $\boldsymbol a,\boldsymbol b$ 满足
+\[
+(\boldsymbol a+2\boldsymbol b)\perp(k\boldsymbol a+\boldsymbol b),
+\]
+求常数 $k$。
+
+\textbf{【答案】}：$k=-2$。
+
+\end{answerbox}
+
+\begin{answerbox}[2024--2025 一-1]
+\textbf{【考点】} 两直线夹角
+
+\textbf{一1 原题}：求直线
+\[
+l_1:\frac{x}{1}=\frac{y-1}{2}=\frac{z+1}{-2}
+\]
+与直线
+\[
+l_2:x=1+2t,\quad y=t,\quad z=-1+2t
+\]
+的夹角。
+\[
+l_1\cdot l_2=2+2-4=0.
+\]
+\textbf{【答案】}：夹角 $\alpha=\dfrac{\pi}{2}$。
+
+\end{answerbox}
+
+\newpage
+
+\begin{answerbox}[2024--2025 三]
+\textbf{【考点】} 平行切平面
+
+\textbf{【原题】} 求曲面 $x^2+2y^2+3z^2=15$ 上平行于平面 $x+2y+6z=20$ 的切平面方程。
+
+\textbf{【思路】} 将曲面写成 $F(x,y,z)=0$，用梯度作法向量写切平面。
+
+\textbf{【速解】} 切平面法向量平行于 $(1,2,6)$，解 $\nabla F=\lambda(1,2,6)$。
+
+\textbf{【答案】} x+2y+6z-15=0，x+2y+6z+15=0。
+\end{answerbox}
+
+\begin{answerbox}[2023--2024 一-4]
+\textbf{【考点】} 曲面切平面
+
+\textbf{【原题】} 求曲面 $(x^2+y^2+z^2)^2=9z$ 上点 (1,1,1) 处的切平面方程。
+
+\textbf{【思路】} 将曲面写成 $F(x,y,z)=0$，用梯度作法向量写切平面。
+
+\textbf{【速解】} 令 $F=(x^2+y^2+z^2)^2-9z$，$\nabla F(1,1,1)=(12,12,3)$。
+
+\textbf{【答案】} 4x+4y+z-9=0。
+\end{answerbox}
+
+\begin{answerbox}[2022--2023 一-1]
+\textbf{【考点】} 空间向量数量积
+
+\textbf{【原题】} 设单位向量 $\boldsymbol a,\boldsymbol b$ 满足
+\[
+|\boldsymbol a\times \boldsymbol b|=\frac12,
+\]
+求 $\boldsymbol a\cdot \boldsymbol b$。
+
+\textbf{【思路】} 利用 $|\boldsymbol a\times\boldsymbol b|^2+(\boldsymbol a\cdot\boldsymbol b)^2=|\boldsymbol a|^2|\boldsymbol b|^2$ 求数量积。
+
+\textbf{【速解】}
+\[
+(\boldsymbol a\cdot\boldsymbol b)^2
+=1-\left(\frac12\right)^2=\frac34.
+\]
+
+\textbf{【答案】} $\boldsymbol a\cdot\boldsymbol b=\dfrac{\sqrt3}{2}$。
+\end{answerbox}
+
+\begin{answerbox}[2021--2022 一-1]
+\textbf{【考点】} 曲面切平面
+
+\textbf{【原题】} 求曲面 $z-e^z+2xy=3$ 在点 (1,2,0) 处的切平面。
+
+\textbf{【思路】} 将曲面写成 $F(x,y,z)=0$，用梯度作法向量写切平面。
+
+\textbf{【速解】} 令 $F=z-e^z+2xy-3$，$\nabla F(1,2,0)=(4,2,0)$，切平面 $4(x-1)+2(y-2)=0$。
+
+\textbf{【答案】} $2x+y-4=0$。
+\end{answerbox}
+\section{多元函数偏导、全微分与方向导数}
+
+\begin{identifybox}[考频定位]
+常考：直接偏导、方向导数、原点处偏导与可微性。原点题按“连续、偏导、路径或定义”写。
+\end{identifybox}
+
+\begin{templatebox}[考场模板]
+方向导数：
+\[
+D_{\boldsymbol l}f(P)=\nabla f(P)\cdot \boldsymbol l_0,
+\]
+其中 $\boldsymbol l_0$ 必须是单位向量。
+
+分段函数原点：
+\[
+f_x(0,0)=\lim_{t\to0}\frac{f(t,0)-f(0,0)}{t},\quad
+f_y(0,0)=\lim_{t\to0}\frac{f(0,t)-f(0,0)}{t}.
+\]
+可微性：
+\[
+f(x,y)-f(0,0)-f_x(0,0)x-f_y(0,0)y=o(\sqrt{x^2+y^2}).
+\]
+\end{templatebox}
+
+\begin{answerbox}[2020--2021 一-2]
+\textbf{【考点】} 偏导计算
+
+\textbf{原题}：$z=9+(x+1)^y$，求 $(z_x+z_y)|_{(1,1)}$。
+\[
+z_x=y(x+1)^{y-1},\qquad z_y=(x+1)^y\ln(x+1).
+\]
+\[
+z_x(1,1)=1,\\ z_y(1,1)=2\ln2.
+\]
+\textbf{【答案】}：$1+2\ln2$。
+\end{answerbox}
+
+\begin{answerbox}[2021--2022 一-2]
+\textbf{【考点】} 偏导计算
+
+\textbf{一2 原题}：$z=\ee^{x+2y}\cos(xy)$，求 $z_y(0,1)$。
+\[
+z_y=2\ee^{x+2y}\cos(xy)-x\ee^{x+2y}\sin(xy),
+\]
+\[
+z_y(0,1)=2\ee^2.
+\]
+\textbf{【答案】}：$2\ee^2$。
+
+\end{answerbox}
+
+\begin{answerbox}[2024--2025 一-2]
+\textbf{【考点】} 偏导计算
+
+\textbf{一2 原题}：$f(x,y)=\ee^{x^2y}\ln(x^2+1)$，求 $f_x(1,0)$。
+\[
+f_x=\ee^{x^2y}(2xy)\ln(x^2+1)+\ee^{x^2y}\frac{2x}{x^2+1}.
+\]
+\textbf{【答案】}：$f_x(1,0)=1$。
+
+\end{answerbox}
+
+\begin{answerbox}[2020--2021 三-10]
+\textbf{【考点】} 可微性与方向导数
+
+\textbf{2020--2021 三10 原题}：
+\[
+f(x,y)=\begin{cases}\dfrac{xy^2}{x^2+y^2},&(x,y)\ne(0,0),\\0,&(x,y)=(0,0).
+\end{cases}
+\]
+(1) 求 $f_x(0,0),f_y(0,0)$；(2) 判断可微；(3) 求沿 $\left(\frac45,\frac35\right)$ 的方向导数。
+
+\[
+f_x(0,0)=\lim_{t\to0}\frac{f(t,0)}t=0,
+\quad
+f_y(0,0)=\lim_{t\to0}\frac{f(0,t)}t=0.
+\]
+沿直线 $x=y$：
+\[
+\frac{f(x,x)-0}{\sqrt{2x^2}}=\frac{x/2}{\sqrt2|x|}
+\]
+左右极限不一致，故不可微。
+
+方向 $\boldsymbol l=(4/5,3/5)$：
+\[
+D_{\boldsymbol l}f(0,0)=\lim_{t\to0}\frac{f(4t/5,3t/5)}{t}
+=\frac{36}{125}.
+\]
+\textbf{【答案】}：$f_x(0,0)=f_y(0,0)=0$，不可微，方向导数 $36/125$。
+
+\end{answerbox}
+
+\newpage
+
+\begin{answerbox}[2024--2025 八]
+\textbf{【考点】} 二阶混合偏导
+
+\textbf{【原题】} 设 $f(x,y)=\dfrac{x^4+xy^3}{x^2+y^2}$，$(x,y)\ne(0,0)$，$f(0,0)=0$，求 $f_{xy}(0,0)$。
+
+\textbf{【思路】} 先用定义求 $f_x(0,y)$，再按 $f_{xy}(0,0)=\lim_{y\to0}\dfrac{f_x(0,y)-f_x(0,0)}{y}$ 计算。
+
+\textbf{【速解】}
+\[
+f_x(0,y)=\lim_{t\to0}\frac{f(t,y)-f(0,y)}{t}
+=\lim_{t\to0}\frac{t^4+ty^3}{t(t^2+y^2)}=y.
+\]
+\[
+f_{xy}(0,0)=\lim_{y\to0}\frac{f_x(0,y)-f_x(0,0)}{y}=1.
+\]
+
+\textbf{【答案】} 1。
+\end{answerbox}
+
+\begin{answerbox}[2023--2024 二-2]
+\textbf{【考点】} 方向导数
+
+\textbf{【原题】} 设 $\boldsymbol l$ 为直线
+\[
+\begin{cases}
+4x-y-z=1,\\
+2x+y-2z=2
+\end{cases}
+\]
+的方向向量（与 $z$ 轴的夹角为锐角），求函数
+\[
+u=\ln\left(\sqrt{x^2+y^2}+z\right)
+\]
+在点 $(1,1,0)$ 处沿方向 $\boldsymbol l$ 的方向导数。
+
+\textbf{【思路】} 先由两平面法向量叉乘求直线方向向量，再单位化并与 $\nabla u(1,1,0)$ 点乘。
+
+\textbf{【速解】} 方向向量取两平面法向量叉乘并单位化，再与梯度点乘。
+
+\textbf{【答案】} $\dfrac43$。
+\end{answerbox}
+
+\begin{answerbox}[2022--2023 三-10]
+\textbf{【考点】} 连续偏导与可微性
+
+\textbf{【原题】} 设
+\[
+f(x,y)=
+\begin{cases}
+\dfrac{x^3+y^3}{\sqrt{x^4+y^4}},&(x,y)\ne(0,0),\\[4pt]
+0,&(x,y)=(0,0).
+\end{cases}
+\]
+(1) 讨论 $f(x,y)$ 在 $(0,0)$ 处的连续性、偏导数及可微性；(2) 求 $f(x,y)$ 在 $(0,0)$ 处沿 $\boldsymbol l=(1,1)$ 的方向导数。
+
+\textbf{【思路】} 先用夹逼判连续，再用定义求偏导；可微性用定义式检验，方向导数沿给定方向代入。
+
+\textbf{【速解】}
+\[
+|f(x,y)|\le |x|+|y|\to0,
+\]
+故连续。
+\[
+f_x(0,0)=\lim_{t\to0}\frac{f(t,0)}t=1,\qquad
+f_y(0,0)=\lim_{t\to0}\frac{f(0,t)}t=1.
+\]
+沿 $y=x$：
+\[
+\frac{f(x,x)-x-y}{\sqrt{x^2+y^2}}
+=\frac{(\sqrt2-2)x}{\sqrt2|x|}
+\]
+左右极限不同，故不可微。沿单位方向
+$\boldsymbol e=(1/\sqrt2,1/\sqrt2)$：
+\[
+D_{\boldsymbol l}f(0,0)
+=\lim_{t\to0}\frac{f(t/\sqrt2,t/\sqrt2)}t=1.
+\]
+
+\textbf{【答案】} 连续，$f_x(0,0)=f_y(0,0)=1$，不可微，方向导数为 $1$。
+\end{answerbox}
+
+\begin{answerbox}[2022--2023 一-3]
+\textbf{【考点】} 偏导计算
+
+\textbf{【原题】} 设 $f(x,y)=\ln\!\left(2\sqrt{x}+x^2\sin(x^2y)\right)$，求 $f_x(4,0)$。
+
+\textbf{【思路】} 先将函数写成 $\frac12\ln(\cdots)$，按链式法则求 $f_x$ 后代入 $(4,0)$。
+
+\textbf{【速解】} 写成 $\dfrac12\ln(2x+x^2\sin(x^2y))$ 后求偏导并代入。
+
+\textbf{【答案】} $\dfrac18$。
+\end{answerbox}
+
+\begin{answerbox}[2021--2022 一-5]
+\textbf{【考点】} 方向导数
+
+\textbf{【原题】} 设 $u=x\ln(y+z)$，求在 $(1,1,1)$ 处沿 $\boldsymbol n=(0,1,1)$ 的方向导数。
+
+\textbf{【思路】} 先按链式法则或定义求偏导，方向导数用 $\nabla u\cdot\boldsymbol e$。
+
+\textbf{【速解】} $\nabla u=(\ln(y+z),x/(y+z),x/(y+z))$，单位方向 $\boldsymbol n_0=(0,1/\sqrt2,1/\sqrt2)$。
+
+\textbf{【答案】} $1/\sqrt2$。
+\end{answerbox}
+\section{隐函数求导与复合函数求导}
+
+\begin{templatebox}[隐函数模板]
+设 $G(x,y,z)=0$，且 $G_z\ne0$：
+\[
+z_x=-\frac{G_x}{G_z},\qquad z_y=-\frac{G_y}{G_z}.
+\]
+二阶偏导：先求一阶关系，再对指定变量继续求导，最后代入点。
+\end{templatebox}
+
+\begin{answerbox}[2020--2021 二-6]
+\textbf{【考点】} 隐函数二阶偏导
+
+\textbf{原题}：$z=z(x,y)$ 由
+\[
+xz+xy-x^2+y\ee^z=1
+\]
+确定，求 $z_y(1,1)$ 与 $z_{yy}(1,1)$。
+
+令
+\[
+G=xz+xy-x^2+y\ee^z-1.
+\]
+点 $(1,1)$ 处由方程得 $z=0$。偏导：
+\[
+G_y=x+\ee^z,
+\qquad G_z=x+y\ee^z.
+\]
+\[
+z_y=-\frac{x+\ee^z}{x+y\ee^z},
+\quad z_y(1,1)=-1.
+\]
+对 $y$ 再求导：
+\[
+G_{yy}+2G_{yz}z_y+G_{zz}z_y^2+G_z z_{yy}=0.
+\]
+代入 $(1,1,0)$：
+\[
+0+2\cdot1\cdot(-1)+1\cdot1+2z_{yy}=0.
+\]
+\textbf{【答案】}：
+\[
+z_y(1,1)=-1,\\ z_{yy}(1,1)=\frac12.
+\]
+\end{answerbox}
+
+\begin{answerbox}[2022--2023 二-1]
+\textbf{【考点】} 隐函数关系式
+
+\textbf{2022--2023 二1 原题}：设 $z=z(x,y)$ 由
+\[
+x+z=yf(x^2-z^2)
+\]
+确定，其中 $f$ 可导，且 $1+2yzf'(x^2-z^2)\ne0$。证明
+\[
+zz_x+yz_y=x.
+\]
+
+\textbf{【思路】} 对 $x,y$ 分别求偏导，解出 $z_x,z_y$ 后消去 $f'$。
+
+\textbf{【速解】} 记 $f'=f'(x^2-z^2)$。对 $x$ 求导：
+\[
+1+z_x=yf'(2x-2zz_x),
+\qquad
+z_x=\frac{2xyf'-1}{1+2yzf'}.
+\]
+对 $y$ 求导：
+\[
+z_y=f+yf'(-2zz_y),
+\qquad
+z_y=\frac{f}{1+2yzf'}.
+\]
+又由原式 $yf=x+z$，故
+\[
+zz_x+yz_y
+=\frac{z(2xyf'-1)+y(x+z)}{1+2yzf'}=x.
+\]
+\textbf{【答案】}：$zz_x+yz_y=x$。
+
+\end{answerbox}
+
+\begin{answerbox}[2021--2022 二-8]
+\textbf{【考点】} 隐函数二阶偏导
+
+\textbf{2021--2022 二8 原题}：设 $z=z(x,y)$ 是由方程
+\[
+z^3-xz^2-yz^2=1
+\]
+确定的隐函数，求 $\dfrac{\partial^2 z}{\partial x\partial y}$ 在点 $(0,0,1)$ 的值。
+
+令 $G=z^3-xz^2-yz^2-1=0$。在 $(0,0)$ 处 $z=1$。
+\[
+z_x=-\frac{G_x}{G_z}=\frac{z^2}{3z^2-2xz-2yz},
+\quad
+z_y=\frac{z^2}{3z^2-2xz-2yz}.
+\]
+代入点得 $z_x(0,0)=z_y(0,0)=\frac13$。继续对 $y$ 求导并代入：
+\[
+z_{xy}(0,0)=\frac29.
+\]
+\textbf{【答案】}：$z_{xy}(0,0)=\dfrac29$。
+
+\end{answerbox}
+
+\newpage
+
+\begin{answerbox}[2024--2025 二]
+\textbf{【考点】} 隐函数求导
+
+\textbf{【原题】} 设 $f(u,v)$ 具有连续偏导数，由 $f(2x+z,2y+2z)=0$ 确定 $z=z(x,y)$，且 $f'_1+2f'_2\ne0$，求 $z_x+2z_y$。
+
+\textbf{【思路】} 对隐函数方程两边求偏导，解出所需偏导或消去中间项。
+
+\textbf{【速解】} 对 x,y 分别求导并消去 f\_1',f\_2'。
+
+\textbf{【答案】} -2。
+\end{answerbox}
+
+\begin{answerbox}[2023--2024 二-1]
+\textbf{【考点】} 复合函数偏导
+
+\textbf{【原题】} 设 $z=\arctan\dfrac{x-y}{x+y}$，且 $x^2+y^2\ne0$，求 $xz_x+yz_y$。
+
+\textbf{【思路】} 先按链式法则或定义求偏导，方向导数用 $\nabla u\cdot\boldsymbol e$。
+
+\textbf{【速解】} 内层函数 (x-y)/(x+y) 是零次齐次函数。
+
+\textbf{【答案】} 0。
+\end{answerbox}
+\section{多元函数极值、条件极值与闭区域最值}
+
+\begin{templatebox}[普通极值判别]
+先解驻点：
+\[
+f_x=0,
+\qquad f_y=0.
+\]
+再算
+\[
+A=f_{xx},\qquad B=f_{xy},\qquad C=f_{yy},\qquad \Delta=AC-B^2.
+\]
+判别表：
+\[
+\begin{array}{c|c}
+\Delta>0,A>0&\text{极小值}\\
+\Delta>0,A<0&\text{极大值}\\
+\Delta<0&\text{鞍点，无极值}\\
+\Delta=0&\text{失效}
+\end{array}
+\]
+\end{templatebox}
+
+\begin{templatebox}[条件极值模板]
+约束 $\varphi(x,y,z)=0$：
+\[
+L=f+\lambda\varphi,
+\quad L_x=L_y=L_z=L_\lambda=0.
+\]
+若函数为正，可先取对数，把乘积型目标化为加法型目标。
+\end{templatebox}
+
+\begin{answerbox}[2023--2024 二-3]
+\textbf{【考点】} 普通极值
+
+\textbf{原题}：求 $f(x,y)=x^3+y^3-3xy$ 的极值。
+
+驻点方程：
+\[
+f_x=3x^2-3y=0,
+\qquad f_y=3y^2-3x=0.
+\]
+得驻点 $(0,0),(1,1)$。
+\[
+A=6x,
+\quad B=-3,
+\quad C=6y,
+\quad \Delta=36xy-9.
+\]
+在 $(0,0)$：$\Delta=-9<0$，无极值。
+
+在 $(1,1)$：$\Delta=27>0,A=6>0$，极小值。
+\[
+f(1,1)=1+1-3=-1.
+\]
+\textbf{【答案】}：$(1,1)$ 为极小值点，极小值 $-1$；$(0,0)$ 非极值点。
+\end{answerbox}
+
+\begin{answerbox}[2020--2021 四-14]
+\textbf{【考点】} 条件极值
+
+\textbf{2020--2021 四14 原题}：将正数 $10$ 分为 $x,y,z$，使 $\ee^xy^2z^3$ 最大。
+
+令
+\[
+\ln f=x+2\ln y+3\ln z,
+\quad x+y+z=10.
+\]
+构造
+\[
+L=x+2\ln y+3\ln z+\lambda(10-x-y-z).
+\]
+方程为
+\[
+1-\lambda=0,
+\quad \frac2y-\lambda=0,
+\quad \frac3z-\lambda=0,
+\quad x+y+z=10.
+\]
+得
+\[
+x=5,
+\quad y=2,
+\quad z=3.
+\]
+\textbf{【答案】}：最大值
+\[
+\ee^5\cdot2^2\cdot3^3=108\ee^5.
+\]
+
+\end{answerbox}
+
+\begin{answerbox}[2024--2025 五]
+\textbf{【考点】} 闭区域最值
+
+\textbf{原题}：求闭圆盘 $D:x^2+y^2\le20$ 上函数 $f=x^2+y^2-2x+4y$ 的最大值和最小值。
+
+内部驻点：
+\[
+f_x=2x-2=0,
+\quad f_y=2y+4=0
+\Rightarrow (1,-2)\in D.
+\]
+\[
+f(1,-2)=-5.
+\]
+边界 $x^2+y^2=20$ 上，
+\[
+f=20-2x+4y.
+\]
+令
+\[
+L=20-2x+4y+\lambda(x^2+y^2-20).
+\]
+\[
+-2+2\lambda x=0,
+\quad 4+2\lambda y=0,
+\quad x^2+y^2=20.
+\]
+得 $(2,-4)$ 与 $(-2,4)$。对应
+\[
+f(2,-4)=0,
+\quad f(-2,4)=40.
+\]
+\textbf{【答案】}：最大值 $40$，最小值 $-5$。
+\end{answerbox}
+
+\newpage
+
+\begin{answerbox}[2022--2023 二-2]
+\textbf{【考点】} 条件极值与距离
+
+\textbf{【原题】} 求椭球面 $x^2+y^2+4z^2=1$ 上的点到平面 x+y+z=4 的最大距离和最小距离。
+
+\textbf{【思路】} 建立驻点或 Lagrange 方程，再代入目标函数比较。
+
+\textbf{【速解】} 等价求 x+y+z 在椭球面上的最大最小，使用拉格朗日乘数法。
+
+\textbf{【答案】} $d_{\min}=\dfrac5{2\sqrt3}$，$d_{\max}=\dfrac{11}{2\sqrt3}$。
+\end{answerbox}
+\section{二重积分、三重积分与变量替换}
+
+\begin{templatebox}[二重积分三区流程]
+\textbf{一看结构}：$xy$ 奇函数优先对称；$x^2+y^2$ 优先极坐标；$x+y$ 优先对称或换元。
+
+\textbf{二看区域}：画区域，能补全就补全，不能补全就拆分。
+
+\textbf{三选方法}：换序、极坐标、对称性、直接积分。
+\end{templatebox}
+
+\begin{answerbox}[2020--2021 二-7]
+\textbf{【考点】} 圆域二重积分
+
+\textbf{原题}：计算
+\[
+\iint_{x^2+y^2\le4}\left(2+y\ee^{|y|}+\sqrt{4-x^2}\right)\dd x\dd y.
+\]
+
+区域关于 $x$ 轴对称，$y\ee^{|y|}$ 为关于 $y$ 的奇函数：
+\[
+\iint_D y\ee^{|y|}\dd x\dd y=0.
+\]
+常数项：
+\[
+\iint_D2\dd A=2\cdot4\pi=8\pi.
+\]
+剩余项：
+\[
+\iint_D\sqrt{4-x^2}\dd A
+=\int_{-2}^2\int_{-\sqrt{4-x^2}}^{\sqrt{4-x^2}}\sqrt{4-x^2}\dd y\dd x
+\]
+\[
+=\int_{-2}^2 2(4-x^2)\dd x=\frac{64}{3}.
+\]
+\textbf{【答案】}：$8\pi+\dfrac{64}{3}$。
+\end{answerbox}
+
+\begin{answerbox}[2023--2024 二-4]
+\textbf{【考点】} 二次积分换序
+
+\textbf{2023--2024 二4 原题}：计算二次积分
+\[
+\int_0^1 x^2\,\dd x\int_{x^3}^{1}\frac{\sin y}{y}\,\dd y.
+\]
+\textbf{【速解】} 积分区域
+\[
+D=\{(x,y):0\le x\le1,\ x^3\le y\le1\}
+=\{(x,y):0\le y\le1,\ 0\le x\le y^{1/3}\}.
+\]
+\[
+I=\int_0^1\frac{\sin y}{y}\dd y\int_0^{y^{1/3}}x^2\dd x
+=\frac13\int_0^1\sin y\,\dd y
+=\frac13(1-\cos1).
+\]
+\textbf{【答案】}：$\dfrac{1-\cos1}{3}$。
+
+\end{answerbox}
+
+\begin{answerbox}[2021--2022 三-12]
+\textbf{【考点】} 三重积分
+
+\textbf{2021--2022 三12 原题}：计算
+\[
+\int_{-1}^{1}\int_0^{\sqrt{1-x^2}}\int_1^{1+\sqrt{1-x^2-y^2}}
+\frac1{\sqrt{x^2+y^2+z^2}}\dd z\dd y\dd x.
+\]
+\textbf{【思路】} 将区域看成以 $(0,0,1)$ 为球心的上半球在 $y\ge0$ 的部分，用球坐标写出 $\rho$ 的上下限。
+
+\textbf{【速解】} 球坐标下 $y\ge0$ 给出 $0\le\theta\le\pi$，区域满足
+\[
+1\le \rho\cos\varphi,\qquad \rho\le2\cos\varphi,
+\]
+故 $0\le\varphi\le\pi/4$，$\sec\varphi\le\rho\le2\cos\varphi$。原积分
+\[
+I=\int_0^\pi\int_0^{\pi/4}\int_{\sec\varphi}^{2\cos\varphi}
+\frac1\rho \rho^2\sin\varphi\,\dd\rho\dd\varphi\dd\theta
+\]
+\[
+=\frac\pi2\int_0^{\pi/4}\left(4\cos^2\varphi-\sec^2\varphi\right)\sin\varphi\,\dd\varphi.
+\]
+\textbf{【答案】}：
+\[
+I=\frac\pi2\left(\frac{4-\sqrt2}{3}-\ln(1+\sqrt2)\right).
+\]
+
+\end{answerbox}
+
+\begin{answerbox}[2020--2021 四-12]
+\textbf{【考点】} 空间体积
+
+\textbf{2020--2021 四12 原题}：空间物体由
+\[
+z=\sqrt{2-x^2-y^2},
+\qquad z=x^2+y^2
+\]
+围成，求体积。
+
+交线：
+\[
+2-r^2=r^2\Rightarrow r=1.
+\]
+体积
+\[
+V=\int_0^{2\pi}\int_0^1(2-2r^2)r\dd r\dd\theta=\pi.
+\]
+\textbf{【答案】}：$V=\pi$。
+
+\end{answerbox}
+
+\newpage
+
+\begin{answerbox}[2024--2025 六]
+\textbf{【考点】} 质心
+
+\textbf{【原题】} 设均匀空间物体 $\Omega$ 由曲面 $z=x^2+y^2$ 及平面 $z=4$ 所围成，求 $\Omega$ 的质心。
+
+\textbf{【思路】} 利用绕 $z$ 轴对称先得 $\bar x=\bar y=0$，再用柱坐标计算体积和关于 $xOy$ 平面的一阶矩。
+
+\textbf{【速解】} 对称性得
+\[
+\bar x=\bar y=0.
+\]
+柱坐标下 $0\le r\le2,\ r^2\le z\le4$，故
+\[
+V=\int_0^{2\pi}\int_0^2(4-r^2)r\dd r\dd\theta=8\pi,
+\]
+\[
+\iiint_\Omega z\dd V
+=\int_0^{2\pi}\int_0^2\frac{16-r^4}{2}r\dd r\dd\theta
+=\frac{64\pi}{3}.
+\]
+\[
+\bar z=\frac{1}{V}\iiint_\Omega z\dd V=\frac83.
+\]
+
+\textbf{【答案】} $\left(0,0,\dfrac83\right)$。
+\end{answerbox}
+
+\begin{answerbox}[2024--2025 一-3]
+\textbf{【考点】} 二次积分换序
+
+\textbf{【原题】} 求二次积分 $\displaystyle \int_0^1\dd x\int_x^1 e^{y^2}\dd y$。
+
+\textbf{【思路】} 先画出区域 $0\le x\le y\le1$，换序后外层对 $y$ 积分。
+
+\textbf{【速解】}
+\[
+\int_0^1\dd x\int_x^1 e^{y^2}\dd y
+=\int_0^1\dd y\int_0^y e^{y^2}\dd x
+=\int_0^1y e^{y^2}\dd y=\frac{e-1}{2}.
+\]
+
+\textbf{【答案】} $\dfrac{e-1}{2}$。
+\end{answerbox}
+
+\begin{answerbox}[2023--2024 一-2]
+\textbf{【考点】} 旋转抛物面体积
+
+\textbf{【原题】} 求旋转抛物面 $z=x^2+y^2$ 与平面 $z=1$ 围成空间区域 $\Omega$ 的体积。
+
+\textbf{【思路】} 先写出空间区域，再选择柱坐标或球坐标化简积分。
+
+\textbf{【速解】} 极坐标：$0\le r\le1$，$r^2\le z\le1$。
+
+\textbf{【答案】} $\pi/2$。
+\end{answerbox}
+\section{第一类曲线积分与第一类曲面积分}
+
+\begin{templatebox}[第一类积分模板]
+曲线积分：参数化 $x=x(t),y=y(t),z=z(t)$，写
+\[
+\dd s=\sqrt{x'^2+y'^2+z'^2}\dd t.
+\]
+曲面积分：显式曲面 $z=z(x,y)$，写
+\[
+\dd S=\sqrt{1+z_x^2+z_y^2}\dd x\dd y.
+\]
+球面对称：
+\[
+\iint_\Sigma x^2\dd S=\iint_\Sigma y^2\dd S=\iint_\Sigma z^2\dd S.
+\]
+\end{templatebox}
+
+\begin{answerbox}[2020--2021 一-3]
+\textbf{【考点】} 第一类曲线积分
+
+\textbf{2020--2021 一3 原题}：
+\[
+\oint_{x^2+y^2=1}(1+x^2)\dd s.
+\]
+单位圆上 $x=\cos t,\dd s=\dd t$：
+\[
+\int_0^{2\pi}(1+\cos^2t)\dd t=3\pi.
+\]
+\textbf{【答案】}：$3\pi$。
+
+\end{answerbox}
+
+\begin{answerbox}[2021--2022 二-7]
+\textbf{【考点】} 第一类曲面积分
+
+\textbf{2021--2022 二7 原题}：计算 $\iint_\Sigma |z|\dd S$，其中 $\Sigma$ 为双曲抛物面 $z=xy$ 被圆柱面 $x^2+y^2=1$ 所截下的有限部分。
+
+写成图形曲面：
+\[
+\dd S=\sqrt{1+y^2+x^2}\dd x\dd y.
+\]
+所以
+\[
+I=\iint_{x^2+y^2\le1}|xy|\sqrt{1+x^2+y^2}\dd x\dd y.
+\]
+极坐标：
+\[
+I=\int_0^1\int_0^{2\pi}r^2|\cos\theta\sin\theta|\sqrt{1+r^2}\,r\dd\theta\dd r.
+\]
+角向积分 $\int_0^{2\pi}|\cos\theta\sin\theta|\dd\theta=2$，故
+\[
+I=2\int_0^1r^3\sqrt{1+r^2}\dd r.
+\]
+\[
+I=\int_1^2(u-1)u^{1/2}\dd u
+=\left[\frac25u^{5/2}-\frac23u^{3/2}\right]_1^2
+=\frac{4(1+\sqrt2)}{15}.
+\]
+\textbf{【答案】} $\displaystyle \frac{4(1+\sqrt2)}{15}$。
+
+\end{answerbox}
+
+\newpage
+
+\begin{answerbox}[2024--2025 一-5]
+\textbf{【考点】} 球面对称积分
+
+\textbf{【原题】} 求 $\displaystyle \iint_{\Sigma}x^2\dd S$，其中 $\Sigma:x^2+y^2+z^2=R^2$。
+
+\textbf{【思路】} 利用球面对称性把三个平方项的曲面积分化为同一个值。
+
+\textbf{【速解】}
+\[
+\iint_\Sigma x^2\dd S=\iint_\Sigma y^2\dd S=\iint_\Sigma z^2\dd S.
+\]
+因此
+\[
+3\iint_\Sigma x^2\dd S
+=\iint_\Sigma (x^2+y^2+z^2)\dd S
+=R^2\cdot 4\pi R^2.
+\]
+
+\textbf{【答案】} $\dfrac{4\pi R^4}{3}$。
+\end{answerbox}
+
+\begin{answerbox}[2024--2025 一-4]
+\textbf{【考点】} 第一类曲线积分
+
+\textbf{【原题】} 求 $\displaystyle \int_L y\dd s$，其中 $L$ 为连接 $A(1,0),B(0,1)$ 的线段。
+
+\textbf{【思路】} 将线段写成 $x=1-y$，用弧长微元 $\dd s=\sqrt2\,\dd y$ 直接积分。
+
+\textbf{【速解】}
+\[
+\int_Ly\dd s=\int_0^1y\sqrt2\,\dd y=\frac{\sqrt2}{2}.
+\]
+
+\textbf{【答案】} $\sqrt2/2$。
+\end{answerbox}
+
+\begin{answerbox}[2023--2024 三-1]
+\textbf{【考点】} 曲面面积与形心
+
+\textbf{【原题】} 设曲面 $\Sigma$ 是球面上半部
+\[
+z=\sqrt{2-x^2-y^2}
+\]
+被锥面 $z=\sqrt{x^2+y^2}$ 截出的顶部，求 $\Sigma$ 的面积和形心。
+
+\textbf{【思路】} 将 $\Sigma$ 看作半径 $\sqrt2$ 的球冠，先由对称性确定 $\bar x=\bar y=0$，再用球冠面积和一阶矩求 $\bar z$。
+
+\textbf{【速解】} 交线满足
+\[
+\sqrt{2-r^2}=r,\quad r=1,\quad z=1.
+\]
+球半径 $R=\sqrt2$，球冠高度 $h=\sqrt2-1$：
+\[
+S=2\pi Rh=(4-2\sqrt2)\pi.
+\]
+球冠曲面形心在 $z$ 轴上，且
+\[
+\bar z=\frac{\int_1^{\sqrt2}z\cdot 2\pi R\,\dd z}{2\pi R(\sqrt2-1)}
+=\frac{1+\sqrt2}{2}.
+\]
+
+\textbf{【答案】} $S=(4-2\sqrt2)\pi$，形心 $\left(0,0,\dfrac{1+\sqrt2}{2}\right)$。
+\end{answerbox}
+
+\begin{answerbox}[2023--2024 一-3]
+\textbf{【考点】} 第一类曲线积分
+
+\textbf{【原题】} 设 $L:y=\sqrt{1-x^2}\ (-1\le x\le1)$，求 $\displaystyle \int_L (x+y)x\dd s$。
+
+\textbf{【思路】} 将曲线参数化为 $x=t,\ y=1-t^2$，写出 $\dd s$ 后利用奇偶性压缩积分。
+
+\textbf{【速解】} 令 $x=t,y=1-t^2$，$-1\le t\le1$，
+\[
+\dd s=\sqrt{1+4t^2}\dd t.
+\]
+则
+\[
+\int_L(x+y)x\dd s
+=\int_{-1}^{1}(t+1-t^2)t\sqrt{1+4t^2}\dd t
+=\int_{-1}^{1}(t^2-t^3)\sqrt{1+4t^2}\dd t.
+\]
+奇函数项积分为 $0$，余下计算得 $\pi/2$。
+
+\textbf{【答案】} $\pi/2$。
+\end{answerbox}
+
+\begin{answerbox}[2022--2023 一-4]
+\textbf{【考点】} 第一类曲线积分
+
+\textbf{【原题】} 设 $L:x^2+y^2=1$，求 $\displaystyle \int_L (x+3y)^2\dd s$。
+
+\textbf{【思路】} 展开被积函数后利用单位圆对称性，交叉项积分为 $0$，平方项积分相等。
+
+\textbf{【速解】} 展开后利用圆的对称性：$\int_Lx^2\dd s=\int_Ly^2\dd s=\pi$，$\int_Lxy\dd s=0$。
+
+\textbf{【答案】} $10\pi$。
+\end{answerbox}
+
+\begin{answerbox}[2021--2022 四-13]
+\textbf{【考点】} 曲面面积与形心
+
+\textbf{【原题】} 试求在圆锥面 $z=\sqrt{x^2+y^2}$ 与平面 $z=1$ 所围成的锥体内，各面平行于坐标面的最大长方体体积。
+
+\textbf{【思路】} 用参数方程 $\boldsymbol r(r,\theta)=(r\cos\theta,r\sin\theta,r)$，由面积元和一阶矩求曲面形心。
+
+\textbf{【速解】} 取极坐标参数 $r,\theta$，$0\le r\le1$；面积元为 $\sqrt2r\dd r\dd\theta$，由对称性 $\bar x=\bar y=0$。
+
+\[
+S=\int_0^{2\pi}\int_0^1\sqrt2\,r\,\dd r\dd\theta=\sqrt2\pi,
+\]
+\[
+\bar z=\frac{1}{S}\int_0^{2\pi}\int_0^1 r\sqrt2\,r\,\dd r\dd\theta=\frac23.
+\]
+\textbf{【答案】} 面积 $S=\sqrt2\pi$，形心为 $\left(0,0,\dfrac23\right)$。
+\end{answerbox}
+
+\begin{answerbox}[2021--2022 一-3]
+\textbf{【考点】} 空间曲线第一类积分
+
+\textbf{【原题】} 设 $L$ 为 $x^2+y^2+z^2=4$ 与 $x=y$ 的交线，求 $\displaystyle \int_L(2y^2+z^2)\dd s$。
+
+\textbf{【思路】} 参数化曲线，写出 $\dd s$，必要时利用对称性化简。
+
+\textbf{【速解】} 取 $x=y=\sqrt2\cos t$，$z=2\sin t$，$\dd s=2\dd t$；被积函数恒为 $4$。
+
+\textbf{【答案】} $16\pi$。
+\end{answerbox}
+\section{第二类曲线积分与格林公式}
+
+\begin{templatebox}[格林公式模板]
+闭曲线 $L$ 正向：
+\[
+\oint_LP\dd x+Q\dd y=\iint_D\left(Q_x-P_y\right)\dd x\dd y.
+\]
+非闭曲线：补线 $L'$，先算闭合曲线，再减去补线积分。
+
+若 $P_y=Q_x$，曲线积分与路径无关，可找原函数 $u$：
+\[
+\dd u=P\dd x+Q\dd y.
+\]
+\end{templatebox}
+
+\begin{answerbox}[2020--2021 二-8]
+\textbf{【考点】} 路径无关曲线积分
+
+\textbf{原题}：计算
+\[
+\int_L(1+3x^2+\ee^x\sin y)\dd x+(2y+\ee^x\cos y)\dd y,
+\]
+其中 $L:x=2t-t^2,y=2\arctan t,0\le t\le1$。
+
+检查：
+\[
+P_y=\ee^x\cos y=Q_x.
+\]
+原函数可取
+\[
+\Phi=x+x^3+y^2+\ee^x\sin y.
+\]
+端点：$t=0$ 为 $(0,0)$，$t=1$ 为 $(1,\pi/2)$。
+\[
+I=\Phi(1,\pi/2)-\Phi(0,0)=2+\ee+\frac{\pi^2}{4}.
+\]
+\textbf{【答案】}：$2+\ee+\dfrac{\pi^2}{4}$。
+\end{answerbox}
+
+\begin{answerbox}[2021--2022 二-9]
+\textbf{【考点】} 格林公式
+
+\textbf{2021--2022 二9 原题}：计算
+\[
+I=\int_L (e^y\sin x+x+y)\dd x+(2x-e^y\cos x)\dd y,
+\]
+其中 $L$ 为 $(x-1)^2+(y-1)^2=1$ 的下半圆周，取逆时针方向。
+
+\textbf{【思路】} 闭曲线正向，直接用 Green 公式计算 $Q_x-P_y$。
+
+\textbf{【速解】} 令
+\[
+P=e^y\sin x+x+y,\qquad Q=2x-e^y\cos x.
+\]
+\[
+Q_x-P_y=(2+e^y\sin x)-(e^y\sin x+1)=1.
+\]
+故
+\[
+I=\iint_D1\,\dd x\dd y=\pi.
+\]
+\textbf{【答案】} $I=\pi$。
+
+\end{answerbox}
+
+\newpage
+
+\begin{answerbox}[2024--2025 九]
+\textbf{【考点】} 格林公式补线
+
+\textbf{【原题】} 计算 $\displaystyle \int_L\left[-\frac{y}{x^2+y^2}-y\right]\dd x+\left[\frac{x}{x^2+y^2}+x\right]\dd y$，其中 $L$ 从 $A(0,1)$ 沿 $y=1-x^2$ 到 $B(1,0)$。
+
+\textbf{【思路】} 将积分拆成极角微分项和多项式项；极角项按端点角度差计算，多项式项沿抛物线直接代入。
+
+\textbf{【速解】}
+\[
+\frac{-y\dd x+x\dd y}{x^2+y^2}=\dd\theta,\qquad
+\theta_A=\frac\pi2,\ \theta_B=0.
+\]
+故极角项为 $-\pi/2$。沿 $y=1-x^2$，$0\le x\le1$：
+\[
+\int_L(-y\dd x+x\dd y)
+=\int_0^1[-(1-x^2)-2x^2]\dd x=-\frac43.
+\]
+
+\textbf{【答案】} $-\pi/2-4/3$。
+\end{answerbox}
+
+\begin{answerbox}[2023--2024 三-2]
+\textbf{【考点】} 格林公式补线
+
+\textbf{【原题】} $L$ 从 $O$ 沿圆 $x^2+y^2=2x$ 到 $A(2,0)$，再沿圆 $x^2+y^2=4$ 到 $B(0,2)$，计算 $\displaystyle \int_L3x^2y\dd x+(x^3+x^2/2-2y)\dd y$。
+
+\textbf{【思路】} 补上线段 $BO$ 构成正向闭曲线，先用 Green 公式算闭合积分，再扣除 $BO$ 上的积分。
+
+\textbf{【速解】} 记
+\[
+P=3x^2y,\qquad Q=x^3+\frac{x^2}{2}-2y,
+\]
+则
+\[
+Q_x-P_y=x.
+\]
+闭合区域可写为
+\[
+0\le\theta\le\frac\pi2,\qquad 2\cos\theta\le r\le2.
+\]
+故闭合积分为
+\[
+\iint_Dx\dd A
+=\int_0^{\pi/2}\int_{2\cos\theta}^{2}r^2\cos\theta\dd r\dd\theta
+=\frac83-\frac\pi2.
+\]
+补线 $BO$ 上 $x=0$，积分为
+\[
+\int_{BO}-2y\dd y=4.
+\]
+
+\textbf{【答案】} $-\pi/2-4/3$。
+\end{answerbox}
+
+\begin{answerbox}[2022--2023 二-4]
+\textbf{【考点】} 路径无关积分
+
+\textbf{【原题】} 计算 $\displaystyle \int_L\left(\sqrt{1+x}+y^2e^{xy^2}\right)\dd x+2xye^{xy^2}\dd y$，其中 $L$ 从 $(0,0)$ 沿 $y=2x-x^2$ 到 $(2,0)$。
+
+\textbf{【思路】} 先验证 $P_y=Q_x$，确认路径无关，再取 $y=0$ 的直线路径计算。
+
+\textbf{【速解】}
+\[
+P_y=2ye^{xy^2}+2xy^3e^{xy^2}=Q_x.
+\]
+取 $y=0$，$0\le x\le2$：
+\[
+I=\int_0^2(1+x)\dd x=4.
+\]
+
+\textbf{【答案】} $4$。
+\end{answerbox}
+\section{第二类曲面积分、高斯公式与斯托克斯公式}
+
+\begin{templatebox}[高斯公式模板]
+闭曲面外侧：
+\[
+\iint_\Sigma P\dd y\dd z+Q\dd z\dd x+R\dd x\dd y
+=\iiint_\Omega(P_x+Q_y+R_z)\dd V.
+\]
+若曲面不封闭：补面，闭合曲面结果减去补面通量。
+\end{templatebox}
+
+\begin{answerbox}[2020--2021 三-11]
+\textbf{【考点】} 高斯公式
+
+\textbf{原题}：$\Sigma$ 由锥面 $z=\sqrt{x^2+y^2}$ 和上半球面 $z=\sqrt{4-x^2-y^2}$ 组成，方向外侧。计算
+\[
+\iint_\Sigma \cos(y^2+z)\dd y\dd z+(3x^2y+y^3)\dd z\dd x+(xy+z^3)\dd x\dd y.
+\]
+
+散度：
+\[
+P_x+Q_y+R_z=0+(3x^2+3y^2)+3z^2=3(x^2+y^2+z^2).
+\]
+球坐标区域：锥面 $\varphi=\pi/4$，上半球 $0\le\rho\le2$，$0\le\varphi\le\pi/4$。
+\[
+I=\int_0^{2\pi}\int_0^{\pi/4}\int_0^2 3\rho^2\rho^2\sin\varphi\dd\rho\dd\varphi\dd\theta.
+\]
+\textbf{【答案】}：
+\[
+\frac{96\pi}{5}(2-\sqrt2).
+\]
+\end{answerbox}
+
+\begin{answerbox}[2022--2023 二-5]
+\textbf{【考点】} 高斯公式补面
+
+\textbf{2022--2023 二5 原题}：计算第二类曲面积分
+\[
+\iint_\Sigma x^3(1+y^3)\,\dd y\dd z
++y^3(1+x^3)\,\dd z\dd x
++(z^3+x^3y^3)\,\dd x\dd y,
+\]
+其中 $\Sigma$ 为球面 $x^2+y^2+z^2=2$ 被平面 $z=1$ 截出的上部分，取外侧。
+
+\textbf{【思路】} 先补平面 $\Sigma_1:z=1$ 形成闭合曲面，写出散度后用高斯公式，再扣除补面通量。
+
+\textbf{【速解】} 记
+\[
+P=x^3(1+y^3),\quad Q=y^3(1+x^3),\quad R=z^3+x^3y^3.
+\]
+补平面 $\Sigma_1:z=1$，$x^2+y^2\le1$，取上侧。闭合曲面外侧通量由
+\[
+P_x+Q_y+R_z=3(x^2+y^2+z^2)+3x^2y^2(x+y).
+\]
+其中 $3x^2y^2(x+y)$ 在对称区域上积分为 $0$。补面上
+\[
+\iint_{\Sigma_1}R\dd x\dd y
+=\iint_{x^2+y^2\le1}(1+x^3y^3)\dd x\dd y=\pi.
+\]
+故
+\[
+I=\frac{3\pi}{10}(16\sqrt2-19)+\pi.
+\]
+\textbf{【答案】}：$\dfrac{3\pi}{10}(16\sqrt2-19)+\pi$。
+
+\end{answerbox}
+
+\newpage
+
+\begin{answerbox}[2024--2025 七]
+\textbf{【考点】} 高斯公式补面
+
+\textbf{【原题】} 计算 $\displaystyle \iint_{\Sigma}(2x+z)\dd y\dd z+y\dd z\dd x+z\dd x\dd y$，其中 $\Sigma:z=\sqrt{x^2+y^2}$，$0\le z\le1$，取外侧。
+
+\textbf{【思路】} 补上平面 $z=1$ 封闭圆锥体，先算闭合曲面通量，再减去顶面通量。
+
+\textbf{【速解】} 记
+\[
+P=2x+z,\quad Q=y,\quad R=z,\qquad P_x+Q_y+R_z=4.
+\]
+圆锥体体积 $V=\pi/3$，闭合通量为 $4V=4\pi/3$。顶面 $z=1$ 上取上侧：
+\[
+\iint_{\Sigma_1}R\dd x\dd y=\iint_{x^2+y^2\le1}1\dd x\dd y=\pi.
+\]
+故
+\[
+I=\frac{4\pi}{3}-\pi=\frac{\pi}{3}.
+\]
+
+\textbf{【答案】} $\pi/3$。
+\end{answerbox}
+
+\begin{answerbox}[2023--2024 三-3]
+\textbf{【考点】} 第二类曲面积分
+
+\textbf{【原题】} 计算 $\displaystyle \iint_{\Sigma}(x^3z+xz)\dd y\dd z-(x^2yz-yx)\dd z\dd x-x^2z^2\dd x\dd y$，其中 $\Sigma:z=x^2+y^2$，$0\le z\le1$，取下侧。
+
+\textbf{【思路】} 补上平面 $z=1$，使抛物面下侧与补面上侧构成闭合曲面；写出 $P,Q,R$ 和散度后用高斯公式。
+
+\textbf{【速解】} 记
+\[
+P=x^3z+xz,\quad Q=-(x^2yz-yx),\quad R=-x^2z^2.
+\]
+\[
+P_x+Q_y+R_z=z+x.
+\]
+由对称性 $\iiint_\Omega x\dd V=0$。补面 $\Sigma_1:z=1$ 上
+\[
+\iint_{\Sigma_1}R\dd x\dd y
+=-\iint_{x^2+y^2\le1}x^2\dd x\dd y=-\frac{\pi}{4}.
+\]
+按闭合曲面通量减补面通量，得
+\[
+I=\frac{\pi}{2}.
+\]
+
+\textbf{【答案】} $\pi/2$。
+\end{answerbox}
+
+\begin{answerbox}[2021--2022 四-14]
+\textbf{【考点】} 第二类曲面积分
+
+\textbf{【原题】} 计算 $I=\displaystyle \iint_{\Sigma}x^2\dd y\dd z+y^2\dd z\dd x+z^2\dd x\dd y$，其中 $\Sigma:z=x^2+y^2$，$0\le z\le1$，取外侧。
+
+\textbf{【思路】} 曲面为图形 $z=x^2+y^2$ 且取上侧，直接用上侧法向量 $(-z_x,-z_y,1)$。
+
+\textbf{【速解】} 投影区域为 $D:x^2+y^2\le1$。上侧有
+\[
+\dd y\dd z=-2x\,\dd x\dd y,\quad
+\dd z\dd x=-2y\,\dd x\dd y,\quad
+\dd x\dd y=\dd x\dd y.
+\]
+故
+\[
+I=\iint_D(-2x^3-2y^3+(x^2+y^2)^2)\dd x\dd y.
+\]
+奇函数项积分为 $0$，
+\[
+I=\int_0^{2\pi}\int_0^1 r^4\cdot r\,\dd r\dd\theta=\frac{\pi}{3}.
+\]
+
+\textbf{【答案】} $I=\dfrac{\pi}{3}$。
+\end{answerbox}
+\section{级数、幂级数与泰勒展开}
+
+\begin{templatebox}[幂级数模板]
+先求收敛半径或区间，再逐端点检查。求和函数常用：
+\[
+\sum_{n=0}^\infty x^n=\frac1{1-x},\qquad
+\sum_{n=1}^\infty\frac{x^n}{n}=-\ln(1-x).
+\]
+求高阶导数：若
+\[
+f(x)=\sum_{n=0}^\infty a_nx^n,
+\]
+则
+\[
+f^{(m)}(0)=m!a_m.
+\]
+\end{templatebox}
+
+\begin{answerbox}[2020--2021 四-13]
+\textbf{【考点】} 泰勒级数
+
+\textbf{四13 原题}：
+\[
+f(x)=\frac{x}{1-x}+\ln(1-x).
+\]
+展开：
+\[
+\frac{x}{1-x}=\sum_{n=1}^\infty x^n,
+\quad
+\ln(1-x)=-\sum_{n=1}^\infty\frac{x^n}{n}.
+\]
+\[
+f(x)=\sum_{n=1}^\infty\left(1-\frac1n\right)x^n
+=\sum_{n=2}^\infty\frac{n-1}{n}x^n.
+\]
+\textbf{【答案】}：
+\[
+f^{(2021)}(0)=2021!\cdot\frac{2020}{2021}=2020\cdot2020!.
+\]
+
+\end{answerbox}
+
+\begin{answerbox}[2022--2023 一-5]
+\textbf{【考点】} 幂级数收敛域
+
+\textbf{2022--2023 一5 原题}：求幂级数
+\[
+\sum_{n=0}^{\infty}\frac{(-3)^n(x-1)^n}{\sqrt{n+2}}
+\]
+的收敛区间。
+
+\textbf{【思路】} 先由比值判别求半径，再分别检查两个端点。
+
+\textbf{【速解】} 收敛半径 $R=\frac13$，先得 $|x-1|<\frac13$。端点：
+\[
+x=\frac23:\ \sum\frac1{n+2}\ \text{发散};
+\qquad
+x=\frac43:\ \sum\frac{(-1)^n}{n+2}\ \text{收敛}.
+\]
+\textbf{【答案】}：$(2/3,4/3]$。
+
+\end{answerbox}
+
+\newpage
+
+\begin{answerbox}[2024--2025 四]
+\textbf{【考点】} 幂级数和函数
+
+\textbf{【原题】} 求幂级数 $\displaystyle \sum_{n=1}^{\infty}\frac{n+1}{n}x^{n+1}$ 的和函数。
+
+\textbf{【思路】} 将系数拆成 $1+\frac1n$，分别套几何级数和对数级数。
+
+\textbf{【速解】}
+\[
+\sum_{n=1}^{\infty}\frac{n+1}{n}x^{n+1}
+=\sum_{n=1}^{\infty}x^{n+1}+\sum_{n=1}^{\infty}\frac{x^{n+1}}{n}
+=\frac{x^2}{1-x}-x\ln(1-x).
+\]
+
+\textbf{【答案】} $\displaystyle S(x)=\frac{x^2}{1-x}-x\ln(1-x)$，$|x|<1$。
+\end{answerbox}
+
+\begin{answerbox}[2023--2024 二-5]
+\textbf{【考点】} 幂级数和函数
+
+\textbf{【原题】} 求幂级数 $\displaystyle \sum_{n=1}^{\infty}\frac{3n^2+1}{2n}x^n$ 的和函数。
+
+\textbf{【思路】} 拆成 $\frac32\sum nx^n+\frac12\sum \frac{x^n}{n}$，分别用标准和函数。
+
+\textbf{【速解】} 拆为 $\dfrac32\sum nx^n+\dfrac12\sum x^n/n$。
+
+\textbf{【答案】} $\displaystyle S(x)=\frac{3x}{2(1-x)^2}-\frac12\ln(1-x)$，$|x|<1$。
+\end{answerbox}
+
+\begin{answerbox}[2022--2023 三-11]
+\textbf{【考点】} Taylor 系数
+
+\textbf{【原题】} 设
+\[
+f(x)=\frac{e^{2x}}{1-x},
+\]
+求 $f^{(10)}(0)$。
+
+\textbf{【思路】} 展开 $e^{2x}$ 与 $\frac1{1-x}$，用 Cauchy 乘积提取 $x^{10}$ 的系数。
+
+\textbf{【速解】}
+\[
+e^{2x}=\sum_{k=0}^{\infty}\frac{2^k}{k!}x^k,\qquad
+\frac1{1-x}=\sum_{m=0}^{\infty}x^m.
+\]
+故 $x^{10}$ 系数为 $\displaystyle\sum_{k=0}^{10}\frac{2^k}{k!}$。
+
+\textbf{【答案】} $10!\displaystyle\sum_{k=0}^{10}\dfrac{2^k}{k!}$。
+\end{answerbox}
+
+\begin{answerbox}[2021--2022 三-11]
+\textbf{【考点】} 函数展开与级数求和
+
+\textbf{【原题】} 设 $f(x)=\dfrac{1+x^2}{x}\arctan x$ $(x\ne0)$，$f(0)=1$，讨论 $x=0$ 处性质，并求 $\displaystyle\sum_{n=1}^{\infty}\dfrac{(-1)^n}{1-4n^2}$。
+
+\textbf{【思路】} 用 $\arctan x$ 的幂级数展开 $f(x)$，由 $x\to0$ 的极限判断连续性，再取 $x=1$ 得级数和。
+
+\textbf{【速解】} 用 arctan x 的幂级数展开，分离偶次项后代入 x=1。
+
+\textbf{【答案】} $f$ 在 $0$ 处连续；级数和为 $(\pi-2)/4$。
+\end{answerbox}
+
+\begin{answerbox}[2020--2021 五-15]
+\textbf{【考点】} 幂级数与积分证明
+
+\textbf{【原题】} 设 $s(x)=\displaystyle\sum_{n=1}^{\infty}\dfrac{(-1)^{n-1}}{n^2}x^n$。求收敛域、$s'(x)$，并证明 $\displaystyle\int_0^1s(y)\dd y=\pi^2/12-2\ln2+1$。
+
+\textbf{【思路】} 先求收敛半径或展开式，再检查端点或提取指定系数。
+
+\textbf{【速解】} 收敛域为 $[-1,1]$；逐项求导得 $s'(x)=\ln(1+x)/x$；逐项积分并用 $\sum1/n^2=\pi^2/6$。
+
+\textbf{【答案】} 收敛域 $[-1,1]$；$\displaystyle s'(x)=\frac{\ln(1+x)}{x}$；积分结论成立。
+\end{answerbox}
+\section{傅里叶级数}
+
+\begin{templatebox}[傅里叶题模板]
+周期 $2\pi$：
+\[
+f(x)\sim\frac{a_0}{2}+\sum_{n=1}^{\infty}(a_n\cos nx+b_n\sin nx).
+\]
+间断点处和函数：
+\[
+S(x_0)=\frac{f(x_0-0)+f(x_0+0)}2.
+\]
+\end{templatebox}
+
+\begin{answerbox}[2020--2021 一-5]
+\textbf{【考点】} 傅里叶级数和函数
+
+\textbf{2020--2021 一5 原题}：
+\[
+f(x)=\begin{cases}
+\sin x-x,&-\pi\le x<0,\\
+x-\cos x,&0\le x<\pi.
+\end{cases}
+\]
+周期为 $2\pi$，求傅里叶级数和函数 $S(\pi)$。
+
+由傅里叶级数在端点处取左右极限平均：
+\[
+S(\pi)=\frac{f(\pi-0)+f(-\pi+0)}2
+=\frac{\pi-(-\pi)}2=\pi.
+\]
+\textbf{【答案】} $S(\pi)=\pi$。
+
+\end{answerbox}
+
+\newpage
+
+\begin{answerbox}[2024--2025 一-6]
+\textbf{【考点】} 傅里叶和函数
+
+\textbf{【原题】} 设 $2\pi$ 周期函数 $f(x)=-1(-\pi\le x<0)$，$f(x)=1+2x(0\le x<\pi)$，和函数为 $S(x)$，求 $S(9\pi)$。
+
+\textbf{【思路】} 利用傅里叶级数在间断点处取左右极限平均值。
+
+\textbf{【速解】} $S(9\pi)=S(\pi)$，端点取左右极限平均。
+
+\textbf{【答案】} $\pi$。
+\end{answerbox}
+
+\begin{answerbox}[2023--2024 一-5]
+\textbf{【考点】} 正弦级数系数
+
+\textbf{【原题】} 将 $f(x)=x(0\le x<\pi)$ 展开成 $2\pi$ 周期正弦级数 $\sum b_n\sin nx$，求 $b_2$。
+
+\textbf{【思路】} 直接套正弦级数系数公式，对 $x\sin2x$ 作分部积分。
+
+\textbf{【速解】} $b_2=\dfrac2\pi\int_0^\pi x\sin2x\dd x$。
+
+\textbf{【答案】} $-1$。
+\end{answerbox}
+
+\begin{answerbox}[2022--2023 一-6]
+\textbf{【考点】} 傅里叶系数
+
+\textbf{【原题】} 设 $2\pi$ 周期函数在 $[-\pi,\pi)$ 上满足 $f(x)=0(-\pi\le x<0)$，$f(x)=x(0\le x<\pi)$，求余弦系数 $a_3$。
+
+\textbf{【思路】} 利用傅里叶系数公式计算指定系数。
+
+\textbf{【速解】} $a_3=\dfrac1\pi\int_0^\pi x\cos3x\dd x$，分部积分。
+
+\textbf{【答案】} $-2/(9\pi)$。
+\end{answerbox}
+
+\begin{answerbox}[2021--2022 一-4]
+\textbf{【考点】} 正弦级数和函数
+
+\textbf{【原题】} 设 $f(x)=[x]$，$0\le x<2$，$S(x)=\sum b_n\sin(n\pi x/2)$，$b_n=\int_0^2 f(x)\sin(n\pi x/2)\dd x$，求 $S(-1)$。
+
+\textbf{【思路】} 按 $(0,2)$ 上的正弦展开理解为奇延拓，在跳跃点取左右极限平均值。
+
+\textbf{【速解】} 按区间 (0,2) 的奇延拓，x=-1 为跳跃点，取左右极限平均。
+
+\textbf{【答案】} $-\dfrac12$。
+\end{answerbox}
+\section{微分方程}
+
+\begin{templatebox}[考试只保留三类]
+可分离变量：
+\[
+g(y)\dd y=f(x)\dd x.
+\]
+一阶线性：
+\[
+y'+p(x)y=q(x),
+\quad
+\left(\ee^{\int p}\,y\right)'=\ee^{\int p}q.
+\]
+二阶常系数：
+\[
+y''+ay'+by=f(x),
+\quad r^2+ar+b=0.
+\]
+\end{templatebox}
+
+\begin{answerbox}[2020--2021 一-4]
+\textbf{【考点】} 可分离变量方程
+
+\textbf{一4 原题}：
+\[
+(1+y)^2\frac{\dd y}{\dd x}+x^3=0,
+\quad y(1)=0.
+\]
+分离变量：
+\[
+(1+y)^2\dd y=-x^3\dd x.
+\]
+\[
+\frac{(1+y)^3}{3}=-\frac{x^4}{4}+C.
+\]
+代入 $y(1)=0$，得
+\[
+4(1+y)^3+3x^4=7.
+\]
+\textbf{【答案】} $4(1+y)^3+3x^4=7$。
+
+\end{answerbox}
+
+\begin{answerbox}[2021--2022 三-10]
+\textbf{【考点】} 二阶常系数非齐次方程
+
+\textbf{原题}：
+\[
+y''-2y'+y=2\ee^x,
+\quad y(0)=y'(0)=1.
+\]
+特征方程：
+\[
+(r-1)^2=0.
+\]
+齐次解
+\[
+y_h=(C_1+C_2x)\ee^x.
+\]
+因右端 $2\ee^x$ 与二重根对应，设
+\[
+y^*=Ax^2\ee^x.
+\]
+代入得 $2A\ee^x=2\ee^x$，即 $A=1$。
+\[
+y=(C_1+C_2x+x^2)\ee^x.
+\]
+代入初值：
+\[
+C_1=1,\qquad C_1+C_2=1,
+\]
+故 $C_2=0$。
+\textbf{【答案】} $y=(1+x^2)\ee^x$。
+\end{answerbox}
+
+\newpage
+
+\begin{answerbox}[2020--2021 二-9]
+\textbf{【考点】} 二阶常系数非齐次方程
+
+\textbf{【原题】} 求初值问题
+\[
+y''-y'+2y=(x-1)e^{x},\qquad y(0)=y'(0)=1
+\]
+的特解。
+
+\textbf{【思路】} 先解齐次方程，再因右端为 $e^x$ 乘一次多项式，设特解 $e^x(ax+b)$ 并代入初值。
+
+\textbf{【速解】} 特征方程
+\[
+r^2-r+2=0.
+\]
+齐次解为
+\[
+y_h=e^{x/2}\left(C_1\cos\frac{\sqrt7x}{2}+C_2\sin\frac{\sqrt7x}{2}\right).
+\]
+设 $y^*=e^x(ax+b)$，代入得 $a=\frac12,\ b=-\frac34$，再由初值确定常数。
+
+\textbf{【答案】} $y=e^{x/2}\left(\dfrac74\cos\dfrac{\sqrt7x}{2}+\dfrac{3\sqrt7}{28}\sin\dfrac{\sqrt7x}{2}\right)+e^x\left(\dfrac x2-\dfrac34\right)$。
+\end{answerbox}
+\section{积分方程与综合计算}
+
+\begin{answerbox}[2021--2022 二-6]
+\textbf{【考点】} 积分方程
+
+\textbf{2021--2022 二6 原题}：设 $f(x)$ 满足
+\[
+\int_0^1 f(tx)\dd t=5f(x).
+\]
+\textbf{【思路】} 换元把积分上限化为 $x$，再对 $x$ 求导得到一阶可分离方程。
+
+\textbf{【速解】}
+令 $u=tx$，则
+\[
+\int_0^1 f(tx)\dd t=\frac1x\int_0^x f(u)\dd u.
+\]
+故
+\[
+\int_0^x f(u)\dd u=5xf(x).
+\]
+两边对 $x$ 求导：
+\[
+f(x)=5f(x)+5xf'(x).
+\]
+整理为
+\[
+5xf'(x)+4f(x)=0.
+\]
+\[
+\frac{f'}f=-\frac4{5x}
+\quad\Rightarrow\quad
+f(x)=Cx^{-4/5}.
+\]
+
+\textbf{【答案】} $f(x)=Cx^{-4/5}$，其中 $C$ 为常数。
+
+\end{answerbox}
+
+\begin{answerbox}[2022--2023 三-12]
+\textbf{【考点】} 旋转曲面与质心
+
+\textbf{原题}：将 $Oyz$ 平面上的闭曲线
+\[
+(y^2+z^2)^2=z
+\]
+绕 $z$ 轴旋转一周得到曲面 $\Sigma$。求 $\Sigma$ 的方程，并求 $\Sigma$ 所围成空间体的质心。
+
+\textbf{【速解】} 绕 $z$ 轴旋转，$y^2$ 替换为 $x^2+y^2$：
+\[
+z=(x^2+y^2+z^2)^2,
+\quad 0\le z\le1.
+\]
+由对称性
+\[
+\bar x=\bar y=0.
+\]
+\[
+\bar z=\frac{\iiint_\Omega z\,\dd V}{\iiint_\Omega \dd V}=\frac9{20}.
+\]
+\textbf{【答案】}：曲面方程为
+\[
+z=(x^2+y^2+z^2)^2,\quad 0\le z\le1,
+\]
+质心为 $(0,0,9/20)$。
+\end{answerbox}
+
+\newpage
+
+\begin{answerbox}[2022--2023 二-3]
+\textbf{【考点】} 积分方程
+
+\textbf{【原题】} 设函数 $f(x,y)$ 在第一卦限内连续，且满足
+\[
+f(x,y)=\frac{xy}{\sqrt{1+y^3}}-\int_0^1\dd x\int_{x^2}^1f(x,y)\dd y,
+\]
+求 $f(x,y)$。
+
+\textbf{【思路】} 将积分项化为变上限或常数，再求导得到可解方程。
+
+\textbf{【速解】} 把积分项记为常数 A，代回方程求 A。
+
+\textbf{【答案】} $f(x,y)=\dfrac{xy}{\sqrt{1+y^3}}-\dfrac{\sqrt2-1}{5}$。
+\end{answerbox}
+\section{综合证明题与级数敛散性判别}
+
+\begin{templatebox}[证明题写法]
+先写使用结论，再写关键估计式，结论必须有来源。
+
+常用：比较判别、交错级数判别、Abel 判别、积分中值定理、Green/Gauss 公式、单调有界。
+\end{templatebox}
+
+\begin{answerbox}[2022--2023 五-15]
+\textbf{【考点】} 参数级数敛散性
+
+\textbf{原题}：当 $p$ 分别取 $\dfrac54,\dfrac34,\dfrac14$ 时，判断级数
+\[
+\sum_{n=1}^{\infty}\left(\ee^{(-1)^n n^{-p}}-1\right)
+\]
+是绝对收敛、条件收敛还是发散，并证明结论。
+
+当 $p>0$，用展开
+\[
+\ee^u-1=u+\frac{u^2}{2}+O(u^3),
+\quad u=(-1)^n n^{-p}.
+\]
+主项为交错级数 $\sum(-1)^n n^{-p}$，二阶项为正项级数 $\sum n^{-2p}$。
+
+\textbf{【答案】}：
+\[
+p=\frac54\text{ 时绝对收敛};
+\quad p=\frac34\text{ 时条件收敛};
+\quad p=\frac14\text{ 时发散}.
+\]
+\end{answerbox}
+
+\begin{answerbox}[2023--2024 四-1]
+\textbf{【考点】} 级数判别
+
+\textbf{原题}：设
+\[
+a_n=\frac{4n+\sqrt{4n^2-1}}{\sqrt{2n+1}+\sqrt{2n-1}},
+\quad n\ge1,\qquad
+S_n=\sum_{k=1}^n a_k.
+\]
+判断级数
+\[
+\sum_{n=1}^{\infty}\frac{(-1)^n}{\sqrt{n+1}\,S_n^p}\quad(p>0)
+\]
+是绝对收敛还是条件收敛，并证明。
+
+\textbf{【速解】} 由
+\[
+a_n=\frac12\left[(2n+1)^{3/2}-(2n-1)^{3/2}\right],
+\]
+得
+\[
+S_n=\frac12\left[(2n+1)^{3/2}-1\right],
+\quad
+\frac1{(n+1)S_n^p}\sim \frac{C}{n^{1+3p/2}}.
+\]
+故绝对值级数在 $p>\frac13$ 时收敛；当 $0<p\le\frac13$ 时，通项绝对值单调趋于 $0$，由 Leibniz 判别法条件收敛。
+
+\textbf{【答案】}：
+\[
+p>\frac13\quad\Rightarrow\quad\text{绝对收敛},
+\]
+\[
+0<p\le\frac13\quad\Rightarrow\quad\text{条件收敛}.
+\]
+\end{answerbox}
+
+\begin{answerbox}[2024--2025 十]
+\textbf{【考点】} 正项级数证明
+
+\textbf{原题}：设 $u_n>0\ (n=1,2,\cdots)$，且正项级数 $\displaystyle\sum_{n=1}^{\infty}u_n$ 发散，$S_n=u_1+\cdots+u_n$，证明
+\[
+\sum_{n=1}^{\infty}\frac{u_n}{S_n^\alpha}
+\]
+在 $\alpha\ge2$ 时收敛。
+
+当 $\alpha\ge2$，有
+\[
+\frac{u_n}{S_n^\alpha}\le\frac{u_n}{S_n^2}.
+\]
+又
+\[
+\frac{u_n}{S_n^2}
+=\frac{S_n-S_{n-1}}{S_n^2}
+\le \frac{S_n-S_{n-1}}{S_{n-1}S_n}
+=\frac1{S_{n-1}}-\frac1{S_n}
+\quad(n\ge2).
+\]
+故部分和由望远镜求和有上界，级数收敛。
+\textbf{【答案】}：$\alpha\ge2$ 时原级数收敛。
+\end{answerbox}
+
+\newpage
+
+\begin{answerbox}[2021--2022 五-15]
+\textbf{【考点】} 级数证明
+
+\textbf{【原题】} 设数列 $\{a_n\}$ 满足
+\[
+|a_n|\le1\quad(n\in\mathbb N),
+\]
+且
+\[
+|a_n-a_{n-1}|\le\frac14|a_{n-1}^2-a_{n-2}^2|
+\quad(n\in\mathbb N,\ n\ge3).
+\]
+证明：
+\[
+(1)\ \sum_{n=2}^{\infty}(a_n-a_{n-1})\ \text{收敛};
+\qquad
+(2)\ \{a_n\}\ \text{收敛}.
+\]
+
+\textbf{【思路】} 利用 $|a_{n-1}+a_{n-2}|\le2$ 建立相邻差的几何级数估计。
+
+\textbf{【速解】} 由条件
+\[
+|a_n-a_{n-1}|
+\le\frac14|a_{n-1}-a_{n-2}|\cdot |a_{n-1}+a_{n-2}|
+\le\frac12|a_{n-1}-a_{n-2}|.
+\]
+递推得
+\[
+|a_n-a_{n-1}|\le \left(\frac12\right)^{n-2}|a_2-a_1|.
+\]
+故
+\[
+\sum_{n=2}^{\infty}|a_n-a_{n-1}|
+\]
+收敛，从而 $\sum_{n=2}^{\infty}(a_n-a_{n-1})$ 收敛。又
+\[
+a_N=a_1+\sum_{n=2}^{N}(a_n-a_{n-1}),
+\]
+右端有极限，故 $\{a_n\}$ 收敛。
+
+\textbf{【答案】} $\sum_{n=2}^{\infty}(a_n-a_{n-1})$ 绝对收敛，数列 $\{a_n\}$ 收敛。
+\end{answerbox}
+\section{考前速背清单}
+
+\begin{scorebox}[必须会写]
+\begin{enumerate}[leftmargin=2em]
+\item 法平面：切向量作法向量；切平面：梯度作法向量。
+\item 分段函数原点：先偏导，再用可微定义或路径法。
+\item 隐函数：$z_x=-G_x/G_z$，$z_y=-G_y/G_z$。
+\item 极值：$A=f_{xx}$，$B=f_{xy}$，$C=f_{yy}$，$\Delta=AC-B^2$。
+\item 二重积分：先写区域，再判断对称、极坐标、换序。
+\item 格林公式：闭合曲线正向；非闭曲线先补线。
+\item 高斯公式：不封闭曲面先补面，最后减补面通量。
+\item 幂级数高阶导：找 $x^n$ 系数，$f^{(n)}(0)=n!a_n$。
+\item 二阶常系数方程：先特征方程，再非齐次特解。
+\end{enumerate}
+\end{scorebox}
+
+\end{document}
+
+
+
+
+

@@ -1,0 +1,2222 @@
+\documentclass[11pt,a4paper,UTF8]{ctexart}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage[colorlinks=true,linkcolor=MidnightBlue,urlcolor=MidnightBlue]{hyperref}
+
+\geometry{left=2.1cm,right=2.1cm,top=2.2cm,bottom=2.2cm}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.35em}
+\linespread{1.08}
+
+\definecolor{bluebg}{RGB}{235,245,255}
+\definecolor{bluebd}{RGB}{41,128,185}
+\definecolor{greenbg}{RGB}{235,255,240}
+\definecolor{greenbd}{RGB}{39,174,96}
+\definecolor{orangebg}{RGB}{255,246,235}
+\definecolor{orangebd}{RGB}{230,126,34}
+\definecolor{redbg}{RGB}{255,240,240}
+\definecolor{redbd}{RGB}{192,57,43}
+
+\newtcolorbox{identifybox}[1][]{
+  enhanced,breakable,colback=bluebg,colframe=bluebd,
+  title=#1,fonttitle=\bfseries,arc=2mm,boxrule=0.8pt
+}
+\newtcolorbox{templatebox}[1][]{
+  enhanced,breakable,colback=orangebg,colframe=orangebd,
+  title=#1,fonttitle=\bfseries,arc=2mm,boxrule=0.9pt
+}
+\newtcolorbox{answerbox}[1][]{
+  enhanced,breakable,colback=greenbg,colframe=greenbd,
+  title=#1,fonttitle=\bfseries,arc=2mm,boxrule=0.8pt
+}
+\newtcolorbox{scorebox}[1][]{
+  enhanced,breakable,colback=redbg,colframe=redbd,
+  title=#1,fonttitle=\bfseries,arc=2mm,boxrule=0.8pt
+}
+
+\newcommand{\dd}{\,\mathrm d}
+\newcommand{\ee}{\mathrm e}
+
+\title{\Huge 微积分（II）-2 期末题型考点详解\\[0.3em]
+\Large 2020--2025 四川大学期末卷考试得分模板手册}
+\author{按历年试题与参考答案风格整理}
+\date{\today}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\begin{scorebox}[定位]
+这份讲义不是教材总结，而是\textbf{考场可直接照写的模板手册}。每一类题只保留：
+\[
+\text{识别题型}\ \longrightarrow\ \text{套标准步骤}\ \longrightarrow\ \text{计算得分点}.
+\]
+所有极值题统一使用川大参考答案常见写法：
+\[
+A=f_{xx},\qquad B=f_{xy},\qquad C=f_{yy},\qquad \Delta=B^2-AC.
+\]
+\end{scorebox}
+
+\tableofcontents
+\newpage
+
+\section{2020--2025 选题覆盖索引}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.22}
+\begin{tabular}{p{2.7cm}p{4.5cm}p{7.2cm}}
+\toprule
+\textbf{年份} & \textbf{选取题型} & \textbf{纳入板块}\\
+\midrule
+2020--2021 & 极限、一元积分、二重积分、全微分、微分方程、可微性、证明题 & 极限与一元积分；二重积分；多元微分；微分方程；证明题\\
+2021--2022 & 广义积分、Riemann 和、二阶方程、复合求导、连续偏导、极坐标区域 & 极限与一元积分；微分方程；多元微分；连续可微；二重积分\\
+2022--2023 & 等价无穷小、全微分、换序、隐函数极值、可微性、小区域极限、积分方程 & 各对应模板板块\\
+2023--2024 & 定积分、换序、曲线弧长、复合隐函数、普通极值、可微证明 & 各对应模板板块\\
+2024--2025 & 二元极限、Riemann 和、一阶线性、二阶常系数、隐函数、旋转体、二重积分、可微证明 & 各对应模板板块\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{scorebox}[使用方式]
+本讲义不按年份堆题，而是把 2020--2025 期末题按考点嵌入对应板块。每道题保留可得分步骤：识别题型、列关键式、给结论。
+\end{scorebox}
+
+\newpage
+
+\section{总模板：考场先判断题型}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.28}
+\begin{tabular}{p{3cm}p{6.3cm}p{5.4cm}}
+\toprule
+\textbf{看到什么} & \textbf{先想什么} & \textbf{答案写法}\\
+\midrule
+\(\lim\)、\(\sin,\ln,\tan,\ee^x\) & 降维、等价、洛必达 & 三步法：结构识别、等价替换、必要时洛必达\\
+\(\iint_D\)、\(x^2+y^2\)、\(xy\) & 对称、极坐标、换序 & 三区流程：结构、区域、方法\\
+\(z=w(\cdots)\)、\(F(\cdots)=0\) & 链式法则、隐函数 & 直接写偏导公式，不展开理论\\
+分段函数原点 & 连续、偏导、可微 & 连续，再偏导，再 \(y=kx\) 路径法\\
+极值 & 驻点、\(A,B,C,\Delta\) & \(\Delta=B^2-AC\) 判别表\\
+\(y'\)、\(y''+ay'+by\) & 三类方程 & 可分离、一阶线性、二阶常系数\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{scorebox}[阅卷习惯]
+川大历年参考答案重视\textbf{步骤分}：先写区域、先写导数、先写特征方程、先写 \(A,B,C\)。即使计算错，模板完整也能拿大部分过程分。
+\end{scorebox}
+
+\newpage
+\section{极限与一元积分：考试三步法}
+
+\begin{identifybox}[识别]
+出现
+\[
+\lim,\quad xy,\quad \sin u,\quad \ln(1+u),\quad 1-\cos u,\quad \int_0^1x^p\ln x\dd x
+\]
+时，按三步写，不要先写长理论。
+\end{identifybox}
+
+\begin{templatebox}[标准三步法]
+\textbf{步骤 1：结构识别}
+
+能否降维：
+\[
+xy\to u,\qquad x+y\to u,\qquad x^2+y^2\to r^2.
+\]
+
+\textbf{步骤 2：等价替换}
+\[
+\sin u\sim u,\qquad \tan u\sim u,\qquad 1-\cos u\sim\frac{u^2}{2},
+\]
+\[
+\ln(1+u)\sim u,\qquad \ee^u-1\sim u.
+\]
+
+\textbf{步骤 3：必要时洛必达}
+
+只在 \(0/0\) 或 \(\infty/\infty\) 结构清楚时使用。变上限积分先求导：
+\[
+\frac{\dd}{\dd x}\int_0^{\phi(x)}F(t)\dd t=F(\phi(x))\phi'(x).
+\]
+\end{templatebox}
+
+\begin{answerbox}[例 1：二元极限，2024--2025]
+\[
+\lim_{(x,y)\to(0,0)}\frac{1-\cos(xy)}{xy\tan(xy)}.
+\]
+
+\textbf{按答案写：}
+
+令 \(u=xy\)，则 \(u\to0\)。
+\[
+\frac{1-\cos(xy)}{xy\tan(xy)}
+=\frac{1-\cos u}{u\tan u}.
+\]
+由
+\[
+1-\cos u\sim \frac{u^2}{2},\qquad u\tan u\sim u^2,
+\]
+得
+\[
+\boxed{\lim=\frac12.}
+\]
+\end{answerbox}
+
+\begin{answerbox}[例 2：指数型极限，2020--2021]
+\[
+\lim_{(x,y)\to(+\infty,+\infty)}
+\left(1+\frac1{x+y}\right)^{x+y}.
+\]
+
+\textbf{按答案写：}
+
+令
+\[
+u=x+y,\qquad u\to+\infty.
+\]
+则
+\[
+\left(1+\frac1{x+y}\right)^{x+y}
+=\left(1+\frac1u\right)^u.
+\]
+故
+\[
+\boxed{\lim=\ee.}
+\]
+\end{answerbox}
+
+\begin{answerbox}[例 3：Riemann 和，2024--2025]
+\[
+\lim_{n\to\infty}\frac1n\sum_{k=1}^n\sqrt[3]{1+\frac kn}.
+\]
+
+\textbf{按答案写：}
+\[
+\lim_{n\to\infty}\frac1n\sum_{k=1}^n f\left(\frac kn\right)
+=\int_0^1 f(x)\dd x,\qquad f(x)=\sqrt[3]{1+x}.
+\]
+故
+\[
+\lim=\int_0^1(1+x)^{1/3}\dd x
+=\left.\frac34(1+x)^{4/3}\right|_0^1
+=\boxed{\frac34(2\sqrt[3]{2}-1)}.
+\]
+\end{answerbox}
+
+\begin{answerbox}[例 4：广义积分换元，2021--2022]
+\[
+\int_{-\infty}^{+\infty}\frac{\ee^x}{\ee^{2x}+1}\dd x.
+\]
+
+\textbf{按答案写：}
+
+令 \(t=\ee^x\)，则
+\[
+\dd t=\ee^x\dd x,\qquad x:-\infty\to+\infty,\quad t:0\to+\infty.
+\]
+因此
+\[
+\int_{-\infty}^{+\infty}\frac{\ee^x}{\ee^{2x}+1}\dd x
+=\int_0^{+\infty}\frac1{t^2+1}\dd t
+=\boxed{\frac\pi2.}
+\]
+\end{answerbox}
+
+\begin{answerbox}[例 5：反常积分，2024--2025]
+\[
+\int_0^1x^p\ln x\dd x.
+\]
+
+\textbf{按答案写：}
+
+\[
+p=-1:\quad \int_0^1x^{-1}\ln x\dd x
+=\left.\frac12\ln^2x\right|_{0^+}^1=\infty.
+\]
+
+\[
+p\ne-1:\quad
+\int x^p\ln x\dd x
+=\frac{x^{p+1}\ln x}{p+1}-\frac{x^{p+1}}{(p+1)^2}.
+\]
+当 \(p>-1\) 时收敛，且
+\[
+\boxed{\int_0^1x^p\ln x\dd x=-\frac1{(p+1)^2}}.
+\]
+当 \(p<-1\) 时发散。
+
+\[
+\boxed{p>-1\text{ 收敛； }p\le -1\text{ 发散}.}
+\]
+\end{answerbox}
+
+\begin{scorebox}[得分点]
+极限题不要写大段泰勒展开。标准答案通常只要：令 \(u=\cdots\)，写等价式，给结论。
+\end{scorebox}
+
+\newpage
+
+\begin{answerbox}[2020--2021 简答 1：反常积分]
+题：
+\[
+\int_0^{+\infty}\frac{1}{1+4x^2}\dd x.
+\]
+\textbf{解：}
+\[
+\int_0^{+\infty}\frac{1}{1+4x^2}\dd x
+=\frac12\arctan(2x)\Big|_0^{+\infty}
+=\boxed{\frac\pi4}.
+\]
+\end{answerbox}
+
+\begin{answerbox}[2020--2021 计算 1：三角换元定积分]
+题：
+\[
+\int_0^1 x^2(1-x^2)^{3/2}\dd x.
+\]
+\textbf{解：}
+令 \(x=\sin t\)，\(0\le t\le \pi/2\)，则
+\[
+\int_0^1x^2(1-x^2)^{3/2}\dd x
+=\int_0^{\pi/2}\sin^2t\cos^4t\dd t.
+\]
+用降幂公式或 Beta 积分：
+\[
+\int_0^{\pi/2}\sin^2t\cos^4t\dd t
+=\boxed{\frac{\pi}{32}}.
+\]
+\end{answerbox}
+
+\begin{answerbox}[2021--2022 简答 1、3、4：基础极限与积分]
+题：
+\[
+\int_0^1\frac{x}{\sqrt{1-x^2}}\dd x,\qquad
+\lim_{(x,y)\to(2,1)}\left(1+\frac1{x-y}\right)^{x+y},
+\]
+\[
+\lim_{n\to\infty}\frac{1^3+2^3+\cdots+n^3}{n^4}.
+\]
+\textbf{解：}
+\[
+\int_0^1\frac{x}{\sqrt{1-x^2}}\dd x
+=-\sqrt{1-x^2}\Big|_0^1=\boxed{1}.
+\]
+\[
+x-y\to1,\quad x+y\to3
+\Rightarrow
+\left(1+\frac1{x-y}\right)^{x+y}\to \boxed{8}.
+\]
+\[
+1^3+\cdots+n^3=\left[\frac{n(n+1)}2\right]^2
+\Rightarrow
+\lim_{n\to\infty}\frac{1^3+\cdots+n^3}{n^4}
+=\boxed{\frac14}.
+\]
+\end{answerbox}
+
+\begin{answerbox}[2022--2023 简答 1--4：基础积分、等价无穷小与 Riemann 和]
+题：
+\[
+\int_0^1\frac{1}{\sqrt{1-x^2}}\dd x,\quad
+\int_0^{+\infty}\frac{\ee^{-x}}{\ee^{-x}+1}\dd x,
+\]
+\[
+\lim_{(x,y)\to(0,0)}\frac{\ln(1+xy)}{\sin(xy)},\quad
+\lim_{n\to\infty}\ln\sqrt[n]{\frac{(n+1)(n+2)\cdots(2n)}{n^n}}.
+\]
+\textbf{解：}
+\[
+\int_0^1\frac{\dd x}{\sqrt{1-x^2}}=\arcsin x\Big|_0^1=\boxed{\frac\pi2}.
+\]
+令 \(t=\ee^{-x}\)，则 \(x:0\to+\infty\) 时 \(t:1\to0\)，
+\[
+\int_0^{+\infty}\frac{\ee^{-x}}{\ee^{-x}+1}\dd x
+=\int_0^1\frac{1}{1+t}\dd t=\boxed{\ln2}.
+\]
+令 \(u=xy\)，
+\[
+\frac{\ln(1+xy)}{\sin(xy)}
+=\frac{\ln(1+u)}{\sin u}\to\boxed{1}.
+\]
+\[
+\ln\sqrt[n]{\frac{(n+1)\cdots(2n)}{n^n}}
+=\frac1n\sum_{k=1}^n\ln\left(1+\frac kn\right)
+\to\int_0^1\ln(1+x)\dd x
+=\boxed{\ln4-1}.
+\]
+\end{answerbox}
+
+\begin{answerbox}[2023--2024 简答 1、3、4 与大题二、三、四]
+题：
+\[
+\int_0^\pi x\sin x\dd x,\qquad
+\lim_{n\to\infty}\sum_{k=1}^n\frac1{n+1}f\left(\frac kn\right),
+\]
+\[
+\text{求 }y=\frac23(x-1)^{3/2},\ 1\le x\le2\text{ 的弧长},
+\]
+\[
+\int_0^1\frac{x^3}{\sqrt{1-x^2}}\dd x,
+\]
+\[
+\lim_{x\to+\infty}
+\frac{\int_0^{x^2}\ee^{\sqrt t}\sqrt[3]{t^2+1}\dd t}{x^\alpha\ee^x}=2,
+\quad \text{求 }\alpha,
+\]
+\[
+\int_0^{+\infty}\frac{x}{(x+1)(x^2+x+1)}\dd x.
+\]
+\textbf{解：}
+\[
+\int_0^\pi x\sin x\dd x
+=\left[-x\cos x+\sin x\right]_0^\pi
+=\boxed{\pi}.
+\]
+\[
+\sum_{k=1}^n\frac1{n+1}f\left(\frac kn\right)
+=\frac{n}{n+1}\cdot\frac1n\sum_{k=1}^n f\left(\frac kn\right)
+\to \boxed{\int_0^1 f(x)\dd x}.
+\]
+弧长：
+\[
+y'=\frac23(x-1)^{-1/3},\qquad
+L=\int_1^2\sqrt{1+(y')^2}\dd x=\boxed{\frac{4\sqrt2-2}{3}}.
+\]
+\[
+\int_0^1\frac{x^3}{\sqrt{1-x^2}}\dd x
+=\frac12\int_0^1\frac{1-u}{\sqrt u}\dd u
+=\boxed{\frac23}.
+\]
+对变上限积分用洛必达：
+\[
+\frac{\dd}{\dd x}\int_0^{x^2}\ee^{\sqrt t}\sqrt[3]{t^2+1}\dd t
+=2x\ee^x\sqrt[3]{x^4+1}.
+\]
+极限要求
+\[
+\frac{2x\ee^x\sqrt[3]{x^4+1}}{\alpha x^{\alpha-1}\ee^x+x^\alpha\ee^x}
+\to2,
+\]
+故 \(x^{7/3}/x^\alpha\to1\)，
+\[
+\boxed{\alpha=\frac73}.
+\]
+反常积分先分为 \([0,1]\) 与 \([1,+\infty)\)，后半段令 \(x=1/t\)，得
+\[
+\int_0^{+\infty}\frac{x}{(x+1)(x^2+x+1)}\dd x
+=\int_0^1\frac{1}{x^2+x+1}\dd x
+=\boxed{\frac{\pi}{3\sqrt3}}.
+\]
+\end{answerbox}
+
+\begin{answerbox}[2024--2025 简答 2 与大题六]
+题：
+\[
+\int_0^{\pi/4}\sin^2x\dd x
+\quad\text{与}\quad
+\int_0^{\pi/4}\sin^4x\dd x\text{ 比较大小},
+\]
+\[
+I=\int_0^1\frac{\ln(1+x)}{\sqrt x(1+\sqrt x)^2}\dd x.
+\]
+\textbf{解：}
+当 \(0<x<\pi/4\) 时，\(0<\sin x<1\)，故
+\[
+\sin^4x<\sin^2x
+\Rightarrow
+\boxed{\int_0^{\pi/4}\sin^4x\dd x
+<
+\int_0^{\pi/4}\sin^2x\dd x}.
+\]
+令 \(t=\sqrt x\)，则
+\[
+I=2\int_0^1\frac{\ln(1+t^2)}{(1+t)^2}\dd t.
+\]
+分部积分：
+\[
+u=\ln(1+t^2),\quad \dd v=\frac{2}{(1+t)^2}\dd t.
+\]
+\[
+I=-\ln2+4\int_0^1\frac{t}{(1+t)(1+t^2)}\dd t.
+\]
+分解
+\[
+\frac{t}{(1+t)(1+t^2)}
+=\frac12\left(\frac{t+1}{1+t^2}-\frac1{1+t}\right).
+\]
+得
+\[
+\boxed{I=\frac\pi2-2\ln2}.
+\]
+\end{answerbox}
+
+\begin{answerbox}[2021--2022 大题：含绝对值三角积分]
+题：
+\[
+I=\int_0^{2\pi}\frac{x\sin^6x}{1+|\cos x|}\dd x.
+\]
+\textbf{解：}
+拆成 \([0,\pi]\) 与 \([\pi,2\pi]\)，第二段令 \(u=2\pi-x\)，得
+\[
+I=2\pi\int_0^\pi\frac{\sin^6x}{1+|\cos x|}\dd x.
+\]
+再按 \([0,\pi/2]\)、\([\pi/2,\pi]\) 拆分：
+\[
+I=4\pi\int_0^{\pi/2}(1-\cos x)\sin^4x\dd x.
+\]
+\[
+I=4\pi\int_0^{\pi/2}\sin^4x\dd x
+-4\pi\int_0^{\pi/2}\cos x\sin^4x\dd x.
+\]
+因此
+\[
+\boxed{I=\frac{3\pi^2}{4}-\frac{4\pi}{5}}.
+\]
+\end{answerbox}
+
+\begin{answerbox}[2022--2023 大题：含绝对值三角积分]
+题：
+\[
+I=\int_0^{2\pi}\frac{x}{|\sin x|+|\cos x|}\dd x.
+\]
+\textbf{解：}
+拆为 \([0,\pi]\) 与 \([\pi,2\pi]\)，第二段令 \(u=2\pi-x\)，得
+\[
+I=2\pi\int_0^\pi\frac{\dd x}{|\sin x|+|\cos x|}.
+\]
+再由对称性：
+\[
+I=4\pi\int_0^{\pi/2}\frac{\dd x}{\sin x+\cos x}.
+\]
+\[
+\sin x+\cos x=\sqrt2\sin\left(x+\frac\pi4\right).
+\]
+故
+\[
+I=2\sqrt2\pi
+\ln\left|\csc\left(x+\frac\pi4\right)-\cot\left(x+\frac\pi4\right)\right|_0^{\pi/2}
+\]
+\[
+\boxed{I=2\sqrt2\pi\ln(3+2\sqrt2)}.
+\]
+\end{answerbox}
+\section{二重积分：三区流程}
+
+\begin{identifybox}[识别]
+看到二重积分先不算，先判断：
+\[
+x+y \Rightarrow \text{对称优先},\qquad
+x^2+y^2 \Rightarrow \text{极坐标优先},\qquad
+xy \Rightarrow \text{奇函数项常为 }0.
+\]
+\end{identifybox}
+
+\begin{templatebox}[三区流程]
+\textbf{1. 结构判断}
+
+\[
+xy\cdot g(x^2,y^2)\text{ 在对称区域上积分为 }0.
+\]
+\[
+x^2+y^2,\ \sqrt{x^2+y^2},\ \rho=a\sin\theta
+\Rightarrow \text{极坐标}.
+\]
+
+\textbf{2. 区域判断}
+
+写出
+\[
+D=\{(x,y):\cdots\}.
+\]
+判断是否换序、补全、拆分。
+
+\textbf{3. 方法选择}
+
+\[
+\text{换序：画区域}\quad
+\text{极坐标：}x=r\cos\theta,\ y=r\sin\theta,\ \dd\sigma=r\dd r\dd\theta.
+\]
+\end{templatebox}
+
+\begin{answerbox}[例 1：换序，2024--2025]
+\[
+\int_0^1\int_0^x f(x,y)\dd y\dd x.
+\]
+
+\textbf{按答案写：}
+\[
+D=\{(x,y)\mid 0\le y\le x,\ 0\le x\le1\}.
+\]
+改写为
+\[
+D=\{(x,y)\mid 0\le y\le1,\ y\le x\le1\}.
+\]
+故
+\[
+\boxed{\int_0^1\int_0^x f(x,y)\dd y\dd x
+=\int_0^1\int_y^1 f(x,y)\dd x\dd y.}
+\]
+\end{answerbox}
+
+\begin{answerbox}[例 2：换序，2023--2024]
+\[
+\int_0^1\int_0^{x^2}f(x,y)\dd y\dd x.
+\]
+
+\textbf{按答案写：}
+\[
+D=\{(x,y)\mid 0\le x\le1,\ 0\le y\le x^2\}.
+\]
+由 \(y\le x^2,\ x\ge0\)，得 \(x\ge\sqrt y\)，且 \(0\le y\le1\)。故
+\[
+\boxed{
+\int_0^1\int_0^{x^2}f(x,y)\dd y\dd x
+=\int_0^1\int_{\sqrt y}^{1}f(x,y)\dd x\dd y.
+}
+\]
+\end{answerbox}
+
+\begin{answerbox}[例 3：直接按区域积分，2020--2021]
+\[
+\iint_D xy\dd x\dd y,\qquad
+D\text{ 由 }y^2=x,\ y=1,\ x=0\text{ 围成}.
+\]
+
+\textbf{按答案写：}
+
+区域写成
+\[
+D=\{(x,y)\mid 0\le y\le1,\ 0\le x\le y^2\}.
+\]
+因此
+\[
+\iint_D xy\dd x\dd y
+=\int_0^1\int_0^{y^2}xy\dd x\dd y.
+\]
+先对 \(x\) 积分：
+\[
+\int_0^1 y\left.\frac{x^2}{2}\right|_0^{y^2}\dd y
+=\frac12\int_0^1y^5\dd y
+=\boxed{\frac1{12}.}
+\]
+\end{answerbox}
+
+\begin{answerbox}[例 4：对称性 + 极坐标，2024--2025]
+\[
+I=\iint_D\frac{x^2+xy}{x^2+y^2}\ee^{x^2+y^2}\dd\sigma,\qquad
+D=\{(x,y)\mid -1\le x\le1,\ 0\le y\le \sqrt{1-x^2}\}.
+\]
+
+\textbf{按答案写：}
+
+\(D\) 为单位上半圆，关于 \(y\) 轴对称。
+\[
+\iint_D\frac{xy}{x^2+y^2}\ee^{x^2+y^2}\dd\sigma=0.
+\]
+又由对称性，
+\[
+\iint_D\frac{x^2}{x^2+y^2}\ee^{x^2+y^2}\dd\sigma
+=\frac12\iint_D\ee^{x^2+y^2}\dd\sigma.
+\]
+极坐标：
+\[
+I=\frac12\int_0^\pi\int_0^1\ee^{r^2}r\dd r\dd\theta
+=\boxed{\frac\pi4(\ee-1)}.
+\]
+\end{answerbox}
+
+\begin{answerbox}[例 5：小区域极限，2022--2023]
+设 \(D\) 是由极坐标曲线 \(\rho=a\sin\theta\ (a>0)\) 所围成的平面封闭区域，求
+\[
+\lim_{a\to0^+}
+\frac{\displaystyle\iint_D(x+y)^2\dd x\dd y}
+{\left[\displaystyle\int_0^a\ee^x\ln(1+x)\dd x\right]^2}.
+\]
+
+\textbf{按答案写：}
+
+\[
+(x+y)^2=x^2+y^2+2xy.
+\]
+由对称性，
+\[
+\iint_D2xy\dd\sigma=0.
+\]
+故
+\[
+\iint_D(x+y)^2\dd\sigma
+=\int_0^\pi\int_0^{a\sin\theta}r^2\cdot r\dd r\dd\theta
+=\frac{3\pi a^4}{32}.
+\]
+若分母含
+\[
+\left(\int_0^a\ee^x\ln(1+x)\dd x\right)^2,
+\]
+则
+\[
+\int_0^a\ee^x\ln(1+x)\dd x\sim\int_0^a x\dd x=\frac{a^2}{2}.
+\]
+所以分母 \(\sim a^4/4\)，极限为
+\[
+\boxed{\frac{3\pi}{8}}.
+\]
+\end{answerbox}
+
+\begin{scorebox}[得分点]
+二重积分题最先写区域 \(D\)。不要上来积分。标准答案经常先给区域，再换序或极坐标。
+\end{scorebox}
+
+\newpage
+
+\begin{answerbox}[2020--2021 大题：二重积分对称性]
+题：
+\[
+f(x,y)=x^2\cos^2y+x^5y+y^2\sin^2x,
+\]
+计算
+\[
+\int_{-\sqrt2}^{\sqrt2}\int_{\sqrt{4-x^2}}^2 f(x,y)\dd y\dd x
++\int_{\sqrt2}^2\int_{-\sqrt{4-x^2}}^{\sqrt{4-x^2}} f(x,y)\dd y\dd x.
+\]
+\textbf{解：}
+设积分区域为 \(D\)。利用 \(D\) 的对称拆补和
+\[
+f(x,y)+f(y,x)=x^2+y^2+x^5y+y^5x,
+\]
+其中奇函数项在对称区域积分为 \(0\)。故只需计算
+\[
+\frac12\iint_D(x^2+y^2)\dd\sigma
+\]
+并扣除相应补区。按参考答案整理得
+\[
+I=2\pi-\frac{8}{3}
+=\boxed{\frac{6\pi-8}{3}}.
+\]
+\end{answerbox}
+
+\begin{answerbox}[2021--2022 大题：极坐标区域面积与旋转体体积]
+题：区域 \(D\) 由
+\[
+r=2\sin\theta,\qquad r=2\cos\theta
+\]
+围成。求 \(D\) 的面积，并求 \(D\) 绕 \(x\) 轴旋转所得体积。
+
+\textbf{解：}
+两曲线交点为
+\[
+r=\sqrt2,\qquad \theta=\frac\pi4.
+\]
+区域关于直线 \(y=x\) 对称：
+\[
+A=2\int_0^{\pi/4}\int_0^{2\sin\theta}r\dd r\dd\theta
+=4\int_0^{\pi/4}\sin^2\theta\dd\theta
+=\boxed{\frac\pi2-1}.
+\]
+用 Pappus 定理，取质心到旋转轴的距离，绕 \(x\) 轴体积按答案写为
+\[
+\boxed{V=\frac{\pi^2}{2}-\pi}.
+\]
+\end{answerbox}
+
+\begin{answerbox}[2021--2022 大题：二重积分换序与极限]
+题：
+\[
+I(u)=\int_0^{u^2}\int_{\sqrt y}^{u}x\cos(xy)\dd x\dd y.
+\]
+(1) 交换积分顺序；(2) 求
+\[
+\lim_{u\to0^+}\frac{I(u)}
+{\left(\int_0^u\ee^{x^4}\dd x\right)^4}.
+\]
+\textbf{解：}
+区域为
+\[
+0\le y\le u^2,\qquad \sqrt y\le x\le u.
+\]
+换序：
+\[
+\boxed{I(u)=\int_0^u\int_0^{x^2}x\cos(xy)\dd y\dd x}.
+\]
+用洛必达或主部估计：
+\[
+\int_0^u\int_0^{x^2}x\cos(xy)\dd y\dd x
+\sim \int_0^u x\cdot x^2\dd x=\frac{u^4}{4},
+\]
+\[
+\left(\int_0^u\ee^{x^4}\dd x\right)^4\sim u^4.
+\]
+故
+\[
+\boxed{\lim=\frac14}.
+\]
+\end{answerbox}
+
+\begin{answerbox}[2022--2023 大题：旋转体体积]
+题：区域 \(D\) 由
+\[
+y=4x^2,\qquad y=x^2,\qquad y=1
+\]
+围成，求 \(D\) 绕 \(x\) 轴旋转所得体积。
+
+\textbf{解：}
+按 \(y\) 分层：
+\[
+x_1(y)=\frac{\sqrt y}{2},\qquad x_2(y)=\sqrt y,\qquad 0\le y\le1.
+\]
+由壳层法
+\[
+V=2\int_0^1 2\pi y\left(x_2(y)-x_1(y)\right)\dd y.
+\]
+即
+\[
+V=4\pi\int_0^1y\left(\sqrt y-\frac{\sqrt y}{2}\right)\dd y
+=2\pi\int_0^1y^{3/2}\dd y
+=\boxed{\frac45\pi}.
+\]
+\end{answerbox}
+
+\begin{answerbox}[2024--2025 大题五：旋转体体积参数题]
+题：有界闭区域 \(D\) 由 \(y=a\) 和 \(y=1-x^2\) 围成，且 \(0<a<1\)。区域 \(D\) 绕 \(y=a\) 旋转所得立体体积记为 \(V_1(a)\)，绕 \(y\) 轴旋转所得立体体积记为 \(V_2(a)\)。求 \(a\)，使
+\[
+V_1(a)=V_2(a).
+\]
+
+\textbf{按答案写：}
+
+交点由
+\[
+a=1-x^2
+\]
+给出，故
+\[
+-\sqrt{1-a}\le x\le \sqrt{1-a}.
+\]
+绕 \(y=a\) 旋转：
+\[
+V_1(a)=\pi\int_{-\sqrt{1-a}}^{\sqrt{1-a}}
+(1-x^2-a)^2\dd x
+=\frac{16\pi}{15}(1-a)^{5/2}.
+\]
+绕 \(y\) 轴旋转，用水平圆盘：
+\[
+V_2(a)=\pi\int_a^1(\sqrt{1-y})^2\dd y
+=\frac{\pi}{2}(1-a)^2.
+\]
+令 \(V_1(a)=V_2(a)\)，得
+\[
+\frac{16}{15}(1-a)^{5/2}=\frac12(1-a)^2.
+\]
+因 \(0<a<1\)，可约去 \((1-a)^2\)，
+\[
+\sqrt{1-a}=\frac{15}{32}.
+\]
+所以
+\[
+\boxed{a=1-\left(\frac{15}{32}\right)^2}.
+\]
+\end{answerbox}
+
+\begin{answerbox}[2023--2024 大题：正方形与圆盘区域]
+题：设
+\[
+D_r=\{(x,y):|x|\le1,\ |y|\le1\},\qquad
+D_c=\{(x,y):x^2+y^2\le R^2\},
+\]
+\(1<R<\sqrt2\)。若图中两块差集区域满足
+\[
+\iint_{D_1}(x+y)^2\dd\sigma=\iint_{D_2}(x+y)^2\dd\sigma,
+\]
+求 \(R\)。
+
+\textbf{解：}
+由对称性，\((x+y)^2\) 在对应区域中可化为 \(x^2+y^2\) 比较。
+参考答案等价化为
+\[
+\iint_{D_1\cup D_r}(x^2+y^2)\dd\sigma
+=
+\iint_{D_2\cup D_c}(x^2+y^2)\dd\sigma.
+\]
+正方形上：
+\[
+\iint_{D_r}(x^2+y^2)\dd\sigma=\frac83.
+\]
+圆盘上：
+\[
+\iint_{D_c}(x^2+y^2)\dd\sigma
+=\int_0^{2\pi}\int_0^R r^2\cdot r\dd r\dd\theta
+=\frac{\pi R^4}{2}.
+\]
+令二者相等：
+\[
+\frac{\pi R^4}{2}=\frac83.
+\]
+故
+\[
+\boxed{R=\sqrt[4]{\frac{16}{3\pi}}}.
+\]
+\end{answerbox}
+\section{多元微分与隐函数：直接套公式}
+
+\begin{templatebox}[链式法则模板]
+若
+\[
+z=w(u(x,y),v(x,y)),
+\]
+则直接写
+\[
+z_x=w_1u_x+w_2v_x,\qquad z_y=w_1u_y+w_2v_y,
+\]
+\[
+dz=z_x\dd x+z_y\dd y.
+\]
+\end{templatebox}
+
+\begin{answerbox}[例 1：全微分，2024--2025]
+\[
+z=w(x+y,xy).
+\]
+
+\textbf{按答案写：}
+
+令
+\[
+u=x+y,\qquad v=xy.
+\]
+则
+\[
+z_x=w_1+yw_2,\qquad z_y=w_1+xw_2.
+\]
+故
+\[
+\boxed{dz=(w_1+yw_2)\dd x+(w_1+xw_2)\dd y.}
+\]
+\end{answerbox}
+
+\begin{answerbox}[例 2：全微分，2020--2021]
+\[
+z=x\ee^y,\qquad \text{求 }dz\big|_{(1,0)}.
+\]
+
+\textbf{按答案写：}
+
+\[
+z_x=\ee^y,\qquad z_y=x\ee^y.
+\]
+在 \((1,0)\) 处
+\[
+z_x(1,0)=1,\qquad z_y(1,0)=1.
+\]
+故
+\[
+\boxed{dz\big|_{(1,0)}=\dd x+\dd y.}
+\]
+\end{answerbox}
+
+\begin{templatebox}[隐函数标准模板]
+\textbf{第 1 步：} 写
+\[
+G(x,y,z)=0.
+\]
+
+\textbf{第 2 步：} 直接套
+\[
+\boxed{z_x=-\frac{G_x}{G_z}},\qquad
+\boxed{z_y=-\frac{G_y}{G_z}}.
+\]
+
+\textbf{第 3 步：} 若求极值，先令
+\[
+z_x=0,\qquad z_y=0.
+\]
+\end{templatebox}
+
+\begin{answerbox}[例 3：隐函数二阶偏导，2024--2025]
+\[
+z=f(x+y,y+z)\text{ 确定隐函数 }z=z(x,y),\quad f\text{ 具有连续二阶偏导}.
+\]
+
+\textbf{按答案写：}
+
+由
+\[
+z_x=f_1+f_2z_x,
+\]
+得
+\[
+z_x=\frac{f_1}{1-f_2}.
+\]
+继续对 \(y\) 求导并整理：
+\[
+z_{xy}
+=\frac{f_{11}+2f_{12}z_x+f_{22}z_x^2}{1-f_2}.
+\]
+代入 \(z_x=\dfrac{f_1}{1-f_2}\)：
+\[
+\boxed{
+z_{xy}
+=\frac{f_{11}}{1-f_2}
++\frac{2f_1f_{12}}{(1-f_2)^2}
++\frac{f_1^2f_{22}}{(1-f_2)^3}.
+}
+\]
+\end{answerbox}
+
+\begin{answerbox}[例 4：复合隐函数求导，2023--2024]
+\[
+F(x-y,x+y)=0,\qquad w=z(x+y,x-y).
+\]
+
+\textbf{按答案写：}
+
+对 \(F(x-y,x+y)=0\) 求导：
+\[
+F_1(1-y')+F_2(1+y')=0.
+\]
+故
+\[
+y'=\frac{F_1+F_2}{F_1-F_2}.
+\]
+又
+\[
+\frac{\dd w}{\dd x}=z_1(1+y')+z_2(1-y').
+\]
+代入得
+\[
+\boxed{\frac{\dd w}{\dd x}
+=\frac{2(z_1F_1-z_2F_2)}{F_1-F_2}.}
+\]
+\end{answerbox}
+
+\begin{scorebox}[得分点]
+隐函数题不要写长理论。阅卷答案通常就是：设 \(G=0\)，求 \(G_x,G_y,G_z\)，套 \(-G_x/G_z\)、\(-G_y/G_z\)。
+\end{scorebox}
+
+\newpage
+
+\begin{answerbox}[2021--2022 简答 5 与计算 1]
+题：
+\[
+z=\frac{\ln x-\ln y}{x+y},\quad \text{求 }dz\big|_{(1,1)}.
+\]
+\[
+z=F\left(\frac xy,x-y\right),\quad \text{求 }z_x+z_y.
+\]
+\textbf{解：}
+\[
+z_x(1,1)=\frac12,\qquad z_y(1,1)=-\frac12,
+\]
+\[
+\boxed{dz\big|_{(1,1)}=\frac12\dd x-\frac12\dd y}.
+\]
+令 \(u=x/y,\ v=x-y\)，则
+\[
+z_x=\frac1yF_1+F_2,\qquad
+z_y=-\frac{x}{y^2}F_1-F_2.
+\]
+所以
+\[
+\boxed{z_x+z_y=\frac{y-x}{y^2}F_1}.
+\]
+\end{answerbox}
+
+\begin{answerbox}[2022--2023 简答 5 与计算 1、2]
+题：
+\[
+z=\ln(\sqrt{1+x}-y),\quad \text{求 }z_x(0,0).
+\]
+\[
+z=F(g(2x+y),g(x-2y)),\quad \text{求 }2z_x+z_y.
+\]
+\[
+\dd z=\frac{2x^2y+1}{x}\dd x+\frac{x^2y+2y^2+1}{y}\dd y,\quad \text{求 }z(x,y).
+\]
+\textbf{解：}
+\[
+z=\frac12\ln(1+x-y)
+\Rightarrow
+\boxed{z_x(0,0)=\frac12}.
+\]
+令 \(u=g(2x+y)\)，\(v=g(x-2y)\)，
+\[
+z_x=2F_1g'(2x+y)+F_2g'(x-2y),
+\]
+\[
+z_y=F_1g'(2x+y)-2F_2g'(x-2y).
+\]
+因此
+\[
+\boxed{2z_x+z_y=5F_1g'(2x+y)}.
+\]
+由
+\[
+z_x=2xy+\frac1x
+\]
+积分得
+\[
+z=x^2y+\ln|x|+\varphi(y).
+\]
+再由 \(z_y=x^2+2y+\frac1y\)，得
+\[
+\varphi(y)=y^2+\ln|y|+C.
+\]
+故
+\[
+\boxed{z=x^2y+y^2+\ln|xy|+C}.
+\]
+\end{answerbox}
+
+\begin{answerbox}[2023--2024 简答 5]
+题：
+\[
+z=x^{\ln y},\quad \text{求 }dz\big|_{(e,e)}.
+\]
+\textbf{解：}
+\[
+z_x=(\ln y)x^{\ln y-1},\qquad
+z_y=x^{\ln y}\frac{\ln x}{y}.
+\]
+在 \((e,e)\) 处，
+\[
+z_x=1,\qquad z_y=1.
+\]
+故
+\[
+\boxed{dz\big|_{(e,e)}=\dd x+\dd y}.
+\]
+\end{answerbox}
+
+\begin{answerbox}[2020--2021 计算 4：隐函数一阶偏导]
+题：设 \(F\) 可微，\(F(0,0)=1\)，\(F_1(0,0)=1\)，\(F_2(0,0)=-1\)。由
+\[
+F(xz,yz)=z-y
+\]
+确定 \(z=z(x,y)\)，求 \((z_x+z_y)|_{(0,0)}\)。
+
+\textbf{解：}
+令
+\[
+G(x,y,z)=F(xz,yz)-z+y=0.
+\]
+由题设
+\[
+z(0,0)=F(0,0)=1.
+\]
+\[
+G_x=F_1(xz,yz)z,\quad
+G_y=F_2(xz,yz)z+1,
+\]
+\[
+G_z=F_1(xz,yz)x+F_2(xz,yz)y-1.
+\]
+在 \((0,0)\) 处，
+\[
+G_x=1,\quad G_y=0,\quad G_z=-1.
+\]
+所以
+\[
+z_x=-\frac{G_x}{G_z}=1,\qquad
+z_y=-\frac{G_y}{G_z}=0.
+\]
+\[
+\boxed{(z_x+z_y)|_{(0,0)}=1}.
+\]
+\end{answerbox}
+\section{连续、偏导、可微：三步判定}
+
+\begin{templatebox}[三步模板]
+\textbf{第 1 步：连续}
+\[
+\lim_{(x,y)\to(0,0)}f(x,y)=f(0,0).
+\]
+
+\textbf{第 2 步：偏导}
+\[
+f_x(0,0)=\lim_{x\to0}\frac{f(x,0)-f(0,0)}{x},
+\]
+\[
+f_y(0,0)=\lim_{y\to0}\frac{f(0,y)-f(0,0)}{y}.
+\]
+
+\textbf{第 3 步：可微}
+\[
+\frac{f(x,y)-f(0,0)-f_x(0,0)x-f_y(0,0)y}{\sqrt{x^2+y^2}}\to0.
+\]
+常用路径法：
+\[
+y=kx.
+\]
+\end{templatebox}
+
+\begin{scorebox}[必须记住]
+\[
+\boxed{\text{连续 + 偏导存在 } \ne \text{ 可微}.}
+\]
+若代 \(y=kx\) 后极限依赖 \(k\)，则不可微。
+\end{scorebox}
+
+\begin{answerbox}[例：连续、偏导、不可微，2022--2023]
+\[
+f(x,y)=
+\begin{cases}
+\dfrac{x^2(x+y)}{x^2+y^2},&(x,y)\ne(0,0),\\
+0,&(x,y)=(0,0).
+\end{cases}
+\]
+
+\textbf{按答案写：}
+
+连续：
+\[
+\left|\frac{x^2(x+y)}{x^2+y^2}\right|
+\le |x+y|\to0,
+\]
+故连续。
+
+偏导：
+\[
+f_x(0,0)=\lim_{x\to0}\frac{f(x,0)}x
+=\lim_{x\to0}\frac{x}{x}=1,
+\]
+\[
+f_y(0,0)=\lim_{y\to0}\frac{f(0,y)}y=0.
+\]
+
+可微性：
+\[
+\frac{f(x,y)-x}{\sqrt{x^2+y^2}}
+=\frac{x^2y-xy^2}{(x^2+y^2)^{3/2}}.
+\]
+令 \(y=kx\)，得
+\[
+\frac{f(x,kx)-x}{\sqrt{x^2+k^2x^2}}
+=\frac{k-k^2}{(1+k^2)^{3/2}}.
+\]
+结果与 \(k\) 有关，故
+\[
+\boxed{f\text{ 在原点连续，偏导存在，但不可微}.}
+\]
+\end{answerbox}
+
+\newpage
+
+\begin{answerbox}[2020--2021 大题：分段函数偏导与可微性]
+题：
+\[
+F(x,y)=
+\begin{cases}
+\dfrac{\sin(x^2)\sin(x+y)}{x^2+y^2},&(x,y)\ne(0,0),\\
+0,&(x,y)=(0,0).
+\end{cases}
+\]
+求 \(F_x(0,0),F_y(0,0)\)，并判断在原点是否可微。
+
+\textbf{解：}
+\[
+F_x(0,0)=\lim_{x\to0}\frac{F(x,0)-0}{x}
+=\lim_{x\to0}\frac{\sin(x^2)\sin x}{x^3}=1.
+\]
+\[
+F_y(0,0)=\lim_{y\to0}\frac{F(0,y)-0}{y}=0.
+\]
+可微性检验：
+\[
+\frac{F(\Delta x,\Delta y)-\Delta x}{\sqrt{(\Delta x)^2+(\Delta y)^2}}.
+\]
+取 \(\Delta y=-\Delta x\) 与 \(\Delta y=\Delta x\)，极限不同，故
+\[
+\boxed{F_x(0,0)=1,\quad F_y(0,0)=0,\quad F\text{ 在原点不可微}.}
+\]
+\end{answerbox}
+
+\begin{answerbox}[2021--2022 计算 4：由可微定义反推偏导]
+题：设 \(f(x,y)\) 在 \((0,0)\) 可微，且
+\[
+\lim_{(x,y)\to(0,0)}
+\frac{f(x,y)-x+y}{\sqrt{x^2+y^2}}=0.
+\]
+求 \(f(0,0),f_x(0,0),f_y(0,0)\)。
+
+\textbf{解：}
+由极限为 \(0\)，得
+\[
+f(x,y)=x-y+o\left(\sqrt{x^2+y^2}\right).
+\]
+令 \((x,y)\to(0,0)\)，得
+\[
+\boxed{f(0,0)=0}.
+\]
+与可微展开
+\[
+f(x,y)=f(0,0)+f_x(0,0)x+f_y(0,0)y+o(r)
+\]
+比较系数：
+\[
+\boxed{f_x(0,0)=1,\qquad f_y(0,0)=-1}.
+\]
+\end{answerbox}
+\section{二元函数极值：统一 A、B、C 判别}
+
+\begin{templatebox}[考试统一判别表]
+\[
+A=f_{xx},\qquad B=f_{xy},\qquad C=f_{yy},
+\]
+\[
+\boxed{\Delta=B^2-AC.}
+\]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{p{5cm}p{6cm}}
+\toprule
+\textbf{条件} & \textbf{结论}\\
+\midrule
+\(\Delta<0,\ A>0\) & 极小值\\
+\(\Delta<0,\ A<0\) & 极大值\\
+\(\Delta>0\) & 无极值，鞍点\\
+\(\Delta=0\) & 此法失效，另判\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{templatebox}
+
+\begin{templatebox}[考试步骤]
+\textbf{第 1 步：} 求一阶偏导。
+\[
+f_x=0,\qquad f_y=0.
+\]
+
+\textbf{第 2 步：} 解驻点。
+
+\textbf{第 3 步：} 算
+\[
+A=f_{xx},\quad B=f_{xy},\quad C=f_{yy},\quad \Delta=B^2-AC.
+\]
+
+\textbf{第 4 步：} 查表写结论。
+\end{templatebox}
+
+\begin{answerbox}[例 1：普通二元极值，2023--2024]
+\[
+f(x,y)=x^3y^3\ee^{-(x^2+y^2)/2}.
+\]
+
+\textbf{按答案写：}
+\[
+f_x=x^2y^3(3-x^2)\ee^{-(x^2+y^2)/2},
+\]
+\[
+f_y=x^3y^2(3-y^2)\ee^{-(x^2+y^2)/2}.
+\]
+由 \(f_x=f_y=0\)，驻点包括
+\[
+(0,y),\ (x,0),\ (\pm\sqrt3,\pm\sqrt3).
+\]
+
+对 \((\sqrt3,\sqrt3)\)、\((-\sqrt3,-\sqrt3)\)：
+\[
+A<0,\quad C<0,\quad B=0,\quad \Delta=B^2-AC<0.
+\]
+故为极大值点，极大值
+\[
+\boxed{27\ee^{-3}}.
+\]
+
+对 \((\sqrt3,-\sqrt3)\)、\((-\sqrt3,\sqrt3)\)：
+\[
+A>0,\quad C>0,\quad B=0,\quad \Delta<0.
+\]
+故为极小值点，极小值
+\[
+\boxed{-27\ee^{-3}}.
+\]
+
+坐标轴上的驻点另判，非极值点。
+\end{answerbox}
+
+\begin{answerbox}[例 2：隐函数极值，2022--2023]
+\[
+x^2-2xy+2y^2-2yz-z^2+8=0.
+\]
+
+\textbf{按答案写：}
+
+令
+\[
+G=x^2-2xy+2y^2-2yz-z^2+8=0.
+\]
+极值点先令
+\[
+z_x=0,\qquad z_y=0.
+\]
+由
+\[
+z_x=-\frac{G_x}{G_z},\qquad z_y=-\frac{G_y}{G_z},
+\]
+得
+\[
+G_x=0,\qquad G_y=0.
+\]
+解得
+\[
+x=y,\qquad z=y.
+\]
+代回方程：
+\[
+x=y=z=2,\qquad x=y=z=-2.
+\]
+
+在 \((2,2,2)\)：
+\[
+A=z_{xx}=\frac14,\qquad B=z_{xy}=-\frac14,\qquad C=z_{yy}=\frac12.
+\]
+\[
+\Delta=B^2-AC=\frac1{16}-\frac18=-\frac1{16}<0,\quad A>0.
+\]
+故 \(z=2\) 为极小值。
+
+在 \((-2,-2,-2)\)：
+\[
+A=-\frac14,\qquad B=\frac14,\qquad C=-\frac12.
+\]
+\[
+\Delta=B^2-AC=\frac1{16}-\frac18=-\frac1{16}<0,\quad A<0.
+\]
+故 \(z=-2\) 为极大值。
+\end{answerbox}
+
+\begin{scorebox}[得分点]
+全文统一使用
+\[
+\Delta=B^2-AC.
+\]
+考试答案只写 \(A,B,C,\Delta\) 和判别结论。
+\end{scorebox}
+
+\newpage
+
+\begin{answerbox}[2020--2021 计算 3：普通二元极值]
+题：
+\[
+f(x,y)=\ee^x(x+y^2),\quad \text{求极值}.
+\]
+\textbf{解：}
+\[
+f_x=\ee^x(x+y^2+1),\qquad f_y=2y\ee^x.
+\]
+驻点方程 \(f_x=f_y=0\) 给出
+\[
+(x,y)=(-1,0).
+\]
+二阶偏导：
+\[
+A=f_{xx}(-1,0)=\ee^{-1},\quad
+B=f_{xy}(-1,0)=0,\quad
+C=f_{yy}(-1,0)=2\ee^{-1}.
+\]
+\[
+\Delta=B^2-AC=-2\ee^{-2}<0,\quad A>0.
+\]
+故 \((-1,0)\) 为极小值点，极小值
+\[
+\boxed{f(-1,0)=-\ee^{-1}}.
+\]
+\end{answerbox}
+
+\begin{answerbox}[2021--2022 大题：隐约束极值]
+题：设 \(z=z(x,y)\) 由
+\[
+x+y+z+xy+yz+zx=6
+\]
+确定，求 \(F(x,y)=xyz\) 在
+\[
+D=\{(x,y)\mid x>-1/2,\ y>-1/2\}
+\]
+内的极值。
+
+\textbf{解：}
+用拉格朗日函数
+\[
+L=xyz+\lambda(x+y+z+xy+yz+zx-6).
+\]
+驻点方程给出
+\[
+x=y=z=1,\quad (x,y,z)=(0,0,6),(0,6,0),(6,0,0).
+\]
+在 \((1,1,1)\) 处，
+\[
+A=-\frac43,\quad B=-\frac23,\quad C=-\frac43,
+\]
+\[
+\Delta=B^2-AC=-\frac{12}{9}<0,\quad A<0.
+\]
+故 \((1,1)\) 为极大值点，极大值
+\[
+\boxed{F_{\max}=1}.
+\]
+其余三个驻点对应 \(\Delta>0\)，为非极值点。
+\end{answerbox}
+
+\begin{answerbox}[2024--2025 大题九：极值与极限]
+题：
+\[
+F(x,y)=\int_0^{x^2+y^2+x+y}t\ee^{-t^4}\dd t.
+\]
+(1) 求 \(F(x,y)\) 的极值点；(2) 求
+\[
+\lim_{\substack{x\to+\infty\\y\to+\infty}}F(x,y).
+\]
+\textbf{解：}
+令
+\[
+R=x^2+y^2+x+y.
+\]
+则
+\[
+F_x=(2x+1)R\ee^{-R^4},\qquad
+F_y=(2y+1)R\ee^{-R^4}.
+\]
+驻点：
+\[
+R=0
+\quad\text{或}\quad
+\left(x,y\right)=\left(-\frac12,-\frac12\right).
+\]
+因 \(t\ee^{-t^4}\) 与 \(t\) 同号，且 \(R=0\) 时 \(F=0\)，所以曲线
+\[
+x^2+y^2+x+y=0
+\]
+为极小值点集，极小值为 \(0\)。
+
+在 \((-1/2,-1/2)\) 处，
+\[
+A=-\frac12,\quad B=0,\quad C=-\frac12,
+\]
+\[
+\Delta=B^2-AC=-\frac14<0,\quad A<0.
+\]
+故 \((-1/2,-1/2)\) 为极大值点。
+
+又
+\[
+x,y\to+\infty\Rightarrow R\to+\infty,
+\]
+\[
+\lim F(x,y)=\int_0^{+\infty}t\ee^{-t^4}\dd t.
+\]
+令 \(u=t^2\)，得
+\[
+\int_0^{+\infty}t\ee^{-t^4}\dd t
+=\frac12\int_0^{+\infty}\ee^{-u^2}\dd u
+=\boxed{\frac{\sqrt\pi}{4}}.
+\]
+\end{answerbox}
+\section{微分方程：只保留三类}
+
+\begin{identifybox}[识别]
+2020--2025 卷中重点只按三类准备：
+\[
+\text{可分离变量}\quad
+\text{一阶线性}\quad
+\text{二阶常系数非齐次}.
+\]
+其余类型不作为本手册主线。
+\end{identifybox}
+
+\begin{templatebox}[类型 1：可分离变量]
+\[
+y'=X(x)Y(y)
+\Rightarrow
+\frac{\dd y}{Y(y)}=X(x)\dd x.
+\]
+积分，代初值。
+\end{templatebox}
+
+\begin{answerbox}[例：2020--2021]
+\[
+\frac{\dd y}{\dd x}=2xy,\qquad y(0)=1.
+\]
+
+\textbf{按答案写：}
+
+\[
+\frac{\dd y}{y}=2x\dd x.
+\]
+积分得
+\[
+\ln |y|=x^2+C.
+\]
+代 \(y(0)=1\)，得 \(C=0\)。故
+\[
+\boxed{y=\ee^{x^2}.}
+\]
+\end{answerbox}
+
+\begin{answerbox}[例：2023--2024]
+\[
+y'=x\ee^{-y},\qquad y(0)=0.
+\]
+\[
+\ee^y\dd y=x\dd x.
+\]
+\[
+\ee^y=\frac{x^2}{2}+C.
+\]
+代 \(y(0)=0\)，得 \(C=1\)。故
+\[
+\boxed{y=\ln\left(1+\frac{x^2}{2}\right).}
+\]
+\end{answerbox}
+
+\begin{templatebox}[类型 2：一阶线性]
+\[
+y'+P(x)y=Q(x).
+\]
+若能看成乘积导数，优先写乘积导数。
+\end{templatebox}
+
+\begin{answerbox}[例：2024--2025]
+\[
+xy'+y=\ee^x,\qquad y(1)=\ee.
+\]
+左边
+\[
+xy'+y=(xy)'.
+\]
+故
+\[
+(xy)'=\ee^x.
+\]
+\[
+xy=\ee^x+C.
+\]
+代 \(y(1)=\ee\)，得 \(C=0\)。故
+\[
+\boxed{y=\frac{\ee^x}{x}.}
+\]
+\end{answerbox}
+
+\begin{templatebox}[类型 3：二阶常系数]
+\[
+y''+ay'+by=g(x).
+\]
+\textbf{第 1 步：} 写特征方程。
+
+\textbf{第 2 步：} 写齐次通解。
+
+\textbf{第 3 步：} 根据右端设特解；若与齐次解重复，乘 \(x\)。
+
+\textbf{第 4 步：} \(y=Y+y^*\)。
+\end{templatebox}
+
+\begin{answerbox}[例：二阶可降阶，2021--2022]
+\[
+y''=\frac{y'}{x},\qquad y(1)=1,\quad y'(1)=1.
+\]
+
+\textbf{按答案写：}
+
+令 \(u=y'\)，则
+\[
+u'=\frac ux.
+\]
+分离变量：
+\[
+\frac{\dd u}{u}=\frac{\dd x}{x}.
+\]
+积分得
+\[
+u=Cx.
+\]
+由 \(y'(1)=1\)，得 \(C=1\)，即 \(y'=x\)。再积分：
+\[
+y=\frac{x^2}{2}+C_1.
+\]
+代 \(y(1)=1\)，得 \(C_1=\frac12\)。故
+\[
+\boxed{y=\frac{x^2+1}{2}.}
+\]
+\end{answerbox}
+
+\begin{answerbox}[例：2024--2025]
+\[
+y''+5y'+6y=2\ee^{-2x}.
+\]
+特征方程：
+\[
+\lambda^2+5\lambda+6=0,
+\]
+\[
+\lambda_1=-2,\qquad \lambda_2=-3.
+\]
+齐次解：
+\[
+Y=C_1\ee^{-2x}+C_2\ee^{-3x}.
+\]
+右端 \(2\ee^{-2x}\) 与齐次解重复，设
+\[
+y^*=ax\ee^{-2x}.
+\]
+代入得 \(a=2\)。故
+\[
+\boxed{y=C_1\ee^{-2x}+C_2\ee^{-3x}+2x\ee^{-2x}.}
+\]
+\end{answerbox}
+
+\newpage
+
+\begin{answerbox}[2020--2021 简答 6 与积分方程大题]
+题 1：若 \(e^x,xe^x\) 是某二阶常系数齐次线性方程的两个解，求该方程。\\
+题 2：\(f\) 连续且
+\[
+\sin x+\int_0^x t^2f(x-t)\dd t=\int_0^x f(t)\dd t,
+\]
+求 \(f(x)\)。
+
+\textbf{解：}
+题 1：特征根 \(r=1\) 为二重根，故特征方程
+\[
+(r-1)^2=0.
+\]
+微分方程为
+\[
+\boxed{y''-2y'+y=0}.
+\]
+题 2：令 \(u=x-t\)，则
+\[
+\sin x+\int_0^x(x-u)^2f(u)\dd u=\int_0^x f(u)\dd u.
+\]
+对 \(x\) 求导并整理，再求导得
+\[
+f''(x)-2f(x)=-\cos x,\qquad f(0)=1,\quad f'(0)=0.
+\]
+解得
+\[
+\boxed{f(x)=\frac13\ee^{\sqrt2x}+\frac13\ee^{-\sqrt2x}+\frac13\cos x}.
+\]
+\end{answerbox}
+
+\begin{answerbox}[2021--2022 计算 2、3：二阶非齐次与积分方程]
+题：
+\[
+y''-y'-2y=\ee^x(\ee^x+x).
+\]
+\[
+\int_{-x}^{x}f(x+t)\dd t=f(2x)+x^2-1,\quad \text{求 }f(x).
+\]
+\textbf{解：}
+特征方程
+\[
+r^2-r-2=0,\qquad r=2,-1.
+\]
+齐次解
+\[
+Y=C_1\ee^{2x}+C_2\ee^{-x}.
+\]
+右端拆为 \(\ee^{2x}+x\ee^x\)。设特解
+\[
+y_1^*=a x\ee^{2x},\qquad y_2^*=(bx+c)\ee^x.
+\]
+代入得
+\[
+a=\frac13,\qquad b=-\frac12,\qquad c=-\frac14.
+\]
+故
+\[
+\boxed{y=C_1\ee^{2x}+C_2\ee^{-x}+\frac13x\ee^{2x}-\left(\frac12x+\frac14\right)\ee^x}.
+\]
+积分方程令 \(u=x+t\)，
+\[
+\int_0^{2x}f(u)\dd u=f(2x)+x^2-1.
+\]
+求导：
+\[
+2f(2x)=2f'(2x)+2x.
+\]
+令变量替换得
+\[
+f'(x)=f(x)-\frac x2,\qquad f(0)=1.
+\]
+解得
+\[
+\boxed{f(x)=\frac12(\ee^x+x+1)}.
+\]
+\end{answerbox}
+
+\begin{answerbox}[2022--2023 简答 6 与 2023--2024 简答 6]
+题：
+\[
+xy''=y',\quad y(1)=1,\quad y'(1)=1.
+\]
+\[
+y'=x\ee^{-y},\quad y(0)=0.
+\]
+\textbf{解：}
+令 \(u=y'\)，则
+\[
+xu'=u\Rightarrow \frac{\dd u}{u}=\frac{\dd x}{x}.
+\]
+\[
+u=Cx,\quad y' = x.
+\]
+代初值后
+\[
+\boxed{y=\frac{x^2+1}{2}}.
+\]
+第二题分离变量：
+\[
+\ee^y\dd y=x\dd x.
+\]
+\[
+\ee^y=\frac{x^2}{2}+1.
+\]
+故
+\[
+\boxed{y=\ln\left(1+\frac{x^2}{2}\right)}.
+\]
+\end{answerbox}
+
+\begin{answerbox}[2023--2024 大题：二阶常系数非齐次]
+题：
+\[
+2y''+y'-3y=x\ee^{x+1}.
+\]
+\textbf{解：}
+特征方程：
+\[
+2\lambda^2+\lambda-3=0
+\Rightarrow \lambda_1=-\frac32,\quad \lambda_2=1.
+\]
+齐次解：
+\[
+Y=C_1\ee^{-3x/2}+C_2\ee^x.
+\]
+右端为 \(x\ee^{x+1}\)，因 \(\ee^x\) 已在齐次解中，设
+\[
+y^*=(ax^2+bx)\ee^{x+1}.
+\]
+代入得
+\[
+a=\frac1{10},\qquad b=-\frac2{25}.
+\]
+故
+\[
+\boxed{y=C_1\ee^{-3x/2}+C_2\ee^x+\left(\frac1{10}x^2-\frac2{25}x\right)\ee^{x+1}}.
+\]
+\end{answerbox}
+\section{积分方程与证明题：求导转化}
+
+\begin{templatebox}[积分方程模板]
+看到
+\[
+\int_0^x,\qquad \int_{-x}^{x},\qquad f(x+t),\qquad f(x-t),
+\]
+按下面写：
+
+\textbf{第 1 步：} 换元或换序，把积分写标准。
+
+\textbf{第 2 步：} 对 \(x\) 求导。
+
+\textbf{第 3 步：} 再求导，化成微分方程。
+
+\textbf{第 4 步：} 用原式取 \(x=0\) 找初值。
+\end{templatebox}
+
+\begin{answerbox}[例：2022--2023]
+\[
+f(t)=\int_0^t\int_{-x}^0f(x+y)\dd y\dd x+\ee^t.
+\]
+
+\textbf{按答案写：}
+
+令 \(t=0\)，得
+\[
+f(0)=1.
+\]
+对 \(t\) 求导：
+\[
+f'(t)=\int_{-t}^0f(t+y)\dd y+\ee^t.
+\]
+再求导：
+\[
+f''(t)=f(t)+\ee^t.
+\]
+即
+\[
+f''-f=\ee^t.
+\]
+又 \(f'(0)=1\)。解得
+\[
+\boxed{f(t)=\frac34\ee^t+\frac14\ee^{-t}+\frac12t\ee^t.}
+\]
+\end{answerbox}
+
+\begin{templatebox}[证明可微模板]
+若证明 \(G(x,y)\) 在原点可微：
+
+\textbf{第 1 步：} 算 \(G(0,0)\)。
+
+\textbf{第 2 步：} 沿坐标轴算 \(G_x(0,0),G_y(0,0)\)。
+
+\textbf{第 3 步：} 用夹逼：
+\[
+\frac{|G(x,y)-G(0,0)-G_x(0,0)x-G_y(0,0)y|}
+{\sqrt{x^2+y^2}}\to0.
+\]
+\end{templatebox}
+
+\begin{answerbox}[例：可微充要条件，2024--2025]
+\[
+F(x,y)=\ln(1+|x|+|y|)\varphi(x,y),
+\]
+其中 \(\varphi(x,y)\) 连续。证明：\(F\) 在 \((0,0)\) 处可微的充要条件是
+\[
+\varphi(0,0)=0.
+\]
+
+\textbf{按答案写：}
+
+必要性：若 \(F\) 在原点可微，则沿 \(y=0\)，
+\[
+F(x,0)=\ln(1+|x|)\varphi(x,0).
+\]
+可微推出
+\[
+F_x(0,0)=\lim_{x\to0}\frac{F(x,0)}x
+=\lim_{x\to0}\frac{\ln(1+|x|)}x\varphi(x,0)
+\]
+存在。因
+\[
+\frac{\ln(1+|x|)}x\to
+\begin{cases}
+1,&x\to0^+,\\
+-1,&x\to0^-,
+\end{cases}
+\]
+故必须有
+\[
+\varphi(0,0)=0.
+\]
+
+充分性：若 \(\varphi(0,0)=0\)，由连续性
+\[
+\varphi(x,y)\to0.
+\]
+又
+\[
+\ln(1+|x|+|y|)\le |x|+|y|
+\le \sqrt2\sqrt{x^2+y^2}.
+\]
+因此
+\[
+\frac{|F(x,y)|}{\sqrt{x^2+y^2}}
+\le \sqrt2\,|\varphi(x,y)|\to0.
+\]
+故 \(F(0,0)=0,\ F_x(0,0)=F_y(0,0)=0\)，且 \(F\) 在原点可微。
+\[
+\boxed{F\text{ 在 }(0,0)\text{ 可微}\Longleftrightarrow \varphi(0,0)=0.}
+\]
+\end{answerbox}
+
+\begin{answerbox}[例：2023--2024]
+\[
+G(x,y)=(x+y)\int_0^{\sqrt{x^2+y^2}}f(t)\dd t,\qquad f\text{ 连续}.
+\]
+
+\textbf{按答案写：}
+
+\[
+G(0,0)=0.
+\]
+因 \(f\) 连续，原点附近 \(|f(t)|\le M\)。
+\[
+|G(x,0)|\le |x|\cdot M|x|=Mx^2,
+\]
+故
+\[
+G_x(0,0)=0.
+\]
+同理
+\[
+G_y(0,0)=0.
+\]
+验证可微：
+\[
+\frac{|G(x,y)|}{\sqrt{x^2+y^2}}
+\le
+\frac{|x+y|M\sqrt{x^2+y^2}}{\sqrt{x^2+y^2}}
+=M|x+y|\to0.
+\]
+故
+\[
+\boxed{G\text{ 在 }(0,0)\text{ 可微}.}
+\]
+\end{answerbox}
+
+\newpage
+
+\begin{answerbox}[2022--2023 大题：换序与积分方程]
+题：\(f\) 连续。
+\[
+\int_{-t}^{0}\int_{-y}^{t}f(x+y)\dd x\dd y
+\]
+先换序；若
+\[
+f(t)=\int_{-t}^{0}\int_{-y}^{t}f(x+y)\dd x\dd y+\ee^t,
+\]
+求 \(f(t)\)。
+
+\textbf{解：}
+换序区域可写为
+\[
+0\le x\le t,\qquad -x\le y\le0.
+\]
+故
+\[
+\int_{-t}^{0}\int_{-y}^{t}f(x+y)\dd x\dd y
+=\int_0^t\int_{-x}^{0}f(x+y)\dd y\dd x.
+\]
+代入积分方程：
+\[
+f(t)=\int_0^t\int_{-x}^{0}f(x+y)\dd y\dd x+\ee^t.
+\]
+求导两次得
+\[
+f''(t)-f(t)=\ee^t,\qquad f(0)=1,\quad f'(0)=1.
+\]
+解得
+\[
+\boxed{f(t)=\frac34\ee^t+\frac14\ee^{-t}+\frac12t\ee^t}.
+\]
+\end{answerbox}
+
+\begin{answerbox}[2024--2025 大题十：二重积分正性证明]
+题：
+\[
+I=\iint_D\sin(x^2+y^2)\cos(x^2-y^2)\dd\sigma,
+\]
+其中 \(D\) 由 \(y=x,\ y=0,\ x=\sqrt\pi\) 围成。证明 \(I>0\)。
+
+\textbf{证明：}
+用恒等式
+\[
+\sin A\cos B=\frac12[\sin(A+B)+\sin(A-B)].
+\]
+得
+\[
+I=\frac12\iint_D(\sin2x^2+\sin2y^2)\dd\sigma.
+\]
+区域 \(D=\{0\le y\le x,\ 0\le x\le\sqrt\pi\}\)。换序并对称平均：
+\[
+I=\frac12\int_0^{\sqrt\pi}\int_0^x(\sin2x^2+\sin2y^2)\dd y\dd x
+\]
+\[
+=\frac12\int_0^{\sqrt\pi}\int_y^{\sqrt\pi}(\sin2x^2+\sin2y^2)\dd x\dd y.
+\]
+整理为
+\[
+I=\frac{\sqrt{2\pi}}8\int_0^\pi
+\sin t\left(\frac1{\sqrt t}-\frac1{\sqrt{t+\pi}}\right)\dd t.
+\]
+在 \(0<t<\pi\) 上，
+\[
+\sin t>0,\qquad \frac1{\sqrt t}-\frac1{\sqrt{t+\pi}}>0.
+\]
+故
+\[
+\boxed{I>0}.
+\]
+\end{answerbox}
+
+\begin{answerbox}[2020--2021 证明题：积分中值定理]
+题：设 \(f\in C^1[0,1]\)，\(f(0)=0\)，\(f(1)=1\)。证明存在 \(0\le\xi\le1\)，使
+\[
+f(\xi)+f'(\xi)=\frac{\ee}{\ee-1}.
+\]
+\textbf{证明：}
+\[
+\int_0^1[\ee^xf(x)]'\dd x
+=\ee f(1)-f(0)=\ee.
+\]
+而
+\[
+[\ee^xf(x)]'=\ee^x[f(x)+f'(x)].
+\]
+由积分中值定理，存在 \(\xi\in[0,1]\)，使
+\[
+\int_0^1\ee^x[f(x)+f'(x)]\dd x
+=[f(\xi)+f'(\xi)]\int_0^1\ee^x\dd x.
+\]
+所以
+\[
+[f(\xi)+f'(\xi)](\ee-1)=\ee,
+\]
+即
+\[
+\boxed{f(\xi)+f'(\xi)=\frac{\ee}{\ee-1}}.
+\]
+\end{answerbox}
+
+\begin{answerbox}[2021--2022 证明题：含参数二重积分]
+题：
+\[
+f(x,y)=
+\begin{cases}
+\dfrac{\sin(\alpha x^2+\beta y^2)\cos(\beta x^2+\alpha y^2)}
+{\sqrt{x^2+y^2}},&x^2+y^2\ne0,\\
+0,&x^2+y^2=0,
+\end{cases}
+\]
+\(\alpha,\beta\) 为正数且 \(\alpha+\beta=1\)，
+\[
+D=\{(x,y):-1/2\le x\le1/2,\ 0\le y\le1/2\}.
+\]
+证明 \(I=\iint_Df(x,y)\dd x\dd y\) 与 \(\alpha,\beta\) 无关，并证明
+\[
+\frac{1}{6\sqrt\pi}-\frac{1}{84\sqrt\pi}
+\le I\le \frac{\pi}{12\sqrt2}.
+\]
+\textbf{证明：}
+由区域关于 \(y\) 轴对称，
+\[
+I=2\iint_{D_1}f(x,y)\dd x\dd y,\quad
+D_1=\{0\le x\le1/2,\ 0\le y\le1/2\}.
+\]
+交换 \(x,y\) 后相加：
+\[
+2I=\iint_{D_1}
+\frac{\sin(x^2+y^2)}{\sqrt{x^2+y^2}}\dd\sigma\cdot 2.
+\]
+故 \(I\) 与 \(\alpha,\beta\) 无关。
+
+在第一象限用极坐标估计，内接半径 \(1/\sqrt\pi\)，外接半径 \(\sqrt2/2\)。且
+\[
+\sin u\ge u-\frac{u^3}{6},\qquad \sin u\le u.
+\]
+于是
+\[
+I\ge \int_0^{\pi/2}\int_0^{1/\sqrt\pi}(r^2-r^6) \dd r\dd\theta
+=\frac{1}{6\sqrt\pi}-\frac{1}{84\sqrt\pi},
+\]
+\[
+I\le \int_0^{\pi/2}\int_0^{\sqrt2/2}r^2\dd r\dd\theta
+=\frac{\pi}{12\sqrt2}.
+\]
+结论成立。
+\end{answerbox}
+
+\begin{answerbox}[2022--2023 证明题：二重积分不等式]
+题：设 \(f(x)>0\) 在 \([0,1]\) 连续，
+\[
+D=\{(x,y)\mid 0\le y\le x,\ 0\le x\le1\}.
+\]
+证明
+\[
+\iint_D\frac{f(x)f(y)}{f(x)+f(y)}\dd x\dd y
+\le\frac14\int_0^1f(x)\dd x.
+\]
+\textbf{证明：}
+由对称性，
+\[
+2\iint_D\frac{f(x)f(y)}{f(x)+f(y)}\dd x\dd y
+=\int_0^1\int_0^1\frac{f(x)f(y)}{f(x)+f(y)}\dd y\dd x.
+\]
+因为
+\[
+\frac{f(x)f(y)}{f(x)+f(y)}
+\le \frac{f(x)+f(y)}4,
+\]
+所以
+\[
+\iint_D\frac{f(x)f(y)}{f(x)+f(y)}\dd x\dd y
+\le
+\frac18\int_0^1\int_0^1[f(x)+f(y)]\dd y\dd x.
+\]
+右边等于
+\[
+\boxed{\frac14\int_0^1f(x)\dd x}.
+\]
+\end{answerbox}
+
+\begin{answerbox}[2023--2024 证明题：定积分不等式]
+题：证明
+\[
+2\int_0^1\frac{\dd x}{\sqrt{\ee^x+\ee^{-x}}}
+<
+\int_{-1}^{1}\sqrt{\arctan(\ee^x)}\dd x
+<\sqrt{\pi}.
+\]
+\textbf{证明：}
+上界：
+\[
+\arctan(\ee^x)+\arctan(\ee^{-x})=\frac\pi2.
+\]
+故
+\[
+\int_{-1}^{1}\arctan(\ee^x)\dd x<\int_{-1}^1\frac\pi2\dd x=\pi.
+\]
+下界用
+\[
+\arctan u\ge \frac{u}{1+u^2}\quad (u>0).
+\]
+则
+\[
+\int_{-1}^{1}\arctan(\ee^x)\dd x
+>
+\int_{-1}^{1}\frac{\ee^x}{1+\ee^{2x}}\dd x
+=\int_{-1}^{1}\frac{\dd x}{\ee^x+\ee^{-x}}.
+\]
+由对称性和均值估计可得
+\[
+\int_{-1}^{1}\arctan(\ee^x)\dd x
+>
+2\int_0^1\frac{\dd x}{\sqrt{\ee^x+\ee^{-x}}}.
+\]
+结论成立。
+\end{answerbox}
+\section{考前速背清单}
+
+\begin{scorebox}[必须背熟]
+\begin{enumerate}[label=\arabic*.]
+\item 极值统一：
+\[
+A=f_{xx},\quad B=f_{xy},\quad C=f_{yy},\quad \Delta=B^2-AC.
+\]
+\[
+\Delta<0,A>0\Rightarrow \text{极小};\quad
+\Delta<0,A<0\Rightarrow \text{极大};\quad
+\Delta>0\Rightarrow \text{鞍点}.
+\]
+
+\item 极限三步：
+\[
+\text{降维}\to\text{等价}\to\text{洛必达}.
+\]
+
+\item 二重积分三区流程：
+\[
+\text{结构}\to\text{区域}\to\text{方法}.
+\]
+
+\item 隐函数：
+\[
+G=0,\qquad z_x=-G_x/G_z,\qquad z_y=-G_y/G_z.
+\]
+
+\item 可微性：
+\[
+\text{连续}\to\text{偏导}\to y=kx\text{ 路径法}.
+\]
+
+\item 微分方程：
+\[
+\text{可分离、一阶线性、二阶常系数}.
+\]
+\end{enumerate}
+\end{scorebox}
+
+\end{document}
