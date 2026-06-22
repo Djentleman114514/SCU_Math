@@ -301,7 +301,7 @@ l_1\cdot l_2=2+2-4=0.
 =1-\left(\frac12\right)^2=\frac34.
 \]
 
-\textbf{【答案】} $\boldsymbol a\cdot\boldsymbol b=\dfrac{\sqrt3}{2}$。
+\textbf{【答案】} $\boldsymbol a\cdot\boldsymbol b=\pm\dfrac{\sqrt3}{2}$。
 \end{answerbox}
 
 \begin{answerbox}[2021--2022 一-1]
@@ -446,9 +446,21 @@ u=\ln\left(\sqrt{x^2+y^2}+z\right)
 
 \textbf{【思路】} 先由两平面法向量叉乘求直线方向向量，再单位化并与 $\nabla u(1,1,0)$ 点乘。
 
-\textbf{【速解】} 方向向量取两平面法向量叉乘并单位化，再与梯度点乘。
+\textbf{【速解】} 方向向量取两平面法向量叉乘，并按与 $z$ 轴夹角为锐角单位化：
+\[
+\boldsymbol l_0=\frac13(1,2,2).
+\]
+又
+\[
+\nabla u(1,1,0)=\left(\frac12,\frac12,\frac12\right),
+\]
+故方向导数为
+\[
+D_{\boldsymbol l}u(1,1,0)=\nabla u(1,1,0)\cdot\boldsymbol l_0
+=\frac56.
+\]
 
-\textbf{【答案】} $\dfrac43$。
+\textbf{【答案】} $\dfrac56$。
 \end{answerbox}
 
 \begin{answerbox}[2022--2023 三-10]
@@ -881,13 +893,14 @@ z=\sqrt{2-x^2-y^2},
 
 交线：
 \[
-2-r^2=r^2\Rightarrow r=1.
+\sqrt{2-r^2}=r^2\Rightarrow r=1.
 \]
 体积
 \[
-V=\int_0^{2\pi}\int_0^1(2-2r^2)r\dd r\dd\theta=\pi.
+V=\int_0^{2\pi}\int_0^1\left(\sqrt{2-r^2}-r^2\right)r\dd r\dd\theta
+=\frac{(8\sqrt2-7)\pi}{6}.
 \]
-\textbf{【答案】}：$V=\pi$。
+\textbf{【答案】}：$V=\dfrac{(8\sqrt2-7)\pi}{6}$。
 
 \end{answerbox}
 
@@ -1081,19 +1094,19 @@ S=2\pi Rh=(4-2\sqrt2)\pi.
 
 \textbf{【原题】} 设 $L:y=\sqrt{1-x^2}\ (-1\le x\le1)$，求 $\displaystyle \int_L (x+y)x\dd s$。
 
-\textbf{【思路】} 将曲线参数化为 $x=t,\ y=1-t^2$，写出 $\dd s$ 后利用奇偶性压缩积分。
+\textbf{【思路】} 将上半圆参数化为 $x=\cos\theta,\ y=\sin\theta$，再计算第一类曲线积分。
 
-\textbf{【速解】} 令 $x=t,y=1-t^2$，$-1\le t\le1$，
+\textbf{【速解】} 令 $x=\cos\theta,\ y=\sin\theta$，$0\le\theta\le\pi$，
 \[
-\dd s=\sqrt{1+4t^2}\dd t.
+\dd s=\dd\theta.
 \]
 则
 \[
 \int_L(x+y)x\dd s
-=\int_{-1}^{1}(t+1-t^2)t\sqrt{1+4t^2}\dd t
-=\int_{-1}^{1}(t^2-t^3)\sqrt{1+4t^2}\dd t.
+=\int_0^\pi(\cos\theta+\sin\theta)\cos\theta\,\dd\theta
+=\int_0^\pi\cos^2\theta\,\dd\theta+\int_0^\pi\sin\theta\cos\theta\,\dd\theta
+=\frac\pi2.
 \]
-奇函数项积分为 $0$，余下计算得 $\pi/2$。
 
 \textbf{【答案】} $\pi/2$。
 \end{answerbox}
@@ -1273,10 +1286,12 @@ P_y=2ye^{xy^2}+2xy^3e^{xy^2}=Q_x.
 \]
 取 $y=0$，$0\le x\le2$：
 \[
-I=\int_0^2(1+x)\dd x=4.
+I=\int_0^2\sqrt{1+x}\dd x
+=\left.\frac23(1+x)^{3/2}\right|_0^2
+=2\sqrt3-\frac23.
 \]
 
-\textbf{【答案】} $4$。
+\textbf{【答案】} $2\sqrt3-\dfrac23$。
 \end{answerbox}
 \section{第二类曲面积分、高斯公式与斯托克斯公式}
 
@@ -1587,9 +1602,9 @@ x-\cos x,&0\le x<\pi.
 由傅里叶级数在端点处取左右极限平均：
 \[
 S(\pi)=\frac{f(\pi-0)+f(-\pi+0)}2
-=\frac{\pi-(-\pi)}2=\pi.
+=\frac{\pi+1+\pi}{2}=\pi+\frac12.
 \]
-\textbf{【答案】} $S(\pi)=\pi$。
+\textbf{【答案】} $S(\pi)=\pi+\dfrac12$。
 
 \end{answerbox}
 

@@ -384,8 +384,10 @@ x-y\to1,\quad x+y\to3
 \]
 弧长：
 \[
-y'=\frac23(x-1)^{-1/3},\qquad
-L=\int_1^2\sqrt{1+(y')^2}\dd x=\boxed{\frac{4\sqrt2-2}{3}}.
+y'=\sqrt{x-1},\qquad
+L=\int_1^2\sqrt{1+(y')^2}\dd x
+=\int_1^2\sqrt{x}\dd x
+=\boxed{\frac{4\sqrt2-2}{3}}.
 \]
 \[
 \int_0^1\frac{x^3}{\sqrt{1-x^2}}\dd x
@@ -1037,8 +1039,10 @@ z=F(g(2x+y),g(x-2y)),\quad \text{求 }2z_x+z_y.
 \]
 \textbf{解：}
 \[
-z=\frac12\ln(1+x-y)
-\Rightarrow
+z_x=\frac{1}{\sqrt{1+x}-y}\cdot\frac{1}{2\sqrt{1+x}},
+\]
+故
+\[
 \boxed{z_x(0,0)=\frac12}.
 \]
 令 \(u=g(2x+y)\)，\(v=g(x-2y)\)，
@@ -2151,13 +2155,24 @@ D=\{(x,y)\mid 0\le y\le x,\ 0\le x\le1\}.
 <\sqrt{\pi}.
 \]
 \textbf{证明：}
-上界：
+上界：由 Cauchy--Schwarz 不等式，
 \[
-\arctan(\ee^x)+\arctan(\ee^{-x})=\frac\pi2.
+\left(\int_{-1}^{1}\sqrt{\arctan(\ee^x)}\dd x\right)^2
+\le 2\int_{-1}^{1}\arctan(\ee^x)\dd x.
+\]
+又
+\[
+\arctan(\ee^x)+\arctan(\ee^{-x})=\frac\pi2,
 \]
 故
 \[
-\int_{-1}^{1}\arctan(\ee^x)\dd x<\int_{-1}^1\frac\pi2\dd x=\pi.
+\int_{-1}^{1}\arctan(\ee^x)\dd x
+=\int_0^1\left[\arctan(\ee^x)+\arctan(\ee^{-x})\right]\dd x
+=\frac\pi2.
+\]
+于是
+\[
+\int_{-1}^{1}\sqrt{\arctan(\ee^x)}\dd x<\sqrt\pi.
 \]
 下界用
 \[
@@ -2165,14 +2180,14 @@ D=\{(x,y)\mid 0\le y\le x,\ 0\le x\le1\}.
 \]
 则
 \[
-\int_{-1}^{1}\arctan(\ee^x)\dd x
->
-\int_{-1}^{1}\frac{\ee^x}{1+\ee^{2x}}\dd x
-=\int_{-1}^{1}\frac{\dd x}{\ee^x+\ee^{-x}}.
+\sqrt{\arctan(\ee^x)}
+\ge
+\sqrt{\frac{\ee^x}{1+\ee^{2x}}}
+=\frac{1}{\sqrt{\ee^x+\ee^{-x}}}.
 \]
-由对称性和均值估计可得
+由偶对称性得
 \[
-\int_{-1}^{1}\arctan(\ee^x)\dd x
+\int_{-1}^{1}\sqrt{\arctan(\ee^x)}\dd x
 >
 2\int_0^1\frac{\dd x}{\sqrt{\ee^x+\ee^{-x}}}.
 \]
